@@ -1,5 +1,6 @@
-{{ 'Poppins-Bold.woff2' | asset_url | preload_tag: as: 'font' }}
-{{ 'Poppins-Regular.woff2' | asset_url | preload_tag: as: 'font' }}
+{{ 'MuseoSans-300.woff2' | asset_url | preload_tag: as: 'font' }}
+{{ 'MuseoSans-500.woff2' | asset_url | preload_tag: as: 'font' }}
+{{ 'MuseoSans-700.woff2' | asset_url | preload_tag: as: 'font' }}
 
 <style>
   /* ============================================================================
@@ -7,20 +8,30 @@
   ============================================================================== */
 
   @font-face {
-    font-family: 'Poppins';
-    src: url({{ 'Poppins-Bold.woff2' | asset_url }}) format('woff2'),
-      url({{ 'Poppins-Bold.woff' | asset_url }}) format('woff');
-    font-weight: bold;
+    font-family: 'MuseoSans300';
+    src: url({{ 'MuseoSans-300.woff2' | asset_url }}) format('woff2'),
+    url({{ 'MuseoSans-300.woff' | asset_url }}) format('woff');
+    font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Poppins';
-    src: url({{ 'Poppins-Regular.woff2' | asset_url }}) format('woff2'),
-      url({{ 'Poppins-Regular.woff' | asset_url }}) format('woff');
+    font-family: 'MuseoSans500';
+    src: url({{ 'MuseoSans-500.woff2' | asset_url }}) format('woff2'),
+    url({{ 'MuseoSans-500.woff' | asset_url }}) format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
+
+  @font-face {
+    font-family: 'MuseoSans700';
+    src: url({{ 'MuseoSans-700.woff2' | asset_url }}) format('woff2'),
+    url({{ 'MuseoSans-700.woff' | asset_url }}) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
 </style>

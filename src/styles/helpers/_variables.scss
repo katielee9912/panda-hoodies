@@ -29,7 +29,6 @@ $color-btn-primary: #000;
 $color-btn-primary-text: #fff;
 $color-btn-primary-hover: transparent;
 $color-btn-primary-text-hover: #000;
-$color-bg-champagne: #f8f3e7;
 
 // Secondary colors
 $color-secondary: #ccc;
@@ -37,15 +36,17 @@ $color-btn-secondary: #ccc;
 $color-btn-secondary-text: #fff;
 
 // General colors
+$color-rouge: #bf6385;
+$color-tea-rose: #d99191;
+$color-champagne: #f2c1ae;
+$color-prussian: #233a59;
+$color-slate-purple: #57568c;
 $color-white: #fff;
 $color-black: #000;
 $color-grey: #666;
 $color-grey-light: #f5f5f5;
-$color-sale: #ce0d0d;
-$color-best-seller-badge: #000;
-$color-best-seller-badge-text: #fff;
 $color-sale-badge: #ce0d0d;
-$color-sale-badge-text: #fff;
+$color-sale-text: #fff;
 
 // Body text color
 $color-body-text: #000;
@@ -84,10 +85,12 @@ $transition-drawer: 0.3s cubic-bezier(0.46, 0.01, 0.32, 1);
   @font-face import your font families in /views/snippets/style-fonts/style-fonts.liquid then define global variables for them here
 */
 
-$font-poppins: 'Poppins', helvetica, arial, sans-serif;
-$font-marcellus: 'Marcellus', sans-serif;
-$font-heading: $font-marcellus;
-$font-body: $font-poppins;
+$font-museo-300: 'MuseoSans300';
+$font-museo-500: 'MuseoSans500';
+$font-museo-700: 'MuseoSans700';
+$font-heading: $font-museo-700;
+$font-sub-heading: $font-museo-500;
+$font-body: $font-museo-300;
 
 /* ============================================================================
   Font Weights
