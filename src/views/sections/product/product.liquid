@@ -1,0 +1,351 @@
+<script src="{{ 'product.js' | asset_url }}" defer="defer"></script>
+{{ 'product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  if section.settings.product != blank
+    assign product = all_products[section.settings.product]
+  endif
+
+  ## PRODUCT VARIABLES
+  assign color_option = product.options_by_name['color']
+  assign color_option_handle = 'option' | append: color_option.position
+  assign current_variant = product.selected_or_first_available_variant
+  assign active_color = current_variant[color_option_handle]
+  assign featured_image = current_variant.featured_image | default: product.featured_image
+
+  ## PRODUCT OPTIONS
+  # desktop_content_position : options: 'left', 'right'
+  # desktop_gallery_type : options: 'carousel', 'grid', 'simple'
+  # filter_gallery_by_color : options: true, false
+    # Image alt text should use this format: "Image description | Color Value"
+    # Images without "|" included in the alt text will be always be displayed.
+
+  assign desktop_content_position = 'right'
+  assign desktop_gallery_type = 'carousel'
+  assign filter_gallery_by_color = true
+-%}
+
+<product-wrap
+  class="product product--content-{{ desktop_content_position }}"
+  data-color-option-index="{{ color_option.position }}"
+  data-product-id="{{ product.id }}"
+  data-product-handle="{{ product.handle }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="product__container container">
+    <div class="row {% if desktop_content_position == 'left' %}flex-md-row-reverse{% endif %}">
+      <div class="col-md-6 {% if desktop_content_position == 'left' %}offset-sw-1{% endif %}">
+        <div class="product-gallery-carousel {% if desktop_gallery_type != 'carousel' %}d-md-none{% endif %}">
+          {%- render 'product-gallery-carousel',
+            color_option_index: color_option.position,
+            filter_by_color: filter_gallery_by_color,
+            active_color: active_color,
+            pagination_style: section.settings.gallery_pagination_style,
+            product: product
+          -%}
+        </div>
+
+        {% if desktop_gallery_type != 'carousel' %}
+          <div
+            class="product-gallery d-none d-md-block"
+            role="region"
+            aria-label="{{ 'products.accessibility.product_gallery_region_label' | t }}"
+          >
+            {%- liquid
+              if desktop_gallery_type == 'grid'
+                render 'product-gallery-grid', filter_by_color: filter_gallery_by_color, color_option_index: color_option.position, active_color: active_color, product: product
+              else
+                render 'product-gallery-simple', filter_by_color: filter_gallery_by_color, color_option_index: color_option.position, active_color: active_color, product: product
+              endif
+            -%}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-md-6 col-sw-5 {% if desktop_content_position == 'right' %}offset-sw-1{% endif %}">
+        <div class="product-content" id="product-content-{{ section.id }}">
+          {% for block in section.blocks %}
+            <div class="product-content-block product-content-block--{{ block.type }}">
+              {% if block.type == 'title' %}
+                <h1 class="product__title heading-2">
+                  {% if product.variants.size > 1 %}
+                    {% assign title = product.title | append: ' - ' | append: product.selected_or_first_available_variant.title %}
+                  {% else %}
+                    {% assign title = product.title %}
+                  {% endif %}
+                  {{ title }}
+                </h1>
+
+                {% render 'star-rating', rating: product.metafields.custom.rating %}
+
+                <div class="product__meta">
+                  <div class="product__price p--large">
+                    {% assign original_price = product.price | money %}
+                    {% assign sale_price = product.compare_at_price | money %}
+
+                    {% if sale_price != blank or sale_price == original_price %}
+                      <span class="sale-price">
+                        {{- product.price | money -}}
+                      </span>
+
+                      <span class="compare-price">
+                        <span class="visually-hidden">
+                          {{- 'general.accessibility.original_price' | t -}}
+                        </span>
+                        <s aria-hidden="true">
+                          {{- sale_price -}}
+                        </s>
+                      </span>
+                    {% else %}
+
+                      {{- product.price | money -}}
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if block.type == 'description' and product.description != blank %}
+                <div class="product-description rte">
+                  <p class="product-description__title p--large"><strong>{{ block.settings.product_desc_title }}</strong></p>
+                  <div class="product-description__content p--large">
+                    {{ product.description }}
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if block.type == 'form' %}
+                {%- assign form_id = 'product-form-' | append: section.id | append: '-' | append: product.handle -%}
+                {%- assign now = "now" | date: "%s&L" -%}
+
+                {% if block.settings.display_associated_products == true and block.settings.associated_products != blank %}
+                  <fieldset class="product-option">
+                    <legend>
+                      <strong>{{ block.settings.associated_products_label }}{%- if display_selected_value_text == true -%}:&nbsp;{% endif %}
+                      </strong>
+                      <span class="visually-shown">{{ product.title }}</span>
+                    </legend>
+                    <div class="product__associated-products">
+                      {% for associated_product in block.settings.associated_products %}
+                        <div class="product__associated-product">
+                          <input
+                            type="radio"
+                            id="associated-input-{{ associated_product.handle }}-{{ now }}"
+                            name="associated-input-{{ product.handle }}"
+                            {% if associated_product.handle == product.handle %}checked="checked"{% endif %}
+                            data-associated-product-toggle
+                            data-handle="{{ associated_product.handle }}"
+                            data-title="{{ associated_product.title }}"
+                            data-url="{{ associated_product.url | within: collection }}"
+                            form="{{ form_id }}"
+                          >
+                          <label
+                            class="product__associated-product"
+                            for="associated-input-{{ associated_product.handle }}-{{ now }}"
+                            aria-label="View {{ associated_product.title }}"
+                          >
+                            {{ associated_product.featured_image | image_url: width: 100 | image_tag: alt: '' }}
+                          </label>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </fieldset>
+                {% endif %}
+
+                {% if block.settings.display_product_options == true and product.metafields.custom.mask_types != blank %}
+                  <strong>Mask Types</strong>
+                  {% render 'product-options',
+                    display_low_stock: true,
+                    product: product,
+                    form_id: form_id
+                  %}
+                {% endif %}
+
+                {%- capture one_time_label -%}
+                  <span class="product-subscription-toggle__label-text">{{ block.settings.one_time_label }}</span>
+                  <div class="product-subscription-toggle__label-prices heading-s">
+                    <span data-product-non-subscription-price>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span>
+                  </div>
+                {%- endcapture -%}
+
+                {%- capture subscribe_label -%}
+                  <span class="product-subscription-toggle__label-text">{{ block.settings.subscribe_label }}</span>
+                  <div class="product-subscription-toggle__label-prices heading-s">
+                    <span class="visually-hidden">{{ 'general.accessibility.original_price' | t }}</span>
+                    <s data-product-non-subscription-price>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</s>
+                    <span class="visually-hidden">{{ 'general.accessibility.sale_price' | t }}</span>
+                    <span data-product-subscribe-price>{{ product.selected_or_first_available_variant.selling_plan_allocations[0].price | money_without_trailing_zeros }}</span>
+                  </div>
+                {%- endcapture -%}
+
+                {% render 'product-form',
+                  display_quantity_selector: block.settings.display_quantity_selector,
+                  display_subscription_options: block.settings.display_subscription_options,
+                  one_time_label: one_time_label,
+                  subscribe_label: subscribe_label,
+                  hide_product_select: block.settings.display_product_options,
+                  product: product,
+                  form_id: form_id
+                %}
+
+                {% if settings.enable_bis %}
+                  {% render 'back-in-stock-form',
+                    product: product
+                  %}
+                {% endif %}
+              {% endif %}
+
+              {% if block.type == 'accordion' %}
+                {%- capture accordion_content -%}
+                  {%- liquid
+                    if block.settings.page != blank
+                      echo block.settings.page.content
+                    elsif block.settings.content != blank
+                      echo block.settings.content
+                    endif
+                  -%}
+                {%- endcapture -%}
+
+                {%- render 'accordion',
+                  title: block.settings.title,
+                  content: accordion_content,
+                  classes: 'product-accordion',
+                  title_classes: 'heading-4',
+                  open: block.settings.open_by_default
+                -%}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</product-wrap>
+
+{% render 'schema-product', product: product %}
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product",
+        "info": "Defaults to current product if on product template"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "title",
+        "name": "Product Title",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name": "Product Description",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "product_desc_title",
+            "label": "Product Description Title",
+            "default": "Description"
+          }
+        ]
+      },
+      {
+        "type": "form",
+        "name": "Product Form",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Option Settings"
+          },
+          {
+            "type": "checkbox",
+            "id": "display_associated_products",
+            "label": "Display associated products",
+            "default": true
+          },
+          {
+            "type": "product_list",
+            "id": "associated_products",
+            "label": "Associated products"
+          },
+          {
+            "type": "text",
+            "id": "associated_products_label",
+            "label": "Associated Products Label",
+            "default": "Associated Products"
+          },
+          {
+            "type": "checkbox",
+            "id": "display_product_options",
+            "label": "Display product options",
+            "default": true
+          },
+          {
+            "type": "header",
+            "content": "Form Settings"
+          },
+          {
+            "type": "checkbox",
+            "id": "display_quantity_selector",
+            "label": "Display Quantity Select"
+          },
+          {
+            "type": "checkbox",
+            "id": "display_subscription_options",
+            "label": "Display Subscription Options"
+          },
+          {
+            "type": "text",
+            "id": "one_time_label",
+            "label": "One-time Label",
+            "default": "One time"
+          },
+          {
+            "type": "text",
+            "id": "subscribe_label",
+            "label": "Subscribe Label",
+            "default": "Subscribe & Save"
+          }
+        ]
+      },
+      {
+        "type": "accordion",
+        "name": "Accordion",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "page",
+            "id": "page",
+            "label": "Page Content",
+            "info": "If seleced, will override Content defined above"
+          },
+          {
+            "type": "checkbox",
+            "id": "open_by_default",
+            "label": "Open by default",
+            "default": false
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product"
+      }
+    ]
+  }
+{% endschema %}

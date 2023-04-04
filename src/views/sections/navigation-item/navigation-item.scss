@@ -1,0 +1,137 @@
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  Navigation Item
+============================================================================== */
+
+.navitem__container {
+  max-width: $site-width;
+  margin: 0;
+}
+
+.navitem__heading {
+  @include typography(18, 20, 700);
+
+  a {
+    margin-bottom: 20px;
+  }
+}
+
+.navitem__dropdown {
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 50%;
+  width: 100vw;
+  padding: 20px;
+  overflow: hidden;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 0;
+  background-color: var(--background-color, #fff);
+  box-shadow: 0 5px 10px -7px rgb(203, 203, 203);
+  white-space: nowrap;
+
+  &.open {
+    visibility: visible;
+    z-index: 10;
+    opacity: 1;
+  }
+}
+
+.navitem__dropdown-container {
+  max-width: calc($site-width + 60px);
+  margin: auto;
+  gap: 24px;
+}
+
+.navitem__container-full {
+  width: 100%;
+}
+
+.navitem__container-flex {
+  flex: 1;
+}
+
+.navitem__promo-container {
+  width: var(--promo-container-width, 50%);
+
+  &:last-child {
+    gap: 16px;
+  }
+}
+
+.navitem__promo-block {
+  position: relative;
+  flex: 1;
+  width: 50%;
+  height: 100%;
+  padding: 38px;
+  white-space: pre-wrap;
+
+  img {
+    z-index: -1;
+  }
+
+  &.promo-block-count--2 p {
+    flex: 1;
+  }
+}
+
+.navitem__submenu {
+  flex: 1;
+  white-space: normal;
+}
+
+.navitem__submenu-heading {
+  @include typography(16, 24, 700);
+}
+
+.navitem__image-grid-container {
+  gap: 24px;
+  display: grid;
+  grid-template-columns: var(--grid-template-columns, repeat(6, 1fr));
+}
+
+.navitem__image-item {
+  aspect-ratio: 1;
+  position: relative;
+  width: 100%;
+}
+
+.navitem__buttons {
+  gap: 5px 24px;
+  flex-wrap: wrap;
+
+  .btn {
+    flex: 1;
+    padding: 20px;
+
+    &:first-child {
+      border-color: var(--cta-border-color-primary);
+      background-color: var(--cta-bg-color-primary);
+      color: var(--cta-text-color-primary);
+
+      &:hover {
+        border-color: var(--cta-border-color-hover-primary);
+        background-color: var(--cta-bg-color-hover-primary);
+        color: var(--cta-text-color-hover-primary);
+      }
+    }
+
+    &:last-child {
+      border-color: var(--cta-border-color-secondary);
+      background-color: var(--cta-bg-color-secondary);
+      color: var(--cta-text-color-secondary);
+
+      &:hover {
+        border-color: var(--cta-border-color-hover-secondary);
+        background-color: var(--cta-bg-color-hover-secondary);
+        color: var(--cta-text-color-hover-secondary);
+      }
+    }
+  }
+}

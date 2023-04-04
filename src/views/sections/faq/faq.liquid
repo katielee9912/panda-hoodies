@@ -1,0 +1,106 @@
+{{ 'faq.css' | asset_url | stylesheet_tag }}
+
+<div class="faq faq--{{ section.id }}" role="region" aria-label="FAQs">
+  <div class="container">
+    <div class="row">
+      <div class="text-center{% if section.settings.headline_position == 'left' %} col-lg-4 text-lg-left{% endif %}">
+        <div class="faq__content">
+          <h2 class="heading-5">{{ section.settings.preheader }}</h2>
+          <h3 class="heading-3 heading-lg-3">{{ section.settings.title }}</h3>
+        </div>
+      </div>
+      <div class="{% if section.settings.headline_position == 'left' %}col-lg-8{% endif %}">
+        <div class="faq__container">
+          {% for block in section.blocks %}
+            {% assign acc_class = 'block-acc-' | append: block.id | append: '-' | append: section.id %}
+            {% render 'accordion' with
+              title: block.settings.title,
+              content: block.settings.answer,
+              group_id: section.id,
+              class: acc_class,
+              open: block.settings.open_by_default
+            %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% render 'section-spacing', section_name: 'faq' %}
+
+<style>
+  .faq--{{ section.id }} {
+    --faq-background-color: {{ section.settings.bg_color }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQS",
+  "settings": [
+    FRAGMENT.bg-color("#FFFFFF"),
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "headline_position",
+      "label": "Headline Content Position",
+      "default": "top",
+      "info": "Desktop Heading Content Positon",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "preheader",
+      "label": "Preheader"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    FRAGMENT.section-spacing
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "info": "If checked, the accordion answer will be open on page load"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQs"
+    }
+  ]
+}
+{% endschema %}

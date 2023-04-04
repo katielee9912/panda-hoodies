@@ -1,0 +1,139 @@
+<script src="{{ 'collection.js' | asset_url }}" defer="defer"></script>
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+
+{%- assign enable_quickview = settings.enable_quickview -%}
+
+<section class="collection"
+  role="region"
+  aria-label="Collection"
+  data-collection
+  data-ajax-pagination-parent-container
+  data-section-id="{{ section.id }}"
+>
+  <div class="container">
+    <div class="d-md-none collection-mobile-header">
+      <popup-toggle data-target="collection-mobile-filter-{{ collection.handle }}" data-action="open">
+        <button class="btn btn--full btn--outline">{{ 'collections.filters.mobile_filter_button' | t }}</button>
+      </popup-toggle>
+
+      <h3 class="heading-4">{{ 'collections.filters.active_filters' | t }}</h3>
+      {% render 'collection-active-filters' %}
+    </div>
+
+    <popup-element class="collection-mobile-filter drawer drawer--right"
+      data-id="collection-mobile-filter-{{ collection.handle }}"
+      role="dialog"
+      aria-modal="true"
+      inert
+      aria-label="Mobile Navigation"
+    >
+      <popup-toggle data-target="collection-mobile-filter-{{ collection.handle }}" data-action="close">
+        <button aria-label="Close Filters">{% render 'icon-close' %}</button>
+      </popup-toggle>
+
+      <div class="drawer__inner">
+        <h2>{{ collection.title }}</h2>
+
+        <h3 class="heading-4">{{ 'collections.filters.active_filters' | t }}</h3>
+
+        {% render 'collection-active-filters' %}
+
+        {% render 'collection-filters', filter_id: 'mobile' %}
+
+        <div class="collection-mobile-filter__footer">
+          <button class="btn" data-collection-clear-filters-btn>
+            {{ 'collections.filters.clear_filters' | t }}
+          </button>
+
+          <popup-toggle data-target="collection-mobile-filter-{{ collection.handle }}" data-action="close">
+            <button class="btn">{{ 'collections.filters.show_products' | t }}</button>
+          </popup-toggle>
+        </div>
+      </div>
+    </popup-element>
+
+    <div class="row">
+      <div class="d-none d-md-block col-md-3">
+        <h1 class="heading-4">{{ collection.title }}</h1>
+
+        {% if section.settings.enable_filtering == true %}
+          {% render 'collection-active-filters' %}
+          {% render 'collection-filters', filter_id: 'desktop' %}
+        {% endif %}
+      </div>
+      <div class="col-12 col-md-9">
+        <filtered-collection-display class="collection-display collection__display"
+          data-filtered-collection-display="{{ collection.handle }}"
+          data-url="{{ collection.url }}"
+          data-section-id="{{ section.id }}"
+        >
+          <div class="collection-header">
+            <span data-collection-product-count>{{ 'collections.general.product_count' | t: count: collection.products_count }}</span>
+            {% render 'collection-sorting' %}
+          </div>
+
+          {% if collection.products.size == 0 %}
+            <p class="collection__no-products">{{ 'collections.general.no_matches' | t }}</p>
+          {% else %}
+            <div class="collection__grid grid" style="--bs-gap: 34px 24px;">
+              {% for product in collection.products %}
+                {% unless product.tags contains 'hidden' %}
+                  <div class="g-col-6 g-col-md-4">
+                    {% render 'product-card', product: product %}
+                  </div>
+                {% endunless %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </filtered-collection-display>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if enable_quickview %}
+  {% capture quickview_content %}
+    <div data-product-quickview-content></div>
+  {% endcapture %}
+  {% render 'modal',
+    id: 'quickview',
+    content: quickview_content,
+    data_attr: 'data-is-quickview-modal',
+    overlay_view: true
+  %}
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Filtering & Sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_filtering",
+        "label": "Enable Filtering",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sorting",
+        "label": "Enable Sorting",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "sorting_options",
+        "label": "Sorting Options",
+        "default": "manual,price-ascending,price-descending",
+        "info": "Comma seperated list of sorting options to display."
+      },
+      {
+        "type": "paragraph",
+        "content": "Availiable Sorting Options: manual, best-selling, title-ascending, title-descending, price-ascending, price-descending, created-ascending, created-descending"
+      }
+    ]
+  }
+{% endschema %}

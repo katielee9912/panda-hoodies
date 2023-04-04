@@ -1,0 +1,81 @@
+/* ============================================================================
+  Navigation
+============================================================================== */
+
+.nav {
+  ul {
+    margin: 0;
+    cursor: default;
+
+    li {
+      display: block;
+      margin: 0;
+    }
+
+    > li {
+      display: inline-block;
+      position: relative;
+    }
+  }
+}
+
+.nav__link {
+  display: block;
+  padding: calc($gutter / 2);
+  font-size: 1.8rem;
+  white-space: nowrap;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-primary;
+  }
+
+  &.nav__link--first {
+    padding-left: 0;
+  }
+
+  span,
+  svg {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+
+  .nav--mobile & {
+    display: inline-block;
+  }
+}
+
+.nav__dropdown {
+  visibility: hidden;
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  margin: 0;
+  padding: 6px 20px 20px 0;
+  transition: 0.2s all ease;
+  opacity: 0;
+  background-color: $color-dropdown;
+  text-align: left;
+
+  .nav__link-wrapper--has-dropdown:hover &,
+  .nav__link-wrapper--has-dropdown:focus &,
+  .nav__link-wrapper--has-dropdown.focus-within & {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .nav__link-wrapper--has-dropdown:focus-within & {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  li {
+    width: 100%;
+  }
+
+  .nav__link {
+    margin-top: 12px;
+  }
+}

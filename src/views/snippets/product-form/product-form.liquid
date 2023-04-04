@@ -1,0 +1,86 @@
+<div class="product-form">
+  <atc-form>
+    {% form 'product', product, id: form_id %}
+      <select class="single-option-selector{% if hide_product_select %} hide{% endif %}" name="id" id="productSelect-{{ product.id }}" data-product-select data-variant-id>
+        {%- for variant in product.variants -%}
+          <option
+            {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+            data-sku="{{ variant.sku }}"
+            value="{{ variant.id }}"
+            data-inventory-policy="{{ variant.inventory_policy }}"
+            data-inventory-quantity="{{ variant.inventory_quantity }}"
+          >
+            {{- variant.title }} - {{ variant.price | money_with_currency }}{% if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif -%}
+          </option>
+        {%- endfor -%}
+      </select>
+
+      {%- if display_subscription_options and product.selling_plan_groups.size > 0 -%}
+        {%- liquid
+          if one_time_label == blank
+            assign one_time_label = "products.subscribe.one_time_label" | t
+          endif
+          if subscribe_label == blank
+            assign subscribe_label = "products.subscribe.subscribe_label" | t
+          endif
+        -%}
+        <div class="product-block" {{ block.shopify_attributes }}>
+          <div class="product-subscription-options" data-product-subscription-options>
+            <fieldset class="product-subscription-toggles">
+              <legend class="visually-hidden">{{ 'products.product.delivery_options' | t }}</legend>
+              <div class="product-subscription-toggle">
+                <input id="product-subscription-option-onetime" checked="checked" type="radio" name="subscription-toggle" value="one-time" data-product-subscription-toggle />
+                <label for="product-subscription-option-onetime">{{ one_time_label }}</label>
+              </div>
+              <div class="product-subscription-toggle">
+                <input id="product-subscription-option-sub" type="radio" name="subscription-toggle" value="subscription" data-product-subscription-toggle />
+                <label for="product-subscription-option-sub">{{ subscribe_label }}</label>
+              </div>
+            </fieldset>
+
+            <div class="d-none" data-product-selling-plan-group-wrap>
+              {%- for selling_plan_group in product.selling_plan_groups -%}
+                <div class="selling-plan-group d-none"
+                  data-product-selling-plan-group
+                  data-id="{{ selling_plan_group.id }}"
+                >
+                  <dropdown-select>
+                    <select class="selling-plan-group__select"
+                      name="selling-plan-group"
+                      data-custom-dropdown
+                      data-product-selling-plans-select
+                      aria-label="{{ 'products.product.delivery_options' | t }}"
+                    >
+                      {% for plan in selling_plan_group.selling_plans %}
+                        <option value="{{ plan.id }}">{{ plan.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </dropdown-select>
+                </div>
+              {%- endfor -%}
+            </div>
+
+            <input type="hidden" data-product-selling-plan-input name="selling_plan" />
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if display_quantity_selector -%}
+        <strong>Select Quantity</strong>
+        {%- render 'quantity-selector' with
+          min: 1,
+          max: 99,
+          value: 1,
+          product_title: product.title,
+          id: 'pdp-quantity'
+        -%}
+      {%- endif -%}
+
+      <button class="product__submit btn btn--full" type="submit" name="add" data-product-submit>
+        <span data-product-submit-text data-state="add">{{ 'products.product.add_to_cart' | t }} &mdash; <span data-product-price>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span></span>
+        <span data-product-submit-text data-state="sold-out" class="d-none">{{ 'products.product.sold_out' | t }}</span>
+        <span data-product-submit-text data-state="unavailable" class="d-none">{{ 'products.product.unavailable' | t }}</span>
+      </button>
+    {% endform %}
+  </atc-form>
+</div>

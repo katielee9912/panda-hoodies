@@ -1,0 +1,49 @@
+{% comment %}
+  PARAMETERS:
+  display_low_stock: Boolean (optional)
+  form_id: String. Product form ID (optional)
+
+  USAGE:
+  {% render 'product-options' with
+    display_low_stock: true,
+    form_id: form_id
+  %}
+{% endcomment %}
+
+{%- liquid
+  # unavailable_option_display : options: 'disable', 'hide', 'select-next-available'
+  assign unavailable_option_display = 'disable'
+-%}
+
+{% unless product.has_only_default_variant %}
+  <div class="product-options product-options--unavailable-option-style-{{ unavailable_option_display | default: 'hide' }}"
+    data-product-options
+    data-unavailable-display="{{ unavailable_option_display }}"
+  >
+    {%- for option in product.options_with_values -%}
+      {%- liquid
+        assign option_name = option.name | downcase
+        assign display_selected_value_text = false
+        assign type = 'radio'
+        if option_name == 'color'
+          assign display_selected_value_text = true
+          assign type = 'swatch'
+        endif
+      -%}
+      {% render 'product-option',
+        option: option,
+        display_selected_value_text: display_selected_value_text,
+        type: type,
+        product: product,
+        form_id: form_id
+      %}
+    {%- endfor -%}
+
+    {% if display_low_stock == true %}
+      <p class="product-swatches__stock_message hide" aria-live="polite"
+        data-variant-stock-message
+        data-low-stock-breakpoint="5"
+      >{{ 'products.product.limited_stock' | t }}</p>
+    {% endif %}
+  </div>
+{% endunless %}

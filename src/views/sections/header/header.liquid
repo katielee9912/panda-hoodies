@@ -1,0 +1,106 @@
+<header class="site-header" role="banner" aria-label="Site Header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 d-none d-lg-block align-self-center text-center">
+        <div class="site-header__logo">
+          <a href="{{ routes.root_url }}" title="{{ shop.name }} Logo">
+            {% if section.settings.logo != blank %}
+              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ shop.name }} Logo">
+            {% else %}
+              <h2 class="heading-4">{{ shop.name }}</h2>
+            {% endif %}
+          </a>
+        </div>
+      </div>
+
+      <div class="col-2 col-lg-8 align-self-center">
+        <popup-toggle data-target="mobile-nav" data-action="open">
+          <button class="d-lg-none" type="button" aria-label="Menu" data-drawer-toggle="menu">
+            {% render 'icon-menu' %}
+          </button>
+        </popup-toggle>
+
+        <div class="d-none d-lg-flex justify-content-center">
+          {% render 'nav', menu: section.settings.menu %}
+        </div>
+      </div>
+
+      <div class="col-8 d-lg-none align-self-center text-center">
+        <div class="site-header__logo">
+          <a href="{{ routes.root_url }}" title="{{ shop.name }} Logo">
+            {% if section.settings.logo != blank %}
+              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ shop.name }} Logo">
+            {% else %}
+              <h2 class="heading-4">{{ shop.name }}</h2>
+            {% endif %}
+          </a>
+        </div>
+      </div>
+
+      <div class="site-header__controls col-2 col-lg-2 align-self-center text-right">
+        {% if section.settings.secondary_links != blank %}
+          <div class="site-header__secondary-links d-none d-lg-block">
+            <div class="row">
+              {% for link in linklists[section.settings.secondary_links].links %}
+                {% assign secondary_link_title = link.title | split: '|' | last %}
+
+                <div class="col align-self-center">
+                  <a class="p--small" href="{{ link.url }}" title="{{ secondary_link_title }}">
+                    {% if link.title contains '|' %}
+                      <img src="{{ link.title | split: '|' | first | file_url }}" alt="{{ secondary_link_title }}">
+                      <span>{{ secondary_link_title }}</span>
+                    {% else %}
+                      {{ link.title }}
+                    {% endif %}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="row">
+          <div class="col col-lg-auto d-lg-block align-self-center">
+            {% if settings.ajaxcart == true %}
+              <popup-toggle data-target="ajaxcart" data-action="open">
+                <button type="button" aria-label="Cart">
+                  {% render 'icon-cart' %}
+                </button>
+              </popup-toggle>
+            {% else %}
+              <a href="{{ routes.cart_url }}" title="{{ 'cart.general.title' | t }}">
+                {% render 'icon-cart' %}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+  {
+    "name": "Header",
+    "class": "site-header-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "secondary_links",
+        "label": "Secondary Links",
+        "info": "Upload an icon to Settings > Files and add the file name to the link text separated by a |. Ex. icon.svg|Link Text"
+      }
+    ]
+  }
+{% endschema %}

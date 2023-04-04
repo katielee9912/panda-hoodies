@@ -1,0 +1,103 @@
+/* ============================================================================
+  Collection Filters
+============================================================================== */
+
+.collection-filters {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.collection-filters__active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 0 16px;
+}
+
+.collection-filters__active-filter {
+  margin: 0 5px 5px 0;
+}
+
+.collection-filters__content {
+  position: relative;
+  width: 100%;
+}
+
+.collection-filters__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content;
+  gap: 0;
+}
+
+.collection-filters__group {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  margin: 0;
+  padding: 0 0 12px;
+  list-style: none;
+  gap: 12px;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+  }
+}
+
+.collection-filters__group-price {
+  display: flex;
+  gap: 16px;
+
+  .field {
+    flex: 1;
+  }
+}
+
+.collection-filters__group--list {
+  input[type='checkbox'] {
+    display: block;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 1px solid $color-black;
+    border-radius: 4px;
+    cursor: pointer;
+    appearance: none;
+
+    &:checked {
+      border-color: $color-black;
+      background-color: $color-black;
+      background-image: url('checkbox-check.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 15px 12px;
+    }
+  }
+}
+
+.collection-filters__group--swatches {
+  input[type='checkbox'] {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid $color-black;
+    border-radius: 50%;
+    cursor: pointer;
+    appearance: none;
+
+    &:checked::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: $color-white;
+    }
+  }
+}

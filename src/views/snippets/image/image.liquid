@@ -1,0 +1,45 @@
+{%- comment -%}
+  Renders a lazyloaded image
+
+  Accepts:
+  - image: {Object} Image object
+  - background: {Boolean} Turn the image into a background image (optional)
+  - classes: {String} Custom classes (optional)
+  - lazy: {boolean} Whether to lazyload (true by default) (optional)
+  - attributes: {String} Custom attributes (optional)
+
+  Usage:
+  {%- render 'image', image: featured_image -%}
+{%- endcomment -%}
+
+{%- liquid
+  assign image_widths = '50,100,180,360,540,720,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024' | split: ','
+
+  capture image_widths
+    for width in image_widths
+      assign width_num = width | plus: 0 | round
+      if image.width >= width_num
+        echo image | image_url: width: width_num | append: ' ' | append: width_num | append: 'w,'
+      endif
+    endfor
+
+    echo image | image_url: image.width | append: ' ' | append: image.width | append: 'w'
+  endcapture
+
+  assign image_widths = image_widths | strip_newlines
+-%}
+
+<theme-image>
+  <img
+    {% if classes != blank or background == true %}
+      class="{{ classes }} {% if background %}background-image{% endif %}"
+    {% endif %}
+    src="{{ image | image_url: width: 50 }}"
+    data-srcset="[{{ image_widths }}]"
+    alt="{{ image.alt | split: '|' | first | escape }}"
+    {% unless lazy == false %}loading="lazy"{% endunless %}
+    width="{{ image.width }}"
+    height="{{ image.height }}"
+    {{ attributes }}
+  >
+</theme-image>

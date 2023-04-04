@@ -1,0 +1,19 @@
+<quick-search>
+  <form action="{{ routes.search_url }}" method="get" class="search-bar form-inline text-center" role="search">
+    <input type="hidden"
+          name="type"
+          value="product">
+
+    <input class="p--small"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.placeholder' | t }}">
+
+    <div>
+      <button type="submit" class="btn" aria-label="{{ 'general.search.submit' | t }}">
+        {% render 'icon-search' %}
+      </button>
+    </div>
+  </form>
+</quick-search>

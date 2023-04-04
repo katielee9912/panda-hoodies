@@ -1,0 +1,34 @@
+<div class="collection__sorting" data-collection-sorting="{{ collection.handle }}">
+  <collection-sorting data-collection="{{ collection.handle }}">
+    <form>
+      {% if style == 'list' %}
+        <ul>
+          {% for sort_option in collection.sort_options %}
+            <li>
+              <input
+                type="radio"
+                id="{{ sort_option.value }}"
+                name="sort_by"
+                value="{{ sort_option.value }}"
+                data-collection-sorting-radio
+                {% if collection.sort_by == sort_option.value %}checked{% endif %}
+              >
+              <label for="{{ sort_option.value }}" data-label>{{ sort_option.name }}</label>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <label class="d-none d-md-inline" for="collection-sort">{{ 'collections.sorting.title' | t }}</label>
+        <dropdown-select>
+          <select id="collection-sort" name="sort_by" aria-label="Collection Sorting" data-current-sorting="{{ collection.sort_by | default: collection.default_sort_by }}">
+            {% for sort_option in collection.sort_options %}
+              <option value="{{ sort_option.value }}" {% if collection.sort_by == sort_option.value %}selected{% endif %}>
+                {{ sort_option.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </dropdown-select>
+      {% endif %}
+    </form>
+  </collection-sorting>
+</div>

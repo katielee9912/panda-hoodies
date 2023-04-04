@@ -1,0 +1,20 @@
+/* Helpers */
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  FAQ
+============================================================================== */
+
+.faq {
+  background-color: var(--faq-background-color);
+}
+
+.faq__content {
+  margin-bottom: 40px;
+
+  @include media-query($min, $large) {
+    margin-bottom: 56px;
+  }
+}

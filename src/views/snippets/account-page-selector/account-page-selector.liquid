@@ -1,0 +1,7 @@
+<dropdown-select class="d-md-none">
+  <select name="Account Page Selector" data-account-page-selector>
+    <option value="{{ routes.account_url }}" {% if request.path == routes.account_url or request.path contains 'orders' %}selected{% endif %}>{{ 'customer.orders.title' | t }}</option>
+    <option value="{{ routes.account_addresses_url }}" {% if request.path == routes.account_addresses_url %}selected{% endif %}>{{ 'customer.addresses.title' | t }}</option>
+    <option value="{{ routes.account_logout_url }}">{{ 'layout.customer.log_out' | t }}</option>
+  </select>
+</dropdown-select>

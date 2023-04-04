@@ -1,0 +1,22 @@
+{% assign media_product_image = product.images | where: 'src', media.src | first %}
+
+<div class="product-media-item product-media-item--{{ media.media_type }} {{ class }}"
+  data-product-media-item
+  data-item-index="{{ media.position | minus: 1 }}"
+  data-media-id="{{ media.id }}"
+  data-media-alt="{{ media.alt }}"
+  {% if media.src and media_product_image and media_product_image.variants %}
+    data-variant-ids="{{ media_product_image.variants | map: 'id' | join: ',' }}"
+  {% endif %}
+  {{ data }}
+>
+  {%- if media.media_type == 'image' -%}
+    {% render 'image', image: media.preview_image %}
+  {%- elsif media.media_type == 'external_video' -%}
+    {{ media | external_video_tag }}
+  {%- elsif media.media_type == 'video' -%}
+    {{ media | video_tag: controls: true, image_size: '1024x', autoplay: true, muted: true, loop: true }}
+  {%- elsif media.media_type == 'model' -%}
+    {{ media | model_viewer_tag: image_size: '1024x' }}
+  {%- endif -%}
+</div>

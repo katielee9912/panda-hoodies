@@ -1,0 +1,69 @@
+/* Helpers */
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  Mobile Navigation
+============================================================================== */
+
+.mobile-nav {
+  max-width: 600px;
+  padding: 24px;
+  background: $color-white;
+
+  li {
+    list-style: none;
+  }
+}
+
+.mobile-nav__close {
+  display: block;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  line-height: 1;
+
+  button,
+  svg {
+    display: block;
+  }
+
+  svg path {
+    fill: currentcolor;
+  }
+}
+
+.mobile-nav__links {
+  height: calc(100% + 0.1px); // Overscroll hack
+  margin: 0;
+  padding: 50px 0 64px;
+}
+
+.mobile-nav__link {
+  position: relative;
+  margin: 0;
+  padding: 22px 0;
+  border-bottom: 1px solid $color-border;
+  line-height: 1;
+
+  &.mobile-nav__link--last {
+    margin-bottom: 25px;
+  }
+}
+
+.mobile-nav__link-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-nav__submenu {
+  margin: 20px 0 0 20px;
+  list-style-type: none;
+
+  li:not(:last-child) {
+    margin-bottom: 20px;
+    border-bottom: none;
+  }
+}

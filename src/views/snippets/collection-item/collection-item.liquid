@@ -1,0 +1,92 @@
+{% comment %}
+  PARAMETERS
+  product : Product object (required)
+  display_color_options : Boolean (optional)
+
+  USAGE
+  {% render 'collection-item',
+    product: product,
+    display_color_options: true
+  %}
+{% endcomment %}
+
+{%- liquid
+  assign color_option = product.options_by_name['color']
+  assign color_option_handle = 'option' | append: color_option.position
+  assign enable_quickview = settings.enable_quickview
+  assign image_widths = '350, 500, 650'
+  assign image_sizes = '(max-width:750px) calc(90vw / 2), (max-width:1025px) 23vw, 270px'
+-%}
+
+<collection-item class="colleciton-item">
+  <a class="collection-item__image img-contain" href="{{ product.url | within: collection }}" title="{{ product.title }} - {{ product.price | money }}">
+    {%- liquid
+      if display_color_options and color_option != blank
+        if product.selected_variant and product.selected_variant.image != blank
+          assign selected_variant_color = product.selected_variant[color_option_handle]
+          echo product.selected_variant.image | image_url: width: 650 | image_tag: loading: 'lazy', data-collection-item-image: '', data-color: selected_variant_color, widths: image_widths, sizes: image_sizes
+        endif
+
+        for value in color_option.values
+        assign value_variant = product.variants | where: 'image' | where: color_option_handle, value | first
+
+          if value_variant == blank
+            continue
+          endif
+
+          if selected_variant_color != blank and selected_variant_color == value
+            continue
+          endif
+
+          assign image_class = 'hide'
+
+          if selected_variant_color == blank and value_variant[color_option_handle] == product.variants[0][color_option_handle]
+            assign image_class = ''
+          endif
+
+          echo value_variant.image | image_url: width: 650 | image_tag: loading: 'lazy', class: image_class, data-collection-item-image: '', data-color: value, widths: image_widths, sizes: image_sizes
+        endfor
+      else
+        echo product.featured_image | image_url: width: 650 | image_tag: loading: 'lazy', widths: image_widths, sizes: image_sizes
+      endif
+    -%}
+  </a>
+
+  <h3 class="p p--large">
+    <a href="{{ product.url | within: collection }}" title="{{ product.title }} - {{ product.price | money }}">{{ product.title }}</a>
+  </h3>
+
+  {%- liquid
+    if display_color_options
+      render 'product-option', option: color_option, type: 'swatch', product: product
+    endif
+  -%}
+
+  <p>
+    {%- if product.available == false -%}
+      {{- 'products.product.sold_out' | t -}}
+    {%- else -%}
+      {%- if product.compare_at_price > product.price -%}
+        {% assign original_price = product.compare_at_price | money %}
+        {% assign sale_price = product.price | money %}
+        <span class="visually-hidden">
+          {{- 'general.accessibility.strikethough_price' | t: original: original_price, sale: sale_price -}}
+        </span>
+        <span aria-hidden="true">{{ sale_price }}<s>{{ original_price }}</s></span>
+      {%- else -%}
+        {{- product.price | money -}}
+      {%- endif -%}
+    {%- endif -%}
+  </p>
+
+  {% if enable_quickview %}
+    <popup-toggle data-target="quickview" data-action="open">
+      <button type="button" class="btn btn--full"
+        data-quickview-view-toggle
+        data-url="{{ product.url | within: collection | prepend: shop.secure_url }}"
+        data-template="{{ settings.quickview_template }}"
+        data-section-id="{{ settings.quickview_section_id }}"
+      >{{ 'collections.general.quick_view' | t }}</button>
+    </popup-toggle>
+  {% endif %}
+</collection-item>

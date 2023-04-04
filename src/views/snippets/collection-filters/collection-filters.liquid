@@ -1,0 +1,112 @@
+<div data-collection-filter="{{ collection.handle }}" data-filter-id="{{ filter_id }}">
+  <collection-filters class="collection-filters" data-collection="{{ collection.handle }}">
+    <form>
+      <div class="collection-filters__main">
+        {% for filter in collection.filters %}
+          {% assign downcase_filter_label = filter.label | downcase %}
+          {% capture filter_content %}
+          {% case filter.type %}
+            {% when 'boolean', 'list' %}
+              {%- liquid
+                assign has_usable_filter = false
+                for filter_value in filter.values
+                  if filter_value.count > 0
+                    assign has_usable_filter = true
+                    break
+                  endif
+                endfor
+
+                if has_usable_filter == false
+                  continue
+                endif
+
+                assign is_color_filter = false
+                if downcase_filter_label contains 'color' or downcase_filter_label contains 'colour'
+                  assign is_color_filter = true
+                endif
+              -%}
+              <ul class="collection-filters__group collection-filters__group--{% if is_color_filter %}swatches{% else %}list{% endif %}">
+                {% for filter_value in filter.values %}
+                  {% assign option_id = filter_id | append: '-' | append: filter_value.param_name | append: '-' | append: filter_value.value | handleize %}
+                  <li
+                    {% if filter_value.count == 0 %}class="hide"{% endif %}
+                    data-filter-item="{{ filter_value.count }}"
+                  >
+                    <input
+                      class="{% if is_color_filter %}collection-filters__color-input--{{ filter_value.value | handleize }}{% endif %}"
+                      type="checkbox"
+                      id="{{ option_id }}"
+                      name="{{ filter_value.param_name }}"
+                      value="{{ filter_value.value }}"
+                      data-filter-option="{{ filter_value.param_name | handleize }}__{{ filter_value.value | handleize }}"
+                      {% if filter_value.active %}checked{% endif %}
+                    >
+                    <label for="{{ option_id }}" data-label>{{ filter_value.label }} ({{ filter_value.count }})</label>
+                  </li>
+                  {% if is_color_filter %}
+                    <style>
+                      .collection-filters__color-input--{{ filter_value.value | handleize }} {
+                        background-color: {{ filter_value.value | handleize }};
+                      }
+                    </style>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% when 'price_range' %}
+              <div class="collection-filters__group-price">
+                <div class="field">
+                  <input
+                    class="field__input"
+                    name="{{ filter.min_value.param_name }}"
+                    id="Filter-{{ filter.label | escape }}-GTE"
+                    {%- if filter.min_value.value -%}
+                      value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                    {%- endif -%}
+                    type="number"
+                    placeholder="0"
+                    min="0"
+                    inputmode="decimal"
+                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  >
+                  <label class="field__label p--small" for="Filter-{{ filter.label | escape }}-GTE">
+                    {{- 'collections.filters.from' | t -}}
+                  </label>
+                </div>
+
+                <div class="field">
+                  <input
+                    class="field__input"
+                    name="{{ filter.max_value.param_name }}"
+                    id="Mobile-Filter-{{ filter.label | escape }}-LTE"
+                    {%- if filter.max_value.value -%}
+                      value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                    {%- endif -%}
+                    type="number"
+                    min="0"
+                    inputmode="decimal"
+                    placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                    max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                  >
+                  <label class="field__label p--small" for="Mobile-Filter-{{ filter.label | escape }}-LTE">
+                    {{- 'collections.filters.to' | t -}}
+                  </label>
+                </div>
+              </div>
+            {% endcase %}
+          {% endcapture %}
+
+          {% capture group_attribute %}
+            data-filter-facet="{{ filter.label | handleize }}"
+            data-index="{{ forloop.index }}"
+          {% endcapture %}
+          {% render 'accordion',
+            title: filter.label,
+            content: filter_content,
+            group_id: group_id,
+            data_attr: group_attribute
+          %}
+        {% endfor %}
+      </div>
+    </form>
+  </collection-filters>
+</div>

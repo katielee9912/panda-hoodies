@@ -1,0 +1,227 @@
+<script src="{{ 'social.js' | asset_url }}" defer="defer"></script>
+{{ 'social.css' | asset_url | stylesheet_tag }}
+
+<div class="social social--{{ section.id }}" role="region" aria-label="Social Media Showcase">
+  <div class="container">
+    {% if section.blocks.size > 0 %}
+      <div class="row {% if section.settings.mobile_layout == 'slider' %}d-none d-lg-flex{% endif %}">
+        {% assign featured_block = section.blocks | where: 'type', 'featured_post' | first %}
+        {% if featured_block != blank %}
+          <div class="col-12 col-lg-5">
+            {% liquid
+              assign el_type = 'div'
+              if featured_block.settings.link != blank
+                assign el_type = 'a'
+              endif
+            %}
+            <{{ el_type }}
+              class="social__post social__post--featured"
+              {% if featured_block.settings.link != blank %}
+                href="{{ featured_block.settings.link }}"
+                title="{{ featured_block.settings.text }}"
+              {% endif %}
+            >
+              <span class="visually-hidden">
+                {{ featured_block.settings.text }}
+              </span>
+              {%- liquid
+                if featured_block.settings.image_mobile != blank
+                  render 'image', image: featured_block.settings.image, background: true, classes: 'd-none d-lg-block'
+                  render 'image', image: featured_block.settings.image_mobile, background: true, classes: 'd-lg-none'
+                elsif featured_block.settings.image != blank
+                  render 'image', image: featured_block.settings.image, background: true
+                endif
+                assign has_featured_block = true
+              -%}
+            </{{el_type }}>
+          </div>
+        {% endif %}
+
+        <div class="col-12 col-lg-{% if has_featured_block %}7{% else %}12{% endif %}">
+          <div class="row">
+            {% for block in section.blocks %}
+              {% liquid
+                if block.type == 'featured_post'
+                  continue
+                endif
+                assign el_type = 'div'
+                if block.settings.link != blank
+                  assign el_type = 'a'
+                endif
+              %}
+              <div class="col-6 col-lg-{% if has_featured_block %}4{% else %}2{% endif %}">
+                <{{ el_type }}
+                  class="social__post"
+                  {% if block.settings.link != blank %}
+                    href="{{ block.settings.link }}"
+                    title="{{ block.settings.text }}"
+                  {% endif %}
+                >
+                  <span class="visually-hidden">
+                    {{ block.settings.text }}
+                  </span>
+                  {%- liquid
+                    if block.settings.image_mobile != blank
+                      render 'image', image: block.settings.image, background: true, classes: 'd-none d-lg-block'
+                      render 'image', image: block.settings.image_mobile, background: true, classes: 'd-lg-none'
+                    elsif block.settings.image != blank
+                      render 'image', image: block.settings.image, background: true
+                    endif
+                  -%}
+                </{{el_type }}>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% if section.settings.mobile_layout == 'slider' %}
+        <social-swiper class="social__swiper swiper-container d-lg-none">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              {% liquid
+                if block.settings.image_mobile == blank and block.settings.image == blank
+                  continue
+                endif
+                assign el_type = 'div'
+                if block.settings.link != blank
+                  assign el_type = 'a'
+                endif
+              %}
+              <div class="swiper-slide">
+                <{{ el_type }}
+                  class="social__post"
+                  {% if block.settings.link != blank %}
+                    href="{{ block.settings.link }}"
+                    title="{{ block.settings.text }}"
+                  {% endif %}
+                >
+                  <span class="visually-hidden">
+                    {{ block.settings.text }}
+                  </span>
+                  {%- liquid
+                    assign image = block.settings.image_mobile | default: block.settings.image
+                    render 'image', image: image, background: true
+                  -%}
+                </{{el_type }}>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-controls d-flex align-items-center justify-content-center">
+            <button class="swiper-button swiper-button-prev">{% render 'icon-pagination-prev' %}</button>
+            <button class="swiper-button swiper-button-next">{% render 'icon-pagination-next' %}</button>
+          </div>
+        </social-swiper>
+      {% endif %}
+    {% endif %}
+    <div class="text-center">
+      {% if section.settings.cta_text and section.settings.cta_url %}
+        <a class="social__cta" href="{{ section.settings.cta_url }}" title="{{ section.settings.cta_text }}">
+          {{ section.settings.cta_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% render 'section-spacing' with section_name: 'social' %}
+
+{% style %}
+  #shopify-section-{{ section.id }} .social {
+    --section-background-color: {{ section.settings.bg_color }};
+    --section-cta-color: {{ section.settings.cta_color }};
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "radio",
+        "id": "mobile_layout",
+        "label": "Mobile Layout",
+        "default": "stacked",
+        "options": [
+          {
+            "value": "stacked",
+            "label": "Stacked"
+          },
+          {
+            "value": "slider",
+            "label": "Slider"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "CTA"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "CTA Link"
+      },
+      {
+        "type": "color",
+        "id": "cta_color",
+        "label": "CTA Color"
+      },
+      FRAGMENT.bg-color("#FFFFFF"),
+      FRAGMENT.section-spacing
+    ],
+    "blocks": [
+      {
+        "type": "featured_post",
+        "name": "Featured Post",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "The Featured Post appears first and is larger than other posts. It is optional."
+          },
+          FRAGMENT.image("Image Size: 1000x1000" || "Image Size: 700x700"),
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Link Title",
+            "info": "Used by screenreaders"
+          }
+        ]
+      },
+      {
+        "type": "post",
+        "name": "Post",
+        "limit": 6,
+        "settings": [
+          FRAGMENT.image("Image Size: 500x500" || "Image Size: 320x320"),
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Link Title",
+            "info": "Used by screenreaders"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Social"
+      }
+    ]
+  }
+{% endschema %}

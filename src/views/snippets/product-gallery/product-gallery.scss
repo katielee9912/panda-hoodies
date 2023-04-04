@@ -1,0 +1,139 @@
+/* ============================================================================
+  Product Gallery
+============================================================================== */
+
+.product-gallery {
+  @include media-query($min, $medium) {
+    padding-top: 32px;
+  }
+}
+
+.product-gallery-carousel {
+  display: block;
+  position: sticky;
+  top: 0;
+  margin-bottom: 34px;
+
+  .swiper-pagination-bullets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .swiper-pagination-bullet {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    border: 2px solid $color-black;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &.swiper-pagination-bullet-active {
+      background: $color-black;
+    }
+  }
+
+  .product-media-item {
+    background-color: $color-bg-champagne;
+  }
+
+  .swiper-pagination-thumbnail {
+    display: block;
+    position: relative;
+    width: 64px;
+    height: 104px;
+    margin: 0 4px 8px;
+    border: 1px solid rgba($color-black, 0.15);
+
+    img {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.swiper-pagination-bullet-active,
+    &.swiper-slide-thumb-active {
+      border-color: $color-black;
+    }
+  }
+
+  .swiper-pagination-thumbnail--slide {
+    width: 100px;
+    height: auto;
+  }
+
+  .swiper-pagination {
+    margin-top: 16px;
+  }
+}
+
+.product-gallery-carousel--overflow-visible {
+  overflow: visible !important;
+}
+
+.product-gallery-grid__item {
+  margin-bottom: $gutter;
+}
+
+.product-gallery-simple {
+  position: relative;
+
+  .badge {
+    top: -16px;
+    right: 0;
+  }
+}
+
+.product-gallery-simple__secondary-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 28px;
+  padding: 1px 16px;
+  border-radius: 40px;
+  background: $color-white;
+
+  @include media-query($min, $medium) {
+    bottom: 30px;
+    left: 30px;
+    padding: 6px 16px;
+  }
+}
+
+.product-gallery-simple__media {
+  position: relative;
+}
+
+.product-gallery-simple__media-item {
+  &.hidden {
+    position: absolute;
+    transition-delay: 0.25s;
+  }
+}
+
+.product-gallery-simple-nav {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 24px 0 0;
+}
+
+.product-gallery-simple-nav__thumb {
+  width: 93px;
+  height: 93px;
+  margin: 0 16px 16px 0;
+  overflow: hidden;
+  transition: opacity 0.25s ease;
+  opacity: 0.5;
+
+  &.active {
+    opacity: 1;
+  }
+
+  &:hover {
+    opacity: 0.75;
+  }
+}

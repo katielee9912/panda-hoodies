@@ -1,0 +1,64 @@
+/* ============================================================================
+  Dropdown Select
+============================================================================== */
+
+.dropdown-select {
+  display: inline-block;
+  position: relative;
+  width: auto;
+  max-width: 100%;
+
+  &[open] {
+    select {
+      background-image: url('select-flipped.svg');
+    }
+
+    ul {
+      display: flex;
+    }
+  }
+
+  select {
+    width: 100%;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  ul {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    margin: 0;
+    overflow: auto;
+    border: 1px solid $color-border;
+    border-top: none;
+    background-color: $color-white;
+    list-style: none;
+
+    li {
+      display: block;
+      margin: 0;
+      padding: 10px;
+      cursor: pointer;
+
+      &[aria-selected='true'] {
+        background-color: rgba($color-black, 0.15);
+      }
+
+      &[data-disabled] {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.no-click {
+  pointer-events: none;
+}

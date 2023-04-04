@@ -1,0 +1,30 @@
+/* Helpers */
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  Article
+============================================================================== */
+
+.article {
+  margin: 40px 0 80px;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+}
+
+.article__title {
+  margin: 20px 0 40px;
+}
+
+.article__image {
+  position: relative;
+  aspect-ratio: 5/4;
+}
+
+.article__meta {
+  margin-bottom: 22px;
+  color: $color-grey;
+}

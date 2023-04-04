@@ -1,0 +1,231 @@
+{
+  "type": "header",
+  "name": "Navigation Group",
+  "sections": {
+    "navigation-item": {
+      "type": "navigation-item",
+      "blocks": {
+        "d685c8f9-e8bd-4648-a4ec-43f6c22de243": {
+          "type": "promo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/face-treatment-with-a-smile.jpg",
+            "heading": "Example Title",
+            "subtext": "Example sub text goes here. Keep to a max of three lines.",
+            "cta_text_primary": "Primary Button",
+            "cta_link_primary": "shopify:\/\/pages\/anchors",
+            "cta_text_color_primary": "#FFFFFF",
+            "cta_bg_color_primary": "#000000",
+            "cta_border_color_primary": "#000000",
+            "cta_text_color_hover_primary": "#000000",
+            "cta_bg_color_hover_primary": "#FFFFFF",
+            "cta_border_color_hover_primary": "#000000",
+            "cta_text_secondary": "Secondary Button",
+            "cta_link_secondary": "shopify:\/\/products\/example-product-2",
+            "cta_text_color_secondary": "#FFFFFF",
+            "cta_bg_color_secondary": "#000000",
+            "cta_border_color_secondary": "#000000",
+            "cta_text_color_hover_secondary": "#000000",
+            "cta_bg_color_hover_secondary": "#FFFFFF",
+            "cta_border_color_hover_secondary": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "d685c8f9-e8bd-4648-a4ec-43f6c22de243"
+      ],
+      "settings": {
+        "menu": "women",
+        "layout": "regular",
+        "images_per_row": 6,
+        "background_color": "#e6ffc6"
+      }
+    },
+    "43a03cc6-5c29-4c90-858d-1f3ed5ad4804": {
+      "type": "navigation-item",
+      "blocks": {
+        "38f63890-e07a-496d-aec8-9acde7afc6ff": {
+          "type": "promo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/face-treatment-with-a-smile.jpg",
+            "heading": "Example Title",
+            "subtext": "Example subtext goes here. Keep to a max of three lines.",
+            "cta_text_primary": "Button Text",
+            "cta_link_primary": "shopify:\/\/products\/example-product",
+            "cta_text_color_primary": "#FFFFFF",
+            "cta_bg_color_primary": "#000000",
+            "cta_border_color_primary": "#000000",
+            "cta_text_color_hover_primary": "#000000",
+            "cta_bg_color_hover_primary": "#FFFFFF",
+            "cta_border_color_hover_primary": "#000000",
+            "cta_text_secondary": "",
+            "cta_link_secondary": "",
+            "cta_text_color_secondary": "#FFFFFF",
+            "cta_bg_color_secondary": "#000000",
+            "cta_border_color_secondary": "#000000",
+            "cta_text_color_hover_secondary": "#000000",
+            "cta_bg_color_hover_secondary": "#FFFFFF",
+            "cta_border_color_hover_secondary": "#000000"
+          }
+        },
+        "0b8bf931-8552-4ec6-accf-22eaa0c0e14c": {
+          "type": "promo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/a-hand-holds-up-a-bunch-of-grapes.jpg",
+            "heading": "Some grapes",
+            "subtext": "I'm craving grapes.",
+            "cta_text_primary": "Button Text",
+            "cta_link_primary": "shopify:\/\/products\/example-product-3",
+            "cta_text_color_primary": "#FFFFFF",
+            "cta_bg_color_primary": "#000000",
+            "cta_border_color_primary": "#000000",
+            "cta_text_color_hover_primary": "#000000",
+            "cta_bg_color_hover_primary": "#FFFFFF",
+            "cta_border_color_hover_primary": "#000000",
+            "cta_text_secondary": "",
+            "cta_link_secondary": "",
+            "cta_text_color_secondary": "#FFFFFF",
+            "cta_bg_color_secondary": "#000000",
+            "cta_border_color_secondary": "#000000",
+            "cta_text_color_hover_secondary": "#000000",
+            "cta_bg_color_hover_secondary": "#FFFFFF",
+            "cta_border_color_hover_secondary": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "38f63890-e07a-496d-aec8-9acde7afc6ff",
+        "0b8bf931-8552-4ec6-accf-22eaa0c0e14c"
+      ],
+      "settings": {
+        "menu": "men",
+        "layout": "regular",
+        "images_per_row": 6,
+        "background_color": "#ffdef0"
+      }
+    },
+    "fa2e21d7-c66a-4e3f-8409-f3ccd48eae76": {
+      "type": "navigation-item",
+      "settings": {
+        "menu": "kids",
+        "layout": "regular",
+        "images_per_row": 6,
+        "background_color": "#e7fffe"
+      }
+    },
+    "73e732b1-8b56-43fc-b312-b77282d54fd8": {
+      "type": "navigation-item",
+      "blocks": {
+        "440f5440-a3b9-4285-8c6e-e09767a7eed7": {
+          "type": "image",
+          "settings": {
+            "reference": "Beds",
+            "image": "shopify:\/\/shop_images\/woman-practicing-her-skincare-routine.jpg"
+          }
+        },
+        "ec66dff5-4318-455a-ad67-4e98ff368910": {
+          "type": "image",
+          "settings": {
+            "reference": "Pillows",
+            "image": "shopify:\/\/shop_images\/face-treatment-with-a-smile.jpg"
+          }
+        },
+        "b91ae5a4-8a9a-4afc-ad43-cdb0701a61a8": {
+          "type": "image",
+          "settings": {
+            "reference": "Dressers",
+            "image": "shopify:\/\/shop_images\/a-hand-holds-up-a-bunch-of-grapes.jpg"
+          }
+        },
+        "7d14bc41-c7e1-4814-a62e-613b32696125": {
+          "type": "image",
+          "settings": {
+            "reference": "Sofas",
+            "image": "shopify:\/\/shop_images\/sliced-mango-accompanied-by-mint-leaves.jpg"
+          }
+        },
+        "7bdd01d2-b3ab-4344-807a-7876fad0de6d": {
+          "type": "image",
+          "settings": {
+            "reference": "Chairs",
+            "image": "shopify:\/\/shop_images\/orange-in-grass.jpg"
+          }
+        },
+        "11035de3-5aad-4665-ad9f-968c31c37dce": {
+          "type": "image",
+          "settings": {
+            "reference": "Bookcases",
+            "image": "shopify:\/\/shop_images\/holding-an-apple.jpg"
+          }
+        },
+        "cdbe54c0-a495-4b2a-afa9-b4c1e0011e04": {
+          "type": "image",
+          "settings": {
+            "reference": "Cabinets",
+            "image": "shopify:\/\/shop_images\/not-boring-beige.jpg"
+          }
+        },
+        "ec346a28-f132-4c2d-83e0-430da86be225": {
+          "type": "image",
+          "settings": {
+            "reference": "Appliances",
+            "image": "shopify:\/\/shop_images\/organized-workspace.jpg"
+          }
+        },
+        "bdac18e0-2294-46f3-bd3b-1ffc8d270a6f": {
+          "type": "image",
+          "settings": {
+            "reference": "Tableware",
+            "image": "shopify:\/\/shop_images\/babys-toys-on-shelf.jpg"
+          }
+        },
+        "94a06e5e-87fe-43a4-96dd-510ec6c4c112": {
+          "type": "image",
+          "settings": {
+            "reference": "Desks",
+            "image": "shopify:\/\/shop_images\/sunlight-creeps-through-a-bright-living-room.jpg"
+          }
+        },
+        "5a7921d6-b00b-48e5-b6b4-98ec6faef178": {
+          "type": "image",
+          "settings": {
+            "reference": "Chairs",
+            "image": "shopify:\/\/shop_images\/pug-sleeping-in.jpg"
+          }
+        },
+        "b2148e01-e9fb-42d8-bca3-674bb2648a5b": {
+          "type": "image",
+          "settings": {
+            "reference": "Organizers",
+            "image": "shopify:\/\/shop_images\/business-cat-in-office.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "440f5440-a3b9-4285-8c6e-e09767a7eed7",
+        "ec66dff5-4318-455a-ad67-4e98ff368910",
+        "b91ae5a4-8a9a-4afc-ad43-cdb0701a61a8",
+        "7d14bc41-c7e1-4814-a62e-613b32696125",
+        "7bdd01d2-b3ab-4344-807a-7876fad0de6d",
+        "11035de3-5aad-4665-ad9f-968c31c37dce",
+        "cdbe54c0-a495-4b2a-afa9-b4c1e0011e04",
+        "ec346a28-f132-4c2d-83e0-430da86be225",
+        "bdac18e0-2294-46f3-bd3b-1ffc8d270a6f",
+        "94a06e5e-87fe-43a4-96dd-510ec6c4c112",
+        "5a7921d6-b00b-48e5-b6b4-98ec6faef178",
+        "b2148e01-e9fb-42d8-bca3-674bb2648a5b"
+      ],
+      "settings": {
+        "menu": "home",
+        "layout": "images",
+        "images_per_row": 6,
+        "background_color": "#faf7d8"
+      }
+    }
+  },
+  "order": [
+    "navigation-item",
+    "43a03cc6-5c29-4c90-858d-1f3ed5ad4804",
+    "fa2e21d7-c66a-4e3f-8409-f3ccd48eae76",
+    "73e732b1-8b56-43fc-b312-b77282d54fd8"
+  ]
+}

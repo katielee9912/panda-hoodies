@@ -1,0 +1,53 @@
+{%- comment -%}
+  PARAMETERS:
+  product_reviews_rating : Review rating value (required)
+  product_reviews_count : Review count value (required)
+  product_section_id : Enter product section ID if clicking on reviews stars should scroll the user to the review section (optional)
+  class : additional container classes (optional)
+
+  USAGE:
+  {% render 'product-star-rating' with
+    product_reviews_rating: product.metafields.key.reviews_rating,
+    product_reviews_count: product.metafields.key.reviews_count,
+    type: 'product'
+  %}
+{%- endcomment -%}
+
+{%- liquid
+  assign product_reviews_rating = product_reviews_rating | default: 0
+  assign product_reviews_count = product_reviews_count | default: 0
+-%}
+
+<div class="product-rating {% if product_reviews_count == blank %}product-rating--no-reviews{% endif %} {{ class }}">
+  <span class="visually-hidden">
+    {{- 'general.accessibility.rating_label' | t: rating: product_reviews_rating -}}
+  </span>
+
+  {% if product_section_id != blank %}
+    <a href="#{{ product_section_id }}"
+      title="{{ 'products.reviews.read_reviews' | t: count: product_reviews_count }}"
+    >
+  {% endif %}
+    <div class="product-rating__stars" role="region" aria-label="{{- 'general.accessibility.rating_label' | t: rating: product_reviews_rating -}}">
+      {%- liquid
+        assign reviews_rating = product_reviews_rating | plus: 0 | round: 1
+        capture full_star
+          render 'icon-star-full'
+        endcapture
+
+        for index in (1..5)
+          if reviews_rating >= 1 or reviews_rating > 0.75
+            echo full_star
+          elsif reviews_rating > 0.25
+            render 'icon-star-half'
+          else
+            render 'icon-star-empty'
+          endif
+          assign reviews_rating = reviews_rating | minus: 1
+        endfor
+      -%}
+    </div>
+  {% if product_section_id != blank %}
+    </a>
+  {% endif %}
+</div>

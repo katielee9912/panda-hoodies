@@ -1,0 +1,26 @@
+{{ 'Poppins-Bold.woff2' | asset_url | preload_tag: as: 'font' }}
+{{ 'Poppins-Regular.woff2' | asset_url | preload_tag: as: 'font' }}
+
+<style>
+  /* ============================================================================
+    Fonts
+  ============================================================================== */
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url({{ 'Poppins-Bold.woff2' | asset_url }}) format('woff2'),
+      url({{ 'Poppins-Bold.woff' | asset_url }}) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url({{ 'Poppins-Regular.woff2' | asset_url }}) format('woff2'),
+      url({{ 'Poppins-Regular.woff' | asset_url }}) format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>

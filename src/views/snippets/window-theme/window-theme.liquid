@@ -1,0 +1,38 @@
+{% capture icon_plus %}{% render 'icon-plus' %}{% endcapture %}
+{% capture icon_minus %}{% render 'icon-minus' %}{% endcapture %}
+{% capture icon_trash %}{% render 'icon-trash' %}{% endcapture %}
+{% capture icon_qty_plus %}{% render 'icon-qty-plus' %}{% endcapture %}
+{% capture icon_qty_minus %}{% render 'icon-qty-minus' %}{% endcapture %}
+
+<script type="text/javascript">
+  window.theme = {
+    storefront: {
+      store: {{ shop.permanent_domain | json }},
+      apiToken: {% if settings.storefront_api_token != blank %}{{ settings.storefront_api_token | json }}{% else %}null{% endif %}
+    },
+    strings: {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }},
+      productLimitReached: {{ 'products.product.quantity_limit_reached' | t | json }},
+      buyNow: {{ 'products.product.buy_now' | t | json }},
+      bundledProducts: {{ 'cart.general.bundled_products' | t | json }},
+      softBundleDefaultAppend: {{ 'cart.general.soft_bundle_default_append' | t | json }},
+      sellingPlanSingle: {{ 'cart.general.selling_plan_single' | t | json }},
+      loading: {{ 'general.ui.loading' | t | json }},
+      error: {{ 'general.ui.error' | t | json }}
+    },
+    moneyFormat: {{ shop.money_format | json }},
+    icons: {
+      plus: {{ icon_plus | json }},
+      minus: {{ icon_minus | json }},
+      trash: {{ icon_trash | json }},
+      qtyPlus: {{ icon_qty_plus | json }},
+      qtyMinus: {{ icon_qty_minus | json }}
+    }
+  };
+
+  {% if template.directory == 'customers' %}
+    theme.allCountryOptionTags = {{ all_country_option_tags | json }};
+  {% endif %}
+</script>

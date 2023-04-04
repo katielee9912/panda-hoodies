@@ -1,0 +1,46 @@
+{%- comment -%}
+  PARAMETERS:
+  rating: Rating (required)
+  reviews_count : Review count value (optional)
+  product_section_id : Enter product section ID if clicking on reviews stars should scroll the user to the review section (optional)
+  classes : additional container classes (optional)
+
+  USAGE:
+  {% render 'star-rating',
+    rating: product.metafields.key.reviews_rating,
+    reviews_count: product.metafields.key.reviews_count,
+  %}
+{%- endcomment -%}
+
+{%- liquid
+  assign rating_rounded = rating | floor
+  assign leftover = rating | modulo: rating_rounded | ceil
+  assign remaining_stars = 5 | minus: rating_rounded | minus: leftover
+-%}
+
+<div class="product-rating {{ classes }}{% if rating == blank %} product-rating--no-reviews{% endif %}">
+
+  <span class="visually-hidden">
+    {{- 'general.accessibility.rating_label' | t: rating: rating -}}
+  </span>
+
+  {% if product_section_id != blank %}
+    <a href="#{{ product_section_id }}"
+      title="{{ 'products.reviews.read_reviews' | t: count: reviews_count }}"
+    >
+  {% endif %}
+
+  {% for i in (1..rating_rounded) %}
+    {% render 'icon-star-full' %}
+  {% endfor %}
+  {% if leftover > 0 %}
+    {% render 'icon-star-half' %}
+  {% endif %}
+  {% for i in (1..remaining_stars) %}
+    {% render 'icon-star-empty' %}
+  {% endfor %}
+
+  {% if product_section_id != blank %}
+    </a>
+  {% endif %}
+</div>

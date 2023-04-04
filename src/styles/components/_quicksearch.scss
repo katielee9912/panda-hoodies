@@ -1,0 +1,131 @@
+/* ============================================================================
+  Quick Search
+============================================================================== */
+
+.quicksearch {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100vw;
+  max-width: 750px;
+  min-height: 200px;
+  border: 1px solid $color-black;
+  background-color: $color-white;
+
+  .quicksearch__category-title {
+    margin: 0 0 calc($container-padding / 2);
+    opacity: 0.8;
+    font-weight: 700;
+    line-height: 1;
+    text-align: left;
+  }
+}
+
+.quicksearch__collections,
+.quicksearch__products {
+  width: 100%;
+  padding: $container-padding;
+  border-right: 1px solid $color-black;
+}
+
+.quicksearch__collections {
+  @include media-query($min, $large) {
+    width: 200px;
+  }
+}
+
+.quicksearch__products {
+  @include media-query($min, $large) {
+    flex: 1;
+  }
+}
+
+.quicksearch__products-results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc($container-padding / 2);
+}
+
+.quicksearch__product-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.quicksearch__product-image {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 0 calc($container-padding / 2) 0 0;
+  background-color: $color-grey-light;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.quicksearch__product-info {
+  flex: 1;
+}
+
+.quicksearch__product-title {
+  width: 100%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: left;
+
+  .quicksearch__product-title-link {
+    line-height: 1;
+  }
+}
+
+.quicksearch__product-price {
+  width: 100%;
+  text-align: left;
+
+  .quicksearch__product-price-strikethrough {
+    opacity: 0.8;
+  }
+}
+
+.quicksearch__collection-list {
+  margin: 0;
+  list-style: none;
+}
+
+.quicksearch__collection-list-item {
+  position: relative;
+  margin: 0 0 5px;
+  padding-left: calc($container-padding / 2);
+  line-height: 1;
+  text-align: left;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background-color: $color-black;
+  }
+
+  .quicksearch__collection-list-link {
+    font-weight: 700;
+    line-height: 1;
+  }
+}
+
+.quicksearch__no-results {
+  grid-column: span 2;
+  width: 100%;
+  text-align: left;
+}

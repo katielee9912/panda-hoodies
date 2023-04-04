@@ -1,0 +1,25 @@
+<script src="{{ 'article.js' | asset_url }}" defer="defer"></script>
+{{ 'article.css' | asset_url | stylesheet_tag }}
+
+<article class="article container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      {% if article.image %}
+        <div class="article__image">
+          {% render 'image', image: article.image, background: true %}
+        </div>
+      {% endif %}
+
+      <h1 class="article__title heading-2">{{ article.title }}</h1>
+
+      {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+      <p class="article__meta">{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}</p>
+
+      <div class="rte">
+        {{ article.content }}
+      </div>
+    </div>
+  </div>
+</article>
+
+{% render 'schema-article' %}

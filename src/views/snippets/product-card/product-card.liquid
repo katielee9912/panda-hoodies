@@ -1,0 +1,107 @@
+{%- comment -%}
+  PARAMETERS:
+  product : product object (requried)
+  classes: additional classes
+  attributes: additional attributes
+
+  USAGE:
+  {% render 'product-card' with
+    product: product,
+    classes: classes,
+    attributes: attributes
+  %}
+{%- endcomment -%}
+{% if is_variant %}
+  {% assign product_title = product.product.title | append: ' - ' | append: product.title %}
+{% else%}
+  {% assign product_title = product.title %}
+{% endif %}
+
+{% if product.available %}
+  <div class="product-card{% if classes != blank %} {{ classes }}{% endif %}" {{ attributes }}>
+    <div href="{{ product.url }}" class="product-card__container" title="Go to {{ product_title}}">
+
+      {%- liquid
+        assign product_tags = ''
+        for tag in product.tags
+          if tag == 'best-seller'
+            assign product_tags = tag
+            continue
+          endif
+          if tag == 'sale'
+            assign product_tags = product_tags | append: ',' | append: tag
+            continue
+          endif
+        endfor
+        assign product_tags = product_tags | split: ','
+      -%}
+
+      {% if product_tags and product_tags.size > 0 %}
+        <div class="product-card__badges">
+          {% for tag in product_tags %}
+            {% if tag == 'best-seller' %}
+              <span class="badge best-seller">Best Seller</span>
+            {% elsif tag == 'sale' %}
+              <span class="badge sale">Sale</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <a href="{{ product.url }}" class="product-card__images">
+        <div class="product-card__images--primary">
+          {% render 'image', image: product.featured_image, background: true %}
+        </div>
+
+        {% if product.media.size > 1 %}
+          <div class="product-card__images--secondary">
+            {% for media in product.media limit: 1 offset: 1%}
+              {% render 'image', image: media.src, background: true %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </a>
+
+      <div class="product-card__meta">
+        <a href="{{ product.url }}">
+          <p class="product-card__title">
+            {{ product_title }}
+          </p>
+        </a>
+
+        {% if product.metafields.custom.mask_types != blank %}
+          <div class="product-card__variants">
+            {% render 'product-option', option: color_option, type: 'swatch', product: product, is_variant: is_variant %}
+          </div>
+        {% endif %}
+
+        <div class="product-card__rating">
+          {% render 'star-rating', rating: product.metafields.custom.rating %}
+        </div>
+
+        <div class="product-card__price">
+          {% assign original_price = product.price | money %}
+          {% assign sale_price = product.compare_at_price | money %}
+
+          {% if sale_price != blank or sale_price == original_price %}
+            <span class="sale-price">
+              {{- product.price | money -}}
+            </span>
+
+            <span class="compare-price">
+              <span class="visually-hidden">
+                {{- 'general.accessibility.original_price' | t -}}
+              </span>
+              <s aria-hidden="true">
+                {{- sale_price -}}
+              </s>
+            </span>
+          {% else %}
+
+            {{- product.price | money -}}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

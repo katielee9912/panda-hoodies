@@ -1,0 +1,58 @@
+/* ============================================================================
+  Drawers
+============================================================================== */
+
+/* stylelint-disable */
+.drawer {
+  display: block;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  overflow: auto;
+  list-style-type: none;
+  transition: transform $transition-drawer;
+  background: $color-white;
+  overscroll-behavior: none;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+
+  &.drawer--left {
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  &.drawer--right {
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  &.active {
+    transform: translateX(0);
+  }
+}
+
+.drawer::-webkit-scrollbar {
+  display: none;
+}
+
+.drawer__inner {
+  min-height: calc(100% + 1px); // Overscroll hack
+}
+
+.drawer__inside {
+  display: none;
+  position: relative;
+  height: 100%;
+  margin: 0 -35px 0 0;
+  padding: 0 35px 25px 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+
+  .drawer.active & {
+    display: block;
+  }
+}

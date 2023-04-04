@@ -1,0 +1,30 @@
+/* ============================================================================
+  Details
+============================================================================== */
+
+details {
+  &[open] {
+    svg:first-of-type {
+      display: none;
+    }
+
+    svg:last-of-type {
+      display: block;
+    }
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    svg:last-of-type {
+      display: none;
+    }
+  }
+}

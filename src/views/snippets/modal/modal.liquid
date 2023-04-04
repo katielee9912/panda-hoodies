@@ -1,0 +1,42 @@
+{% comment %}
+  PARAMETERS
+  content : content to appear in modal
+  id : unique identifier to link triggers to modals
+  title : title for small view (optional)
+  autoplay_video : autoplay first video in modal (optional)
+  data_attr: data-attributes (optional)
+
+  USAGE
+  {% capture modal_content %}
+    <p>Hi I'm Content</p>
+  {% endcapture %}
+  {% render 'modal', content: modal_content, id: unique-id %}
+  <button data-open-modal="modal-id">Open Modal</button>
+{% endcomment %}
+
+<popup-element class="modal modal--{{ id }}"
+  data-id="{{ id }}"
+  {% if autoplay_video == true %}data-autoplay-video{% endif %}
+  role="dialog"
+  inert
+  {% if title != blank %}
+    aria-labelledby="modal-title-{{ title }}"
+  {% else %%}
+    aria-label="Modal Popup"
+  {% endif %}
+  {{ data_attr }}
+>
+  <div class="modal__inner">
+    <popup-toggle data-target="{{ id }}" data-action="close">
+      <button class="modal__close" aria-label="Close Popup">{% render 'icon-close' %}</button>
+    </popup-toggle>
+
+    {% if title != blank %}
+      <h3 class="modal__title" id="modal-title-{{ title }}">{{ overlay_view_title }}</h3>
+    {% endif %}
+
+    <div class="modal__content">
+      {{ content }}
+    </div>
+  </div>
+</popup-element>

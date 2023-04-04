@@ -1,0 +1,52 @@
+<script src="{{ 'blog.js' | asset_url }}" defer="defer"></script>
+{{ 'blog.css' | asset_url | stylesheet_tag }}
+
+<section class="blog"
+  role="region"
+  aria-label="Blog Articles"
+  data-ajax-pagination-parent-container
+  data-section-id="{{ section.id }}"
+>
+  {% paginate blog.articles by 5 %}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h1 class="blog__title heading-2 text-center">{{ blog.title }}</h1>
+
+          {% for article in blog.articles %}
+            <div class="blog__article">
+              {% if article.image %}
+                <a class="blog__image image-link" href="{{ article.url }}" title="{{ article.title }}">
+                  {% render 'image', image: article.image %}
+                </a>
+              {% endif %}
+
+              <h2 class="heading-4">
+                <a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+              </h2>
+
+              {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+              <p class="blog__meta">{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}</p>
+
+              <div class="rte">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% else %}
+                  <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+                {% endif %}
+              </div>
+
+              <a href="{{ article.url }}" title="{{ article.title }} {{ 'blogs.article.read_more' | t }}" class="btn">{{ 'blogs.article.read_more' | t }} &rarr;</a>
+            </div>
+
+            {% unless forloop.last %}<hr>{% endunless %}
+          {% endfor %}
+
+          {% if paginate.pages > 1 %}
+            {% render 'pagination', paginate: paginate %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endpaginate %}
+</section>

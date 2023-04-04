@@ -1,0 +1,33 @@
+{%- comment -%}
+  PARAMETERS
+  section_name : String associate with the secction (uses in classes) (required)
+  preheader : String (optional)
+  title : String (optional)
+  copy : String (optional)
+
+  USAGE
+  {% render 'section-header',
+    section_name: 'content-blocks',
+    preheader: 'EXAMPLE PRE HEADER',
+    title: 'Headline',
+    copy: 'Example sub text should be kept at a max of three lines.'
+  %}
+{%- endcomment -%}
+
+<div class="{{ section_name }}__header section-header {{ classes | default: 'text-center' }}">
+  {% if preheader != blank %}
+    <span class="{{ section_name }}__preheader heading-5 d-block">
+      {{ preheader }}
+    </span>
+  {% endif %}
+  {% if title != blank %}
+    <h2 class="{{ section_name }}__title heading-3">
+      {{ title }}
+    </h2>
+  {% endif %}
+  {% if copy != blank %}
+    <p class="{{ section_name }}__copy">
+      {{ copy }}
+    </p>
+  {% endif %}
+</div>

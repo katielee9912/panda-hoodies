@@ -1,0 +1,51 @@
+/* Helpers */
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* Snippets */
+@import '~@snippets/collection-filters/collection-filters';
+@import '~@snippets/collection-item/collection-item';
+@import '~@snippets/collection-active-filters/collection-active-filters';
+
+@import '~@snippets/pagination/pagination';
+@import '~@snippets/product-options/product-options';
+
+/* ============================================================================
+  Collection
+============================================================================== */
+
+.collection {
+  margin: 20px 0 80px;
+}
+
+.collection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  .dropdown-select {
+    margin-left: 8px;
+  }
+}
+
+.collection-mobile-header {
+  margin-bottom: 24px;
+
+  .btn {
+    margin-bottom: 16px;
+  }
+}
+
+.collection-mobile-filter {
+  padding: $container-padding;
+  background: $color-white;
+}
+
+.collection-mobile-filter__footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 24px;
+  gap: $gutter;
+}

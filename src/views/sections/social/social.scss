@@ -1,0 +1,63 @@
+/* Helpers */
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  Social
+============================================================================== */
+
+.social {
+  overflow: hidden;
+  background-color: var(--section-background-color);
+}
+
+.social__post {
+  display: block;
+  position: relative;
+  height: 0;
+  margin: 0 0 20px;
+  padding-top: 100%;
+
+  .social__swiper & {
+    margin-bottom: 0;
+  }
+
+  @include media-query($min, $large) {
+    margin: 0 0 24px;
+  }
+
+  &--featured {
+    @include media-query($min, $large) {
+      height: calc(100% - 24px);
+      padding-top: 0;
+    }
+  }
+}
+
+.social__cta {
+  color: var(--section-cta-color);
+  text-decoration: underline;
+}
+
+.social__swiper {
+  display: block;
+  overflow: visible;
+
+  .swiper-slide {
+    max-width: calc(100% - 48px);
+    margin-right: 24px;
+
+    @include media-query($min, $medium) {
+      max-width: calc(33% - 48px);
+    }
+  }
+
+  .swiper-button {
+    padding: 8px;
+
+    svg {
+      display: block;
+    }
+  }
+}

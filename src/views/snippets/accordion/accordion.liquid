@@ -1,0 +1,34 @@
+{% comment %}
+  PARAMETERS
+  title : Toggle title text (required)
+  content : Accordion content (required)
+  class : additional container classes (optional)
+  toggle_class : additional toggle classes (optional)
+  group_id : Add a Group ID if sibling accordions should close when this one opens (optional)
+  data_attr : Data attributes
+
+  USAGE
+  {% render 'accordion',
+    title: title,
+    content: content,
+    group_id: group_id
+  %}
+{% endcomment %}
+
+{%- if title != blank and content != blank -%}
+  <custom-accordion class="accordion {{ class }}"
+    data-accordion
+    {% if group_id %}data-group="{{ group_id }}"{% endif %}
+    {{ data_attr }}
+  >
+    <details {% if open %}open{% endif %}>
+      <summary class="accordion__toggle {{ toggle_class }}">
+        {{ title }}
+        {% render 'icon-plus' %}
+        {% render 'icon-minus' %}
+      </summary>
+
+      <div class="accordion__content" data-accordion-content>{{ content }}</div>
+    </details>
+  </custom-accordion>
+{%- endif -%}

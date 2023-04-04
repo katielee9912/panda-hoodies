@@ -1,0 +1,46 @@
+/* ============================================================================
+  Product - Back in Stock
+============================================================================== */
+
+.product-bis {
+  margin: 40px 0 56px;
+  text-align: center;
+
+  input,
+  button {
+    display: block;
+    width: 100%;
+  }
+}
+
+.product-bis__title {
+  margin-bottom: 32px;
+}
+
+.product-bis__copy {
+  margin-bottom: 24px;
+
+  @include media-query($max, $pre-large) {
+    br {
+      display: none;
+    }
+  }
+}
+
+.product-bis__email {
+  margin-bottom: 8px;
+
+  input {
+    height: 56px;
+    font-size: calc-rem(18px);
+
+    &::placeholder {
+      color: $color-black;
+    }
+  }
+}
+
+.product-bis__response {
+  margin: 0;
+  padding: 16px 0 32px;
+}

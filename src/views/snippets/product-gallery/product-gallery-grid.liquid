@@ -1,0 +1,28 @@
+<product-gallery-grid class="product-gallery-grid row"
+  data-grid-gallery
+  data-filter-by-color="{{ filter_by_color }}"
+  data-color-option-index="{{ color_option_index }}"
+>
+  {%- for media in product.media -%}
+    {%- liquid
+      assign show_item = false
+      if filter_by_color
+        assign alt_split = media.alt | split: '|'
+        assign alt_color = alt_split | last | strip
+        if alt_split.size < 2
+          assign show_item = true
+        elsif alt_color == active_color
+          assign show_item = true
+        endif
+      else
+        assign show_item = true
+      endif
+    %}
+    <div class="product-gallery-grid__item col-lg-6{% unless show_item %} hide{% endunless %}"
+      data-grid-gallery-item
+      data-alt-text="{{ media.alt }}"
+    >
+      {% render 'product-media-item' with media: media, product: product %}
+    </div>
+  {%- endfor -%}
+</product-gallery-grid>

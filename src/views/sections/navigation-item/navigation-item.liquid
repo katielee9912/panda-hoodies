@@ -1,0 +1,299 @@
+{{ 'navigation-item.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign menu = linklists[section.settings.menu]
+  assign layout = section.settings.layout
+  assign promo_block_count = 0
+  assign has_promos = false
+
+  for block in section.blocks
+    if block.type == 'promo'
+      assign has_promos = true
+      assign promo_block_count = promo_block_count | plus: 1
+    endif
+    if promo_block_count == 2
+      break
+    endif
+  endfor
+-%}
+
+{% if section.settings.menu != blank %}
+  <navigation-item
+    class="navitem--{{ section.id }}"
+    data-mega-menu-nav-item
+  >
+    <h2 class="navitem__heading">
+      <a href="{{ menu.title }}"
+        aria-controls="{{ menu.handle }}-{{ section.id }}"
+        aria-expanded="false"
+        tabindex="0"
+        data-mega-menu-primary-link
+      >
+        {{ menu.title }}
+      </a>
+    </h2>
+
+    {% comment %} Nav Item Dropdown {% endcomment %}
+    <div class="navitem__dropdown"
+      id="{{ menu.handle }}-{{ section.id }}"
+      role="menu"
+      aria-hidden="true"
+      aria-labelledby="{{ menu.handle }}-{{ section.id }}"
+      data-mega-menu-dropdown
+    >
+
+      {% comment %} Regular Text Column Layout: {% endcomment %}
+      {% if layout == 'regular' %}
+
+        <div class="navitem__dropdown-container d-flex">
+          {% comment %} Level 2 submenu {% endcomment %}
+          <div class="d-flex w-full {% if has_promos %}navitem__container-flex{% else %}navitem__container-full{% endif %}">
+            {% for submenu in menu.links %}
+              <ul class="navitem__submenu d-flex flex-column" role="menu">
+                <li role="menuitem">
+                  <h3 class="navitem__submenu-heading">
+                    <a href="{{ submenu.url }}"
+                      aria-controls="submenu-{{ submenu.handle }}-{{ forloop.index0 }}"
+                      tabindex="0"
+                      data-mega-menu-secondary-link
+                      data-mega-menu-link
+                    >
+                      {{ submenu.title }}
+                    </a>
+                  </h3>
+                </li>
+
+                {% comment %} Level 3 links {% endcomment %}
+                {% for link in submenu.links %}
+                  <li aria-labelledby="submenu-{{ submenu.handle }}-{{ forloop.index0 }}">
+                    <a class="p--small"
+                      href="{{ link.url }}"
+                      data-mega-menu-tertiary-link
+                      data-mega-menu-link
+                    >
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endfor %}
+          </div>
+
+          {% if has_promos %}
+            <div class="navitem__promo-container d-flex">
+
+              {% for block in section.blocks %}
+                {% if block.type == 'promo' %}
+                  <div class="navitem__promo-block navitem__promo-block--{{ block.id }} d-flex flex-column justify-content-end promo-block-count--{{ promo_block_count }}">
+                    <h2 class="heading-5">{{ block.settings.heading }}</h2>
+                    <p>{{ block.settings.subtext }}</p>
+
+                    <div class="navitem__buttons d-flex">
+                      {% if block.settings.cta_link_primary != blank %}
+                        <a href="{{ block.settings.cta_link_primary }}" class="btn" title="{{ block.settings.cta_text_primary }}">
+                          {{ block.settings.cta_text_primary }}
+                        </a>
+                      {% endif %}
+                      {% if block.settings.cta_link_secondary != blank %}
+                        <a href="{{ block.settings.cta_link_secondary }}" class="btn btn--secondary" title="{{ block.settings.cta_text_secondary}}">
+                          {{ block.settings.cta_text_secondary }}
+                        </a>
+                      {% endif %}
+                    </div>
+
+                    {%- liquid
+                      if block.settings.image_mobile != blank
+                        render 'image', image: block.settings.image, background: true, classes: 'd-none d-lg-block'
+                        render 'image', image: block.settings.image_mobile, background: true, classes: 'd-lg-none'
+                      elsif block.settings.image != blank
+                        render 'image', image: block.settings.image, background: true
+                      endif
+                    -%}
+                  </div>
+
+                  {% style %}
+                    .navitem__promo-block--{{ block.id }} {
+                      --cta-text-color-primary: {{ block.settings.cta_text_color_primary }};
+                      --cta-bg-color-primary: {{ block.settings.cta_bg_color_primary }};
+                      --cta-border-color-primary: {{ block.settings.cta_border_color_primary }};
+                      --cta-text-color-hover-primary: {{ block.settings.cta_text_color_hover_primary }};
+                      --cta-bg-color-hover-primary: {{ block.settings.cta_bg_color_hover_primary }};
+                      --cta-border-color-hover-primary: {{ block.settings.cta_border_color_hover_primary }};
+
+                      --cta-text-color-secondary: {{ block.settings.cta_text_color_secondary }};
+                      --cta-bg-color-secondary: {{ block.settings.cta_bg_color_secondary }};
+                      --cta-border-color-secondary: {{ block.settings.cta_border_color_secondary }};
+                      --cta-text-color-hover-secondary: {{ block.settings.cta_text_color_hover_secondary }};
+                      --cta-bg-color-hover-secondary: {{ block.settings.cta_bg_color_hover_secondary }};
+                      --cta-border-color-hover-secondary: {{ block.settings.cta_border_color_hover_secondary }};
+                    }
+                  {% endstyle %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+      {% comment %} Image Grid Layout: {% endcomment %}
+      {% elsif layout == 'images' %}
+
+        <div class="navitem__image-grid-container container">
+          {% for block in section.blocks %}
+            {% if block.type == 'image'%}
+              {% assign found_reference = false %}
+
+              {% comment %} Level 2 submenu links {% endcomment %}
+              {% for submenu in menu.links %}
+                {% for link in submenu.links %}
+                  {% if link.title == block.settings.reference %}
+                    <a class="navitem__image-item"
+                      href="{{ link.url }}"
+                      title="{{ link.title }}"
+                      data-mega-menu-secondary-link
+                      data-mega-menu-link
+                      data-mega-menu-image
+                    >
+                      {% render 'image', image: block.settings.image, background: true %}
+                    </a>
+                    {% assign found_reference = true %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+                {% if found_reference %}{% break %}{% endif %}
+              {% endfor %}
+              {% if found_reference %}{% continue %}{% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+  {% style %}
+    .navitem--{{ section.id }} {
+      --background-color: {{ section.settings.background_color }};
+      --promo-container-width: {{ section.settings.promo_container_width }}%;
+      --grid-template-columns: repeat({{ section.settings.images_per_row | default: 6 }}, 1fr);
+    }
+  {% endstyle %}
+  </navigation-item>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Navigation Item",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "options": [
+          {
+            "value": "regular",
+            "label": "Nav Columns"
+          },
+          {
+            "value": "images",
+            "label": "Image Grid"
+          }
+        ],
+        "default": "regular"
+      },
+      {
+        "type": "header",
+        "content": "Nav Columns Layout"
+      },
+      {
+        "type": "range",
+        "id": "promo_container_width",
+        "label": "Promo Container Width",
+        "min": 25,
+        "max": 50,
+        "step": 1,
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "Image Grid Layout"
+      },
+      {
+        "type": "range",
+        "id": "images_per_row",
+        "label": "Images Per Row",
+        "min": 5,
+        "max": 8,
+        "step": 1,
+        "default": 6
+      },
+      {
+        "type": "header",
+        "content": "Background Color"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#FFFFFF"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "promo",
+        "name": "Promo Block",
+        "limit": 2,
+        "settings": [
+          FRAGMENT.image("Image Size: 576x360" || "Image Size: 327x312"),
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "subtext",
+            "label": "Subheading"
+          },
+          FRAGMENT.cta-button-indexed(primary),
+          FRAGMENT.cta-button-indexed(secondary)
+        ]
+      },
+      {
+        "type": "image",
+        "name": "Image Nav Item",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Image Nav Item",
+            "info": "These blocks are specific to the 'Image Grid' layout."
+          },
+          {
+            "type": "text",
+            "id": "reference",
+            "label": "Nav Reference",
+            "info": "Input the name of the nav item this image is associated with. E.g. If a submenu is [Mens > Shirts, Denim, Shoes], references could be made for 'Shirts', 'Denim', and 'Shoes'"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "Image Size: 190x180"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Navigation Item"
+      }
+    ],
+    "enabled_on": {
+      "groups": ["header"]
+    }
+  }
+{% endschema %}

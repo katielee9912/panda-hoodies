@@ -1,0 +1,228 @@
+<popup-element class="ajaxcart-drawer drawer drawer--right"
+  data-id="ajaxcart"
+  role="dialog"
+  aria-modal="true"
+  inert
+  aria-labelledby="ajaxcart__header-title"
+>
+  <ajax-cart class="ajaxcart drawer__inner" role="region" aria-label="{{ section.settings.cart_title | default: 'Your Bag' }}">
+    <div class="ajaxcart__header">
+      <div class="ajaxcart__header-main">
+        <h2 id="ajaxcart__header-title" class="heading-4 ajaxcart__header-title">{{ section.settings.cart_title | default: 'Your Bag' }}</h2>
+
+        <hide-if-cart-empty>
+          <span class="ajaxcart__header-item-count"><cart-count>{{ cart.item_count }}</cart-count> {{ 'cart.general.items' | t }}</span>
+        </hide-if-cart-empty>
+
+        <popup-toggle class="ajaxcart__header-close" data-target="ajaxcart" data-action="close">
+          <button aria-label="Close Ajax Cart">
+            {% render 'icon-close' %}
+          </button>
+        </popup-toggle>
+      </div>
+
+      {% if section.settings.free_shipping_enable == true %}
+        <hide-if-cart-empty>
+          <div class="ajaxcart__fsb" data-fsb="{{ section.settings.free_shipping_threshold }}">
+            <h4 class="ajaxcart__fsb-text p--small"
+              data-fsb-text
+              data-unqualified-text="{{ section.settings.fsb_unqualified }}"
+              data-qualified-text="{{ section.settings.fsb_qualified }}"
+            >
+              {{ section.settings.fsb_unqualified }}
+            </h4>
+
+            <div class="ajaxcart__fsb-bar-holder">
+              <span class="ajaxcart__fsb-bar" data-fsb-bar></span>
+            </div>
+          </div>
+        </hide-if-cart-empty>
+      {% endif %}
+    </div>
+
+    <hide-if-cart-empty class="ajaxcart__content">
+      <cart-items class="ajaxcart__items{% if section.settings.properties_enable != true %} ajaxcart__items--hide-properties{% endif %}">
+        {% comment %}
+          Cart Items Generated From src/scripts/cart/components/cart-items.js
+        {% endcomment %}
+      </cart-items>
+
+      <div class="ajaxcart__summary">
+        <p class="ajaxcart__summary-item">
+          <strong>{{ 'cart.general.subtotal' | t }}</strong>
+          <strong><cart-total>{{ cart.total_price | money }}</cart-total></strong>
+        </p>
+
+        <show-if-cart-discounts class="ajaxcart__summary-item">
+          <strong>{{ 'cart.general.discounts' | t }}</strong>
+          <strong>-<cart-discounts>{{ cart.total_discount | money }}</cart-discounts></strong>
+        </show-if-cart-discounts>
+
+        {% if section.settings.free_shipping_enable == true %}
+          <show-if-cart-over data-threshold="{{ section.settings.free_shipping_threshold }}" class="ajaxcart__summary-item">
+            <strong>{{ 'cart.general.shipping' | t }}</strong>
+            <strong>{{ section.settings.free_shipping_text | default: 'Free' }}</strong>
+          </show-if-cart-over>
+        {% endif %}
+      </div>
+
+      {% if section.settings.cart_disclaimer != blank %}
+        <p class="ajaxcart__disclaimer p--small">{{ section.settings.cart_disclaimer }}</p>
+      {% endif %}
+
+      {% if section.settings.note_enable == true %}
+        <details class="ajaxcart__note">
+          <summary>
+            <strong>{{ section.settings.note_text | default: 'Additional Notes' }}</strong>
+            {% render 'icon-plus' %}
+            {% render 'icon-minus' %}
+          </summary>
+
+          <cart-note>
+            <textarea data-note-input placeholder="{{ 'cart.general.note_placeholder' | t  }}"></textarea>
+          </cart-note>
+        </details>
+      {% endif %}
+
+      <div class="ajaxcart__footer">
+        <a class="ajaxcart__empty-cta btn btn--primary btn--full" href="/checkout" class="btn btn--primary">
+          {{ section.settings.checkout_text }}
+        </a>
+      </div>
+    </hide-if-cart-empty>
+
+    <show-if-cart-empty class="ajaxcart__empty hide">
+      {% if section.settings.empty_title != blank %}
+        <h4 class="ajaxcart__empty-title heading-5">{{ section.settings.empty_title }}</h4>
+      {% endif %}
+
+      {% if section.settings.empty_details != blank %}
+        <p class="ajaxcart__empty-details">{{ section.settings.empty_details | newline_to_br }}</p>
+      {% endif %}
+
+      {% if section.settings.empty_cta_text != blank and section.settings.empty_cta_url != blank %}
+        <a class="ajaxcart__empty-cta btn btn--primary" href="{{ section.settings.empty_cta_url }}" class="btn btn--primary">{{ section.settings.empty_cta_text }}</a>
+      {% endif %}
+    </show-if-cart-empty>
+  </ajax-cart>
+</popup-element>
+
+{% schema %}
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings & Labels"
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Cart Title",
+        "default": "Your Bag"
+      },
+      {
+        "type": "text",
+        "id": "checkout_text",
+        "label": "Checkout Button Text",
+        "default": "Proceed to Checkout"
+      },
+      {
+        "type": "textarea",
+        "id": "cart_disclaimer",
+        "label": "Cart Disclaimer",
+        "default": "Shipping, taxes and promotions calculated at checkout."
+      },
+      {
+        "type": "header",
+        "content": "Empty Cart"
+      },
+      {
+        "type": "text",
+        "id": "empty_title",
+        "label": "Empty Cart Title",
+        "default": "Your bag is empty"
+      },
+      {
+        "type": "richtext",
+        "id": "empty_details",
+        "label": "Empty Cart Details"
+      },
+      {
+        "type": "text",
+        "id": "empty_cta_text",
+        "label": "Empty Cart CTA Text",
+        "default": "Continue Shopping"
+      },
+      {
+        "type": "url",
+        "id": "empty_cta_url",
+        "label": "Empty Cart CTA url",
+        "default": "/"
+      },
+      {
+        "type": "header",
+        "content": "Free Shipping"
+      },
+      {
+        "type": "checkbox",
+        "id": "free_shipping_enable",
+        "label": "Enable Free Shipping",
+        "info": "Check to display free shipping in cart summary",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "fsb_unqualified",
+        "label": "Free Shipping Bar Unqualified Text",
+        "default": "Spend [amount] more to get free shipping!",
+        "info": "Use [amount] to insert amout left until threshold"
+      },
+      {
+        "type": "text",
+        "id": "fsb_qualified",
+        "label": "Free Shipping Bar Qualified Text",
+        "default": "Your cart is eligible for free shipping!"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_text",
+        "label": "Summary Free Shipping Text",
+        "default": "Free"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold",
+        "info": "Cart total in dollars",
+        "default": 75
+      },
+      {
+        "type": "header",
+        "content": "Cart Notes"
+      },
+      {
+        "type": "checkbox",
+        "id": "note_enable",
+        "label": "Enable Notes",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "note_text",
+        "label": "Notes Text",
+        "default": "Additional Notes"
+      },
+      {
+        "type": "header",
+        "content": "Line Item Properties"
+      },
+      {
+        "type": "checkbox",
+        "id": "properties_enable",
+        "label": "Display Line Item Properties",
+        "default": false
+      }
+    ]
+  }
+{% endschema %}

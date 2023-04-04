@@ -1,0 +1,68 @@
+{%- comment -%}
+  PARAMETERS:
+  app : 'back_in_stock' or 'klaviyo' (required)
+  klaviyo_api_key : {Number} (required if "app" == "klaviyo")
+  title : {String} (optional)
+  copy : {String} (optional)
+  email_placeholder : {String} (optional)
+  submit_text : {String} (optional)
+  success_text : {String} (optional)
+  error_text : {String} (optional)
+
+  USAGE:
+  {% render 'back-in-stock-form',
+    product: product,
+    app: 'klaviyo',
+    klaviyo_api_key: klaviyo_api_key,
+    title: title,
+    copy: copy,
+    email_placeholder: email_placeholder,
+    submit_text: submit_text,
+    success_text: success_text,
+    error_text: error_text
+  %}
+{%- endcomment -%}
+
+{%- liquid
+  assign app = 'klaviyo'
+  assign default_placeholder = "products.back_in_stock.email_placeholder" | t
+  assign default_submit_text = "products.back_in_stock.submit" | t
+  assign default_error_message = "products.back_in_stock.error_message" | t
+  assign default_success_message = "products.back_in_stock.success_message" | t
+-%}
+
+<bis-form class="product-bis {% if product.selected_or_first_available_variant.available == true %}d-none{% endif %}" data-app="{{ app }}" aria-live="polite">
+  {%- if settings.bis_title != blank -%}
+    <h3 class="product-bis__title heading-4">{{ settings.bis_title }}</h3>
+  {%- endif -%}
+
+  {% if settings.bis_copy != blank %}
+    <p class="product-bis__copy p--large">{{ settings.bis_copy | newline_to_br }}</p>
+  {%- endif -%}
+
+  <form class="product-bis__form" data-bis-form data-validation-required>
+    {% if app == 'klaviyo' %}
+      {% assign email_field_name = "email" %}
+      <input type="hidden" name="a" value="{{ klaviyo_api_key }}">
+      <input type="hidden" name="variant" data-bis-variant value="{{ product.selected_variant.id }}">
+      <input type="hidden" name="product" id="product" value="{{ product.id }}">
+      <input type="hidden" name="platform" value="shopify" />
+      <input type="hidden" name="subscribe_for_newsletter" value="false">
+    {% else %}
+      {% assign email_field_name = "bis-email" %}
+      <input type="hidden" data-bis-variant name="bis-variant" value="{{ product.selected_variant.id }}">
+    {% endif %}
+    <div class="product-bis__email" data-required-field-wrapper>
+      <input type="email" aria-label="Email" name="{{ email_field_name }}"
+        data-bis-email
+        placeholder="{{ email_placeholder | default: default_placeholder }}"
+        data-required-field="Valid email is required"
+        data-required-field-pattern="^\w+([.-/+/-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$"
+      >
+    </div>
+    <button type="submit" class="btn btn--secondary btn--full" data-bis-submit>{{ submit_text | default: default_submit_text }}</button>
+  </form>
+
+  <p class="product-bis__response hide heading-4" aria-live="assertive" data-bis-success-response>{{ success_text | default: default_success_message | newline_to_br }}</p>
+  <p class="product-bis__response hide heading-4" aria-live="assertive" data-bis-error-response>{{ error_text | default: default_error_message | newline_to_br }}</p>
+</bis-form>

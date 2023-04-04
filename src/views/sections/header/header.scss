@@ -1,0 +1,82 @@
+/* Helpers */
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  Header
+============================================================================== */
+
+.site-header-section {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+
+.site-header {
+  position: relative;
+  padding: $gutter 0;
+  background: $color-white;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  button,
+  a {
+    display: inline-block;
+    line-height: 0;
+    vertical-align: middle;
+  }
+}
+
+.site-header__logo {
+  display: inline-block;
+  max-width: 180px;
+}
+
+.site-header__secondary-links {
+  display: block;
+  margin-bottom: 35px;
+
+  .col {
+    border-right: 1px solid $color-black;
+
+    &:last-of-type {
+      border: none;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+  }
+
+  img,
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  img {
+    width: auto;
+    margin-right: 5px;
+  }
+}
+
+.site-header__controls {
+  .row {
+    float: right;
+  }
+
+  .search-bar {
+    max-width: 180px;
+
+    input,
+    .btn {
+      border: none;
+      background-color: $color-grey-light;
+    }
+  }
+}
