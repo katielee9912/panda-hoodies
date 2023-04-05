@@ -38,27 +38,6 @@
       </div>
 
       <div class="site-header__controls col-2 col-lg-2 align-self-center text-right">
-        {% if section.settings.secondary_links != blank %}
-          <div class="site-header__secondary-links d-none d-lg-block">
-            <div class="row">
-              {% for link in linklists[section.settings.secondary_links].links %}
-                {% assign secondary_link_title = link.title | split: '|' | last %}
-
-                <div class="col align-self-center">
-                  <a class="p--small" href="{{ link.url }}" title="{{ secondary_link_title }}">
-                    {% if link.title contains '|' %}
-                      <img src="{{ link.title | split: '|' | first | file_url }}" alt="{{ secondary_link_title }}">
-                      <span>{{ secondary_link_title }}</span>
-                    {% else %}
-                      {{ link.title }}
-                    {% endif %}
-                  </a>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-
         <div class="row">
           <div class="col col-lg-auto d-lg-block align-self-center">
             {% if settings.ajaxcart == true %}
@@ -94,12 +73,6 @@
         "id": "menu",
         "label": "Menu",
         "default": "main-menu"
-      },
-      {
-        "type": "link_list",
-        "id": "secondary_links",
-        "label": "Secondary Links",
-        "info": "Upload an icon to Settings > Files and add the file name to the link text separated by a |. Ex. icon.svg|Link Text"
       }
     ]
   }
