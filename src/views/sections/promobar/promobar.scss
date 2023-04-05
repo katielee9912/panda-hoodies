@@ -1,0 +1,18 @@
+// Helpers
+@import '~@styles/helpers/variables';
+
+/* ============================================================================
+  Promobar
+============================================================================== */
+
+.promobar {
+  padding: 13px 0;
+  background: var(--background-color);
+  line-height: 1;
+
+  span {
+    transition: opacity $transition-primary;
+    color: var(--text-color);
+    cursor: default;
+  }
+}
