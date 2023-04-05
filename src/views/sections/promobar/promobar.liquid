@@ -1,0 +1,42 @@
+{{ 'promobar.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.text != blank %}
+  <div class="promobar" role="region" aria-label="Promo Bar">
+    <div class="container">
+        <div class="col-lg-6 offset-lg-3 p--small text-center">
+          <span>{{ section.settings.text }}</span>
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+{% style %}
+  .promobar {
+    --background-color: {{ section.settings.background_color }};
+    --text-color: {{ section.settings.text_color }};
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Promobar",
+    "settings": [
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "color_background",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "linear-gradient(#ffffff, #000000)"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color"
+      }
+    ]
+  }
+{% endschema %}
