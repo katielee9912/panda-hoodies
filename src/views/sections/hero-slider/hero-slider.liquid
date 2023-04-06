@@ -1,0 +1,276 @@
+<script src="{{ 'hero-slider.js' | asset_url }}" defer="defer"></script>
+{{ 'hero-slider.css' | asset_url | stylesheet_tag }}
+
+<hero-slider class="hero-slider swiper" role="region" aria-label="Hero Slideshow" data-swiper-slider>
+  <div class="hero-slider__container swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="hero-slider__slide hero-slider__slide--{{ block.id }} d-flex swiper-slide
+        {{ block.settings.layout_mobile }}
+        {{ block.settings.layout_desktop }}"
+      >
+        {% comment %} Content Block {% endcomment %}
+        <div class="hero-slider__content d-flex flex-column justify-content-md-center">
+          {% liquid
+            assign header_classes = block.settings.preheader_size | append: ' '
+            assign header_classes = header_classes | append: block.settings.title_size | append: ' '
+            assign header_classes = header_classes | append: block.settings.copy_size
+          -%}
+
+          {% comment %} Content Block - Copy {% endcomment %}
+          {% render 'section-header',
+            section_name: 'hero-slider',
+            preheader: block.settings.preheader,
+            title: block.settings.title,
+            copy: block.settings.copy,
+            classes: header_classes
+          %}
+
+          {% comment %} Content Block - CTA (button) {% endcomment %}
+          {% if block.settings.cta_text != blank and block.settings.cta_link != blank %}
+            <div class="hero-slider__cta">
+              <a class="btn" href="{{ block.settings.cta_link }}" title="{{ block.settings.cta_text }}">
+                {{ block.settings.cta_text }} {% render 'icon-arrow-down' %}
+              </a>
+            </div>
+          {% endif %}
+
+          {% comment %} Content Block - Background Image {% endcomment %}
+          {%- liquid
+            if block.settings.content_bg_image_mobile != blank
+              render 'image', image: block.settings.content_bg_image, background: true, classes: 'd-none d-md-block'
+              render 'image', image: block.settings.content_bg_image_mobile, background: true, classes: 'd-md-none'
+            elsif block.settings.content_bg_image != blank
+              render 'image', image: block.settings.content_bg_image, background: true
+            endif
+          -%}
+
+          {% style %}
+            .hero-slider__slide--{{ block.id }} {
+              --bg-opacity: {{ block.settings.content_bg_opacity | default: 1 }};
+              --text-color: {{ block.settings.text_color }};
+              --cta-text-color: {{ block.settings.cta_text_color }};
+              --cta-bg-color: {{ block.settings.cta_bg_color }};
+              --cta-border-color: {{ block.settings.cta_border_color }};
+              --cta-text-color-hover: {{ block.settings.cta_text_color_hover }};
+              --cta-bg-color-hover: {{ block.settings.cta_bg_color_hover }};
+              --cta-border-color-hover: {{ block.settings.cta_border_color_hover }};
+            }
+          {% endstyle %}
+        </div>
+
+        {% comment %} Image Block (half-size) {% endcomment %}
+        <div class="hero-slider__image">
+          {%- liquid
+            if block.settings.full_width == false
+              if block.settings.bg_image_mobile != blank
+                render 'image', image: block.settings.bg_image, background: true, classes: 'd-none d-md-block'
+                render 'image', image: block.settings.bg_image_mobile, background: true, classes: 'd-md-none'
+              elsif block.settings.bg_image != blank
+                render 'image', image: block.settings.bg_image, background: true
+              endif
+            endif
+          -%}
+        </div>
+
+        {% comment %} Image Block (full-size) {% endcomment %}
+        {%- liquid
+          if block.settings.full_width == true
+            if block.settings.bg_image_mobile != blank
+              render 'image', image: block.settings.bg_image, background: true, classes: 'd-none d-md-block'
+              render 'image', image: block.settings.bg_image_mobile, background: true, classes: 'd-md-none'
+            elsif block.settings.bg_image != blank
+              render 'image', image: block.settings.bg_image, background: true
+            endif
+          endif
+        -%}
+      </div>
+    {% endfor %}
+  </div>
+
+  {% comment %} Slider Navigation {% endcomment %}
+  <div class="hero-slider__navigation">
+    <button class="swiper-button-prev d-inline" aria-label="Previous slide" data-swiper-prev>
+      {% render 'icon-button-prev' %}
+    </button>
+    <button class="swiper-button-next d-inline" aria-label="Next slide" data-swiper-next>
+      {% render 'icon-button-next' %}
+    </button>
+  </div>
+
+  <div class="swiper-pagination" data-swiper-pagination></div>
+</hero-slider>
+
+{% render 'section-spacing', section_name: 'hero-slider' %}
+
+{% schema %}
+  {
+    "settings" : [
+      FRAGMENT.section-spacing
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Hero Slide",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "header",
+            "content": "Content"
+          },
+          {
+            "type": "text",
+            "id": "preheader",
+            "label": "Preheader"
+          },
+          {
+            "type": "select",
+            "id": "preheader_size",
+            "label": "Preheader Size",
+            "options": [
+              {
+                "value": "preheader--large",
+                "label": "Large"
+              },
+              {
+                "value": "preheader--xlarge",
+                "label": "X-Large"
+              },
+              {
+                "value": "preheader--xxlarge",
+                "label": "XX-Large"
+              }
+            ],
+            "default": "preheader--large"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "select",
+            "id": "title_size",
+            "label": "Title Size",
+            "options": [
+              {
+                "value": "title--large",
+                "label": "Large"
+              },
+              {
+                "value": "title--xlarge",
+                "label": "X-Large"
+              },
+              {
+                "value": "title--xxlarge",
+                "label": "XX-Large"
+              }
+            ],
+            "default": "title--large"
+          },
+          {
+            "type": "textarea",
+            "id": "copy",
+            "label": "Copy"
+          },
+          {
+            "type": "select",
+            "id": "copy_size",
+            "label": "Text Size",
+            "options": [
+              {
+                "value": "copy--large",
+                "label": "Large"
+              },
+              {
+                "value": "copy--xlarge",
+                "label": "X-Large"
+              }
+            ],
+            "default": "copy--large"
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#000000"
+          },
+          FRAGMENT.cta-button,
+          {
+            "type": "header",
+            "content": "Content Background Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "content_bg_image",
+            "label": "Content Background Image",
+            "info": "Image Size: 1920x700"
+          },
+          {
+            "type": "image_picker",
+            "id": "content_bg_image_mobile",
+            "label": "Content Background Image Mobile",
+            "info": "Image Size: 375x800"
+          },
+          {
+            "type": "range",
+            "id": "content_bg_opacity",
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "unit": "%",
+            "label": "Content Background Opacity",
+            "default": 0.5
+          },
+          FRAGMENT.bg-image("Image Size: 960x700" || "Image Size: 375x800"),
+          {
+            "type": "checkbox",
+            "id": "full_width",
+            "label": "Full Width Background",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "Layout"
+          },
+          {
+            "type": "select",
+            "id": "layout_desktop",
+            "label": "Layout | Desktop",
+            "options": [
+              {
+                "value": "flex-md-row",
+                "label": "Content-Left"
+              },
+              {
+                "value": "flex-md-row-reverse",
+                "label": "Content-Right"
+              }
+            ],
+            "default": "flex-md-row"
+          },
+          {
+            "type": "select",
+            "id": "layout_mobile",
+            "label": "Layout | Mobile",
+            "options": [
+              {
+                "value": "flex-column",
+                "label": "Content-Top"
+              },
+              {
+                "value": "flex-column-reverse",
+                "label": "Content-Bottom"
+              }
+            ],
+            "default": "flex-column"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Slider"
+      }
+    ]
+  }
+{% endschema %}

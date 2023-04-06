@@ -35,44 +35,43 @@ export default class AccessibleSwiper extends HTMLElement { // eslint-disable-li
       }
       swiperSlidesInView(this, { threshold: 0.95, desktopOnly: false })
 
-      observeChildren(this, () => {
-        if (this.pagination) {
-          let activeIndex = 0
+      // observeChildren(this, () => {
+      // if (this.pagination) {
+      // let activeIndex = 0
+      // Update the active bullet aria-label to read as "Current Slide"
+      // this.paginationBullets.forEach(bullet => {
+      //   if (bullet.classList.contains('swiper-pagination-bullet-active')) {
+      //     activeIndex = bullet.getAttribute('data-bullet-index')
+      //   }
+      //   bullet.setAttribute('aria-label', `Go to slide ${bullet.getAttribute('data-bullet-index')}`)
+      // })
+      // this.paginationBullets[parseInt(activeIndex) - 1].setAttribute('aria-label', 'Current slide')
+      // }
 
-          // Update the active bullet aria-label to read as "Current Slide"
-          this.paginationBullets.forEach(bullet => {
-            if (bullet.classList.contains('swiper-pagination-bullet-active')) {
-              activeIndex = bullet.getAttribute('data-bullet-index')
-            }
-            bullet.setAttribute('aria-label', `Go to slide ${bullet.getAttribute('data-bullet-index')}`)
-          })
-          this.paginationBullets[parseInt(activeIndex) - 1].setAttribute('aria-label', 'Current slide')
-        }
-
-        // Update the Swiper notification to read out the active slide's contet
-        for (let i = 0; i < this.swiper.slides.length; i++) {
-          if (this.swiper.slides[i].classList.contains('swiper-slide-active')) {
-            this.notification.textContent = this.swiper.slides[i].innerText
-          }
-        }
-      })
+      // Update the Swiper notification to read out the active slide's contet
+      //   for (let i = 0; i < this.swiper.slides.length; i++) {
+      //     if (this.swiper.slides[i].classList.contains('swiper-slide-active')) {
+      //       this.notification.textContent = this.swiper.slides[i].innerText
+      //     }
+      //   }
+      // })
     })
 
     // Observer that checks if children have updated according to their attributes (including classes)
-    const observeChildren = (function () {
-      const MutationObserver = window.MutationObserver || window.WebKitMutationObserver
-      return function (parent, callback) {
-        if (!parent || parent.nodeType !== 1) { return }
-        if (MutationObserver) {
-          const observer = new MutationObserver(callback)
-          observer.observe(parent, { attributes: true, subtree: true })
-          return observer
-        } else if (window.addEventListener) { // Browser support fallback
-          parent.addEventListener('DOMNodeInserted', callback, false)
-          parent.addEventListener('DOMNodeRemoved', callback, false)
-        }
-      }
-    })()
+    // const observeChildren = (function () {
+    //   const MutationObserver = window.MutationObserver || window.WebKitMutationObserver
+    //   return function (parent, callback) {
+    //     if (!parent || parent.nodeType !== 1) { return }
+    //     if (MutationObserver) {
+    //       const observer = new MutationObserver(callback)
+    //       observer.observe(parent, { attributes: true, subtree: true })
+    //       return observer
+    //     } else if (window.addEventListener) { // Browser support fallback
+    //       parent.addEventListener('DOMNodeInserted', callback, false)
+    //       parent.addEventListener('DOMNodeRemoved', callback, false)
+    //     }
+    //   }
+    // })()
   }
 
   /**

@@ -1,0 +1,291 @@
+/* Helpers */
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  Hero Slider
+============================================================================== */
+
+.hero-slider {
+  display: block;
+  position: relative;
+}
+
+.hero-slider__container {
+  position: relative;
+  justify-content: stretch;
+}
+
+.hero-slider__slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  @include media-query($min, $medium) {
+    height: 700px;
+  }
+
+  &.flex-md-row {
+    .hero-slider__content {
+      padding: 60px 20px;
+      text-align: right;
+
+      @include media-query($min, $medium) {
+        padding: 60px 40px 60px 80px;
+      }
+    }
+  }
+
+  &.flex-md-row-reverse {
+    .hero-slider__content {
+      padding: 60px 20px;
+      text-align: left;
+
+      @include media-query($min, $medium) {
+        padding: 60px 80px 60px 40px;
+      }
+    }
+  }
+
+  &.swiper-slide {
+    height: auto;
+  }
+}
+
+.hero-slider__content {
+  position: relative;
+  z-index: 10;
+  top: 0;
+  flex: 1;
+  width: 100%;
+  color: var(--text-color);
+
+  @include media-query($min, $medium) {
+    max-width: 50%;
+  }
+
+  .preheader--large .hero-slider__preheader {
+    margin-bottom: 10px;
+    @include typography(14, 18, 500);
+
+    @include media-query($min, $medium) {
+      @include typography(18, 20, 500);
+    }
+  }
+  .preheader--xlarge .hero-slider__preheader {
+    margin-bottom: 10px;
+    @include typography(16, 20, 700);
+
+    @include media-query($min, $medium) {
+      @include typography(20, 22, 700);
+    }
+  }
+  .preheader--xxlarge .hero-slider__preheader {
+    margin-bottom: 12px;
+    @include typography(18, 22, 700);
+
+    @include media-query($min, $medium) {
+      @include typography(22, 24, 700);
+    }
+  }
+
+  .title--large .hero-slider__title {
+    margin-bottom: 10px;
+    @include typography(40, 45, 700);
+
+    @include media-query($min, $medium) {
+      @include typography(50, 50, 700);
+    }
+  }
+  .title--xlarge .hero-slider__title {
+    margin-bottom: 12px;
+    @include typography(70, 80, 700);
+
+    @include media-query($min, $medium) {
+      @include typography(80, 90, 700);
+    }
+  }
+  .title--xxlarge .hero-slider__title {
+    margin-bottom: 14px;
+    @include typography(80, 80, 900);
+
+    @include media-query($min, $medium) {
+      @include typography(110, 110, 900);
+    }
+  }
+
+  .copy--large {
+    .hero-slider__copy {
+      margin-bottom: 20px;
+      @include typography(14, 20, 300);
+
+      @include media-query($min, $medium) {
+        @include typography(16, 18, 300);
+      }
+    }
+
+    ~ .hero-slider__cta .btn {
+      @include typography(14, 20, 300);
+
+      @include media-query($min, $medium) {
+        @include typography(16, 18, 500);
+      }
+      svg {
+        transform: scale(0.8);
+      }
+    }
+  }
+
+  .copy--xlarge {
+    .hero-slider__copy {
+      margin-bottom: 24px;
+      @include typography(16, 20, 500);
+
+      @include media-query($min, $medium) {
+        @include typography(18, 24, 500);
+      }
+    }
+
+    ~ .hero-slider__cta .btn {
+      @include typography(16, 20, 500);
+
+      @include media-query($min, $medium) {
+        @include typography(18, 24, 500);
+      }
+    }
+  }
+
+  .background-image {
+    opacity: var(--bg-opacity);
+  }
+}
+
+.hero-slider__image {
+  position: absolute;
+  top: 0;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+
+  @include media-query($min, $medium) {
+    position: relative;
+  }
+}
+
+.hero-slider__cta .btn {
+  border-color: var(--cta-border-color);
+  background-color: var(--cta-bg-color);
+  color: var(--cta-text-color);
+
+  @include media-query($max, $medium) {
+    width: 100%;
+  }
+
+  &:hover {
+    border-color: var(--cta-border-color-hover);
+    background-color: var(--cta-bg-color-hover);
+    color: var(--cta-text-color-hover);
+
+    svg {
+      transform: translateY(6px);
+      transition: 0.3s all ease;
+
+      path {
+        stroke: var(--cta-text-color-hover);
+      }
+    }
+  }
+
+  svg {
+    margin: 0 0 0 6px;
+
+    path {
+      stroke: var(--text-color);
+    }
+  }
+}
+
+.hero-slider__navigation {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: $site-width;
+  transform: translate(-50%, -50%);
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    padding: 10px;
+    transform: translateY(-50%);
+
+    @include media-query($min, $medium) {
+      padding: 20px;
+    }
+
+    &:hover {
+      svg path:first-child {
+        stroke: $color-pink;
+        fill: $color-pink;
+      }
+    }
+  }
+
+  .swiper-button-prev {
+    left: 5px;
+
+    @include media-query($min, $medium) {
+      left: 10px;
+    }
+  }
+  .swiper-button-next {
+    right: 5px;
+
+    @include media-query($min, $medium) {
+      right: 10px;
+    }
+  }
+
+  svg {
+    path:first-child {
+      transition: all 0.3s ease;
+      stroke: $color-peach;
+      fill: $color-peach;
+    }
+  }
+}
+
+.swiper-pagination {
+  display: flex;
+  position: absolute;
+  z-index: 10;
+  top: calc(100% - 24px);
+  left: 0;
+  justify-content: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.swiper-pagination-bullet {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 100%;
+  background: $color-peach;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active,
+  &:hover,
+  &:focus-within,
+  &-active {
+    background: $color-pink;
+  }
+}
