@@ -1,81 +1,77 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "4bf41579-6d4d-4536-a51d-0e3cda3de779": {
+      "type": "hero-slider",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "aeccf766-1651-4fdf-ace6-37da20b70a8e": {
+          "type": "slide",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "preheader": "FOR A LIMITED TIME",
+            "preheader_size": "preheader--xxlarge",
+            "title": "TIE DYE IS BACK",
+            "title_size": "title--xxlarge",
+            "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+            "copy_size": "copy--xlarge",
+            "text_color": "#57568c",
+            "cta_text": "SHOP NOW",
+            "cta_link": "#featured-product",
+            "cta_text_color": "#57568c",
+            "cta_bg_color": "#ffffff",
+            "cta_border_color": "#ffffff",
+            "cta_text_color_hover": "#ffffff",
+            "cta_bg_color_hover": "#57568c",
+            "cta_border_color_hover": "#57568c",
+            "content_bg_image": "shopify:\/\/shop_images\/tie-dye-content.png",
+            "content_bg_opacity": 0.7,
+            "bg_image": "shopify:\/\/shop_images\/DALL_E_2023-04-05_02.06.16_-_a_panda_bear_wearing_a_tie-dye_hoodie_3_4_angle_background_of_a_skate_park_digital_art.png",
+            "full_width": true,
+            "layout_desktop": "flex-md-row-reverse",
+            "layout_mobile": "flex-column"
           }
         },
-        "text": {
-          "type": "text",
+        "8073d3b9-4e48-4499-abd2-3eb177ae366a": {
+          "type": "slide",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "preheader": "preheader",
+            "preheader_size": "preheader--large",
+            "title": "title",
+            "title_size": "title--large",
+            "copy": "",
+            "copy_size": "copy--large",
+            "text_color": "#000000",
+            "cta_text": "",
+            "cta_link": "",
+            "cta_text_color": "#ffffff",
+            "cta_bg_color": "#000000",
+            "cta_border_color": "#000000",
+            "cta_text_color_hover": "#000000",
+            "cta_bg_color_hover": "#ffffff",
+            "cta_border_color_hover": "#000000",
+            "content_bg_opacity": 0.5,
+            "bg_image": "shopify:\/\/shop_images\/ph_inspiration-timeline.jpg",
+            "full_width": false,
+            "layout_desktop": "flex-md-row",
+            "layout_mobile": "flex-column"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text",
-        "button"
+        "aeccf766-1651-4fdf-ace6-37da20b70a8e",
+        "8073d3b9-4e48-4499-abd2-3eb177ae366a"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "background-1",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "background-1",
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": false,
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 28,
-        "padding_bottom": 36
+        "margin_top": "0",
+        "margin_top_mobile": "default",
+        "margin_bottom": "default",
+        "margin_bottom_mobile": "default",
+        "padding_top": "default",
+        "padding_top_mobile": "default",
+        "padding_bottom": "default",
+        "padding_bottom_mobile": "default"
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "4bf41579-6d4d-4536-a51d-0e3cda3de779"
   ]
 }
