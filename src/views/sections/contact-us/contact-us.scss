@@ -1,0 +1,74 @@
+@import '~@styles/helpers/variables';
+@import '~@styles/helpers/mixins';
+@import '~@styles/helpers/functions';
+
+/* ============================================================================
+  Contact Us
+============================================================================== */
+
+.contact-us {
+  padding: 60px;
+  background-color: rgba(242, 193, 174, 0.5);
+
+  @include media-query($min, $medium) {
+    margin-top: 80px;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+    font-family: $font-museo-900;
+    @include typography(36, 36, 900);
+
+    @include media-query($min, $medium) {
+      @include typography(48, 58, 900);
+    }
+  }
+
+  p {
+    margin: 0 0 30px;
+
+    @include media-query($min, $medium) {
+      max-width: 80%;
+    }
+  }
+
+  .contact-form {
+    @include media-query($min, $medium) {
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+
+    .form-half {
+      width: 49%;
+    }
+
+    button {
+      width: 100%;
+    }
+
+    .cross {
+      transform: translate(-20%, 4px);
+
+      &::after {
+        top: -23px !important;
+        right: -9px !important;
+      }
+    }
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  input,
+  textarea {
+    margin-top: 6px;
+    border: 1px solid $color-black;
+    border-radius: 0;
+  }
+
+  input {
+    margin-bottom: 9px;
+    padding: 10px;
+  }
+}
