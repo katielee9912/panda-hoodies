@@ -20,7 +20,13 @@
 {%- liquid
   assign id_prefix = 'product-swatch-' | append: section.id | append: '-' | append: product.id
 	if type == 'swatch'
-    assign metaobjects = product.metafields.custom.mask_types.value
+    assign swatches = ''
+    for variant in product.variants
+      if variant.metafields.custom.swatch.value != blank
+        assign swatches = swatches | append: variant.metafields.custom.swatch.value | append: '||'
+      endif
+    endfor
+    assign swatches = swatches | split: '||'
   endif
 -%}
 
@@ -30,7 +36,7 @@
   data-option-index="{{ option.position }}"
   data-type="{{ type }}"
 >
-  <legend class="visually-hidden">
+  <legend>
     <strong>{{ option.name }}{%- if display_selected_value_text == true -%}:&nbsp;{% endif %}</strong>
     {%- if display_selected_value_text == true -%}
       <span class="visually-shown" data-product-option-group-selected-text>{{ option.selected_value }}</span>
@@ -39,16 +45,23 @@
 
   {% if type == 'radio' or type == 'swatch' %}
     <div class="product-option__option-values">
-      {% for metaobject in metaobjects %}
+      {% for value in option.values %}
+        {%- liquid
+          assign value_downcase = value | downcase
+          assign swatch_option = swatches | where: value_downcase, swatch | first
+          assign swatch_file_name = swatch_option | split: '/' | last
+          assign swatch_file_url = swatch_file_name | file_url | prepend: 'https:'
+        -%}
+
         <div class="product-option-item
-          product-option-item--{{ metaobject.variant.value.title | handleize }}
-          {% if type == 'swatch' and metaobject != blank %}product-option-item--swatch{% else %}product-option-item--radio{% endif %}"
+          product-option-item--{{ option.name | handleize }}
+          {% if type == 'swatch' and swatch_option != blank %}product-option-item--swatch{% else %}product-option-item--radio{% endif %}"
           data-product-option-item
         >
           <input type="radio"
-            id="{{ id_prefix }}-{{ metaobject.variant.value.title | handleize }}"
-            value="{{ value }}"
-            name="{{ id_prefix }}-{{ metaobject.variant.value.title | handleize }}"
+            id="{{ id_prefix }}-{{ value | handleize }}"
+            value="{{ value | escape }}"
+            name="Color"
             {% if option.selected_value == value %}checked{% endif %}
             data-product-option
             data-option-index="{{ option.position }}"
@@ -56,20 +69,16 @@
             data-selected-text="{{ value }}"
             {% if form_id %}form="{{ form_id }}"{% endif %}
           />
-          <label for="{{ id_prefix }}-{{ metaobject.variant.value.title | handleize }}">
-            {% if type == 'swatch' and metaobject != blank %}
-              {% assign image_url = metaobject.image.value | img_url | prepend: 'https:'%}
-              {% if is_variant %}
-                {% assign product_url = product.url%}
-              {% endif %}
-              <a href="{{ metaobject.variant.value.url }}" class="product-option-item__swatch product-option-item__swatch--{{ metaobject.variant.value.title | handleize }}"
-                style="{%- if metaobject.image.value != blank %}background-image: url({{ image_url }});{%- endif -%}"
-              ></a>
+          <label for="{{ id_prefix }}-{{ value | handleize }}" data-swatch-option="{{ value }}">
+            {% if type == 'swatch' and swatch_option != blank %}
+              <div class="product-option-item__swatch product-option-item__swatch--{{ value | handleize }}"
+                style="{%- if swatch_file_url != blank %}background-image:url({{ swatch_file_url }});{%- endif -%}"
+              ></div>
               <span class="visually-hidden">
-                {{ metaobject.variant.value.title }}
+                {{ value }}
               </span>
             {% else %}
-              <span>{{ metaobject.variant.value.title }}</span>
+              <span>{{ value }}</span>
             {% endif %}
           </label>
         </div>

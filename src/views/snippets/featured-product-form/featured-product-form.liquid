@@ -1,0 +1,103 @@
+<div class="product-form">
+  <atc-form>
+    {% form 'product', product, id: form_id %}
+      <h3 class="featured-product__title">
+        {{ product.title | upcase }}
+      </h3>
+
+      <div class="d-flex align-items-center">
+        <div class="featured-product__price">
+          {% assign original_price = product.price | money %}
+          {% assign sale_price = product.compare_at_price | money %}
+
+          {% if sale_price != blank or sale_price == original_price %}
+            <span class="sale-price">
+              {{- product.price | money -}}
+            </span>
+
+            <span class="compare-price">
+              <span class="visually-hidden">
+                {{- 'general.accessibility.original_price' | t -}}
+              </span>
+              <s aria-hidden="true">
+                {{- sale_price -}}
+              </s>
+            </span>
+          {% else %}
+            {{- product.price | money -}}
+          {% endif %}
+        </div>
+
+        {% comment %} Product Star Rating {% endcomment %}
+        {% render 'star-rating',
+          rating: product.metafields.key.reviews_rating,
+          reviews_count: product.metafields.key.reviews_count,
+        %}
+      </div>
+
+      <p class="featured-product__description">
+        {{ product.description }}
+      </p>
+
+      {% comment %} Product Variants Color Picker {% endcomment %}
+      {% render 'product-options', product: product, options: 'color', form_id: form_id %}
+
+      {% comment %} Care Instructions Slider {% endcomment %}
+      {%- liquid
+        assign swiper_enabled = false
+        assign instructions_length = 0
+
+        for instruction in product.metafields.custom.care_instructions.value
+          assign instructions_length = instructions_length | plus: 1
+        endfor
+
+        if instructions_length > 6
+          assign swiper_enabled = true
+        endif
+      -%}
+
+      <care-instructions class="featured-product__care-instructions swiper">
+        <div class="featured-product__care-instructions-container"
+          data-swiper-enabled="{{ swiper_enabled }}"
+          data-swiper-slider
+        >
+          <p><strong>{{ 'products.product.care_instructions' | t }}</strong></p>
+          <div class="swiper-wrapper{% if swiper_enabled == false %} featured-product__care-instructions-wrapper{% endif %}">
+
+            {% for instruction in product.metafields.custom.care_instructions.value %}
+              {% assign image_url = instruction.image.value | json | prepend: 'https:' | remove: '\' | remove: '"'%}
+
+              <div class="featured-product__care-instruction swiper-slide">
+                <div class="featured-product__care-instruction-image">
+                  <img src="{{ image_url }}" alt="{{ instruction.instruction }}" width="30" height="30"/>
+                </div>
+
+                <small class="text-center">
+                  {{ instruction.instruction }}
+                </small>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {% if swiper_enabled %}
+          {% comment %} Slider Navigation {% endcomment %}
+          <div class="featured-product_navigation">
+            <button class="swiper-button-prev d-inline" aria-label="Previous slide" data-swiper-prev>
+              {% render 'icon-button-prev' %}
+            </button>
+            <button class="swiper-button-next d-inline" aria-label="Next slide" data-swiper-next>
+              {% render 'icon-button-next' %}
+            </button>
+          </div>
+        {% endif %}
+      </care-instructions>
+
+      <button class="product__submit btn btn--full" type="submit" name="add" data-product-submit>
+        <span data-product-submit-text data-state="add">{{ 'products.product.add_to_cart' | t }} &mdash; <span data-product-price>{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span></span>
+        <span data-product-submit-text data-state="sold-out" class="d-none">{{ 'products.product.sold_out' | t }}</span>
+        <span data-product-submit-text data-state="unavailable" class="d-none">{{ 'products.product.unavailable' | t }}</span>
+      </button>
+    {% endform %}
+  </atc-form>
+</div>

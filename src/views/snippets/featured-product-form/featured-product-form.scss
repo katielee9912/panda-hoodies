@@ -1,0 +1,91 @@
+/* ============================================================================
+  Product Form
+============================================================================== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-subscription-options {
+  margin-bottom: 32px;
+}
+
+.product__associated-products {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.product__associated-product {
+  position: relative;
+  margin-right: 12px;
+
+  img {
+    display: block;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  label {
+    display: block;
+    border: 1px solid rgba($color-black, 0.25);
+  }
+
+  input:checked + label {
+    border-color: $color-black;
+  }
+}
+
+.product-subscription-toggles {
+  margin-bottom: 8px;
+  padding: 0;
+  border: none;
+
+  @include media-query($min, $medium) {
+    margin-bottom: 16px;
+  }
+}
+
+.product-subscription-toggle {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+
+    @include media-query($min, $medium) {
+      margin-bottom: 18px;
+    }
+  }
+
+  label {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    @include typography(18, 27);
+
+    &::before {
+      position: relative;
+      top: -2px;
+      flex-shrink: 0;
+      align-self: flex-start;
+      width: 35px;
+      height: 35px;
+    }
+  }
+}
+
+.product-subscription-toggle__label-text {
+  margin-right: auto;
+}
+
+.product-subscription-toggle__label-prices {
+  flex-shrink: 0;
+
+  s {
+    opacity: 0.5;
+  }
+}

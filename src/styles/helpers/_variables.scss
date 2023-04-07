@@ -16,7 +16,8 @@ $pre-large: $large - $viewport-increment;
 $site-width: 1200px;
 $gutter: 20px;
 $container-padding: 20px;
-$border-radius: 0;
+$border-radius: 6px;
+$border-radius-media: 10px;
 
 /* ============================================================================
   Color variables

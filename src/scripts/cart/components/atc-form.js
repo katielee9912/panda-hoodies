@@ -79,6 +79,8 @@ import storefront from '@scripts/storefront/storefront'
         }
       }
 
+      console.log(atcData)
+
       if (itemsToAdd.items.length === 0) { return }
       cartAPI.cartAdd(itemsToAdd)
     }
