@@ -69,9 +69,52 @@
         "padding_bottom": "default",
         "padding_bottom_mobile": "default"
       }
+    },
+    "eb41f6de-8dbc-4468-84fd-12cf2646f541": {
+      "type": "featured-product",
+      "settings": {
+        "product": "tie-dye-hoodie",
+        "header": "Featured",
+        "cta_text_color": "#000000",
+        "cta_bg_color": "#d99191",
+        "cta_border_color": "#d99191",
+        "cta_text_color_hover": "#000000",
+        "cta_bg_color_hover": "#ffffff",
+        "cta_border_color_hover": "#000000",
+        "show_ratings": true,
+        "show_description": true,
+        "show_care_instructions": true,
+        "show_badge": true,
+        "margin_top": "0",
+        "margin_top_mobile": "default",
+        "margin_bottom": "default",
+        "margin_bottom_mobile": "default",
+        "padding_top": "default",
+        "padding_top_mobile": "default",
+        "padding_bottom": "default",
+        "padding_bottom_mobile": "default"
+      }
+    },
+    "58cf8a65-8894-452e-aeaa-66a757f4b1bc": {
+      "type": "about-us",
+      "settings": {
+        "header": "About Us",
+        "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<br\/><br\/>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate.<\/p>",
+        "image": "shopify:\/\/shop_images\/DALL_E_2023-04-05_03.35.13_-_pandas_working_together_as_a_team_designing_clothes_in_an_office_peachy_colours_digital_art.png",
+        "margin_top": "0",
+        "margin_top_mobile": "default",
+        "margin_bottom": "default",
+        "margin_bottom_mobile": "default",
+        "padding_top": "default",
+        "padding_top_mobile": "default",
+        "padding_bottom": "default",
+        "padding_bottom_mobile": "default"
+      }
     }
   },
   "order": [
-    "4bf41579-6d4d-4536-a51d-0e3cda3de779"
+    "4bf41579-6d4d-4536-a51d-0e3cda3de779",
+    "eb41f6de-8dbc-4468-84fd-12cf2646f541",
+    "58cf8a65-8894-452e-aeaa-66a757f4b1bc"
   ]
 }
