@@ -1,0 +1,67 @@
+<script src="{{ 'about-us.js' | asset_url }}" defer="defer"></script>
+{{ 'about-us.css' | asset_url | stylesheet_tag }}
+
+<div id="about-us" class="about-us" role="region" aria-label="About Us">
+  <div class="container">
+    <div class="row flex-column flex-md-row">
+
+      {% comment %} Content Half {% endcomment %}
+      <div class="about-us__content col-md-6">
+        <h3 class="about-us__title">
+          {{ section.settings.header | upcase }}
+        </h3>
+
+        {{ section.settings.copy }}
+      </div>
+
+      {% comment %} Image Half {% endcomment %}
+      <div class="col-md-6">
+        <div class="about-us__image">
+          {%- liquid
+            if section.settings.image_mobile != blank
+              render 'image', image: section.settings.image, background: true, classes: 'd-none d-md-block'
+              render 'image', image: section.settings.image_mobile, background: true, classes: 'd-md-none'
+            elsif section.settings.image != blank
+              render 'image', image: section.settings.image, background: true
+            endif
+          -%}
+        </div>
+      </div>
+    </div>
+
+    {% comment %} Decorations {% endcomment %}
+    {% render 'icon-shaded-box' %}
+    {% render 'icon-squigly-short' %}
+  </div>
+</div>
+
+{% render 'section-spacing', section_name: 'about-us' %}
+
+{% schema %}
+  {
+    "settings" : [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "header",
+        "label": "Header",
+        "default": "About Us"
+      },
+      {
+        "type": "richtext",
+        "id": "copy",
+        "label": "Text"
+      },
+      FRAGMENT.image("Image Size: 600x600" || "Image Size: 600x600"),
+      FRAGMENT.section-spacing
+    ],
+    "presets": [
+      {
+        "name": "About Us"
+      }
+    ]
+  }
+{% endschema %}
