@@ -272,7 +272,7 @@ p {
   Body
 ============================================================================== */
 @mixin body-small {
-  @include typography(14, 20);
+  @include typography(11, 14);
 }
 
 .p--small,

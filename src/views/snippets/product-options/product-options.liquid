@@ -1,10 +1,12 @@
 {% comment %}
   PARAMETERS:
+  options: String
   display_low_stock: Boolean (optional)
   form_id: String. Product form ID (optional)
 
   USAGE:
   {% render 'product-options' with
+    options: 'color, size'
     display_low_stock: true,
     form_id: form_id
   %}
@@ -30,13 +32,15 @@
           assign type = 'swatch'
         endif
       -%}
-      {% render 'product-option',
-        option: option,
-        display_selected_value_text: display_selected_value_text,
-        type: type,
-        product: product,
-        form_id: form_id
-      %}
+      {% if options contains option_name %}
+        {% render 'product-option',
+          option: option,
+          display_selected_value_text: display_selected_value_text,
+          type: type,
+          product: product,
+          form_id: form_id
+        %}
+      {% endif %}
     {%- endfor -%}
 
     {% if display_low_stock == true %}
