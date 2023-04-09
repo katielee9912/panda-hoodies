@@ -1,12 +1,10 @@
 <script src="{{ 'contact-us.js' | asset_url }}" defer="defer"></script>
 {{ 'contact-us.css' | asset_url | stylesheet_tag }}
 
-<div id="contact-us" class="contact-us" role="region" aria-label="Contact Us">
+<contact-us id="contact-us" class="contact-us" role="region" aria-label="Contact Us">
   <div class="container">
 
-    <h3>
-      {{ section.settings.header | upcase }}
-    </h3>
+    <h3>{{ section.settings.header | upcase }}</h3>
 
     {{ section.settings.copy }}
 
@@ -61,7 +59,7 @@
           <label for="contactFormMessage">{{ 'templates.contact.form.message' | t }}</label>
 
           <div data-required-field-wrapper>
-            <textarea rows="9"
+            <textarea rows="8"
               name="contact[body]"
               id="contactFormMessage"
               placeholder="{{ 'templates.contact.form.message' | t }}"
@@ -77,8 +75,14 @@
         <button type="submit" class="btn btn--full">{{ 'templates.contact.form.send' | t }}</button>
       {% endform %}
     </div>
+
+    <div class="contact-up__lets-chat-badge">
+      {% render 'icon-lets-chat-badge' %}
+    </div>
+
+    <div class="contact-us__background-block"> </div>
   </div>
-</div>
+</contact-us>
 
 {% render 'section-spacing', section_name: 'contact-us' %}
 

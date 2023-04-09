@@ -148,11 +148,9 @@
           {% endif %}
         </care-instructions>
 
-        <div class="featured-product__cta">
-          <a class="btn" href="{{ product.url }}" title="{{ product.title }}">
-            {{ 'products.product.see_product' | t }}
-          </a>
-        </div>
+        <a class="btn" href="{{ product.url }}" title="{{ product.title }}">
+          {{ 'products.product.see_product' | t }}
+        </a>
       </div>
     </div>
 
@@ -184,46 +182,6 @@
         "id": "header",
         "label": "Header",
         "default": "Featured"
-      },
-      {
-        "type": "header",
-        "content": "CTA Button"
-      },
-      {
-        "type": "color",
-        "id": "cta_text_color",
-        "label": "CTA Text Color",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "color",
-        "id": "cta_bg_color",
-        "label": "CTA Background Color",
-        "default": "#000000"
-      },
-      {
-        "type": "color",
-        "id": "cta_border_color",
-        "label": "CTA Border Color",
-        "default": "#000000"
-      },
-      {
-        "type": "color",
-        "id": "cta_text_color_hover",
-        "label": "CTA Text Color Hover",
-        "default": "#000000"
-      },
-      {
-        "type": "color",
-        "id": "cta_bg_color_hover",
-        "label": "CTA Background Color Hover",
-        "default": "#FFFFFF"
-      },
-      {
-        "type": "color",
-        "id": "cta_border_color_hover",
-        "label": "CTA Border Color Hover",
-        "default": "#000000"
       },
       {
         "type": "header",

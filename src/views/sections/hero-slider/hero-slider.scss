@@ -10,6 +10,45 @@
 .hero-slider {
   display: block;
   position: relative;
+
+  .background-image {
+    object-position: 0% 20%;
+  }
+
+  .btn {
+    width: 90%;
+    border-color: var(--cta-border-color);
+    background-color: var(--cta-bg-color);
+    color: var(--cta-text-color);
+
+    @include media-query($max, $medium) {
+      width: 80%;
+      margin: auto;
+    }
+
+    &:hover {
+      border-color: var(--cta-border-color-hover);
+      background-color: var(--cta-bg-color-hover);
+      color: var(--cta-text-color-hover);
+
+      svg {
+        transform: translateY(6px);
+        transition: 0.3s all ease;
+
+        path {
+          stroke: var(--cta-text-color-hover);
+        }
+      }
+    }
+
+    svg {
+      margin: 0 0 0 6px;
+
+      path {
+        stroke: var(--text-color);
+      }
+    }
+  }
 }
 
 .hero-slider__container {
@@ -28,23 +67,13 @@
 
   &.flex-md-row {
     .hero-slider__content {
-      padding: 60px 20px;
       text-align: right;
-
-      @include media-query($min, $medium) {
-        padding: 60px 40px 60px 80px;
-      }
     }
   }
 
   &.flex-md-row-reverse {
     .hero-slider__content {
-      padding: 60px 20px;
       text-align: left;
-
-      @include media-query($min, $medium) {
-        padding: 60px 80px 60px 40px;
-      }
     }
   }
 
@@ -59,77 +88,87 @@
   top: 0;
   flex: 1;
   width: 100%;
+  padding: 60px 0;
   color: var(--text-color);
 
   @include media-query($min, $medium) {
     max-width: 50%;
+    padding: 70px 30px;
   }
 
-  .preheader--large .hero-slider__preheader {
+  @include media-query($min, $site-width) {
+    padding: 70px 76px;
+  }
+
+  .hero-slider__header {
+    max-width: 90%;
+
+    @include media-query($max, $medium) {
+      max-width: 80%;
+      margin: auto;
+    }
+  }
+
+  .preheader--medium .hero-slider__preheader {
     margin-bottom: 10px;
     @include typography(14, 18, 500);
 
     @include media-query($min, $medium) {
-      @include typography(18, 20, 500);
+      @include typography(20, 20, 500);
     }
   }
-  .preheader--xlarge .hero-slider__preheader {
+
+  .preheader--large .hero-slider__preheader {
     margin-bottom: 10px;
-    @include typography(16, 20, 700);
+    @include typography(24, 30);
+    letter-spacing: 0.02rem;
 
-    @include media-query($min, $medium) {
-      @include typography(20, 22, 700);
-    }
-  }
-  .preheader--xxlarge .hero-slider__preheader {
-    margin-bottom: 12px;
-    @include typography(18, 22, 700);
-
-    @include media-query($min, $medium) {
-      @include typography(22, 24, 700);
+    @include media-query($min, $site-width) {
+      @include typography(40, 40);
+      letter-spacing: 0.02rem;
     }
   }
 
-  .title--large .hero-slider__title {
+  .title--medium .hero-slider__title {
     margin-bottom: 10px;
+    font-family: $font-museo-900;
     @include typography(40, 45, 700);
 
     @include media-query($min, $medium) {
       @include typography(50, 50, 700);
     }
   }
-  .title--xlarge .hero-slider__title {
-    margin-bottom: 12px;
-    @include typography(70, 80, 700);
 
-    @include media-query($min, $medium) {
-      @include typography(80, 90, 700);
-    }
-  }
-  .title--xxlarge .hero-slider__title {
+  .title--large .hero-slider__title {
     margin-bottom: 14px;
-    @include typography(80, 80, 900);
+    font-family: $font-museo-900;
+    letter-spacing: 0.02rem;
+    @include typography(90, 90);
 
-    @include media-query($min, $medium) {
-      @include typography(110, 110, 900);
+    @include media-query($min, $site-width) {
+      letter-spacing: 0.02rem;
+      @include typography(170, 180);
     }
   }
 
-  .copy--large {
+  .copy--medium {
     .hero-slider__copy {
-      margin-bottom: 20px;
-      @include typography(14, 20, 300);
+      margin-bottom: 24px;
+      font-family: $font-museo-500;
+      @include typography(20, 24);
 
       @include media-query($min, $medium) {
-        @include typography(16, 18, 300);
+        @include typography(22, 30);
       }
     }
 
-    ~ .hero-slider__cta .btn {
-      @include typography(14, 20, 300);
+    ~ .btn {
+      font-family: $font-museo-500;
+      @include typography(20, 24);
 
       @include media-query($min, $medium) {
-        @include typography(16, 18, 500);
+        font-family: $font-museo-500;
+        @include typography(22, 30);
       }
       svg {
         transform: scale(0.8);
@@ -137,21 +176,26 @@
     }
   }
 
-  .copy--xlarge {
+  .copy--large {
     .hero-slider__copy {
       margin-bottom: 24px;
-      @include typography(16, 20, 500);
+      font-family: $font-museo-500;
+      @include typography(18, 24);
 
       @include media-query($min, $medium) {
-        @include typography(18, 24, 500);
+        margin-bottom: 34px;
+      }
+
+      @include media-query($min, $site-width) {
+        @include typography(24, 32);
       }
     }
 
-    ~ .hero-slider__cta .btn {
-      @include typography(16, 20, 500);
+    ~ .btn {
+      @include typography(18, 24, 700);
 
-      @include media-query($min, $medium) {
-        @include typography(18, 24, 500);
+      @include media-query($min, $site-width) {
+        @include typography(22, 30, 700);
       }
     }
   }
@@ -173,46 +217,12 @@
   }
 }
 
-.hero-slider__cta .btn {
-  border-color: var(--cta-border-color);
-  background-color: var(--cta-bg-color);
-  color: var(--cta-text-color);
-
-  @include media-query($max, $medium) {
-    width: 100%;
-  }
-
-  &:hover {
-    border-color: var(--cta-border-color-hover);
-    background-color: var(--cta-bg-color-hover);
-    color: var(--cta-text-color-hover);
-
-    svg {
-      transform: translateY(6px);
-      transition: 0.3s all ease;
-
-      path {
-        stroke: var(--cta-text-color-hover);
-      }
-    }
-  }
-
-  svg {
-    margin: 0 0 0 6px;
-
-    path {
-      stroke: var(--text-color);
-    }
-  }
-}
-
 .hero-slider__navigation {
   position: absolute;
   z-index: 20;
   top: 50%;
   left: 50%;
   width: 100%;
-  max-width: $site-width;
   transform: translate(-50%, -50%);
 
   .swiper-button-prev,
@@ -237,19 +247,25 @@
   .swiper-button-prev {
     left: 5px;
 
-    @include media-query($min, $medium) {
-      left: 10px;
+    @include media-query($min, $site-width) {
+      left: 20px;
     }
   }
   .swiper-button-next {
     right: 5px;
 
-    @include media-query($min, $medium) {
-      right: 10px;
+    @include media-query($min, $site-width) {
+      right: 20px;
     }
   }
 
   svg {
+    transform: scale(1);
+
+    @include media-query($min, $site-width) {
+      transform: scale(1.5);
+    }
+
     path:first-child {
       transition: all 0.3s ease;
       stroke: $color-peach;
@@ -276,7 +292,7 @@
   transition: all 0.3s ease;
   border: none;
   border-radius: 100%;
-  background: $color-peach;
+  background: $color-grey;
 
   &:hover {
     cursor: pointer;
@@ -284,7 +300,7 @@
 
   &:active,
   &:hover,
-  &:focus-within,
+  &:focus,
   &-active {
     background: $color-pink;
   }

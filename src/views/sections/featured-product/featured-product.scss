@@ -7,18 +7,32 @@
 ============================================================================== */
 
 .featured-product-section {
-  padding: 100px 0;
+  padding: 110px 0 60px;
 
   @include media-query($min, $medium) {
-    padding: 150px 0;
+    padding: 160px 0;
+  }
+
+  @include media-query($min, $xlarge) {
+    padding: 180px 0 155px;
   }
 
   .swiper-wrapper {
     height: auto;
+    margin-top: 22px;
   }
 
   .container {
     position: relative;
+  }
+
+  .btn {
+    width: 100%;
+
+    @include media-query($max, $xlarge) {
+      @include typography(18, 24, 700);
+      margin-top: 10px;
+    }
   }
 
   .icon-shaded-box {
@@ -30,13 +44,12 @@
     transform: scale(0.7);
 
     @include media-query($min, $medium) {
-      top: 0;
+      top: -45px;
       right: 5%;
     }
 
     @include media-query($min, $xlarge) {
       top: 0;
-      right: 5%;
       transform: scale(1);
     }
   }
@@ -55,9 +68,13 @@
     }
 
     @include media-query($min, $xlarge) {
-      top: -60px;
+      top: -70px;
       right: 0;
       transform: scale(1);
+    }
+
+    path {
+      stroke: $color-rouge;
     }
   }
 
@@ -70,13 +87,16 @@
 
     @include media-query($min, $medium) {
       display: block;
-      top: 107%;
-      left: -40px;
+      top: 105%;
       transform: scale(0.7);
     }
 
     @include media-query($min, $xlarge) {
       transform: scale(1);
+    }
+
+    path {
+      stroke: $color-purple;
     }
   }
 }
@@ -97,18 +117,18 @@
 .featured-product__header {
   position: absolute;
   top: -44px;
-  left: 0;
+  left: 16px;
   font-family: $font-museo-900;
   @include typography(50, 70, 900);
 
   @include media-query($min, $medium) {
     top: -60px;
-    left: 0;
+    left: 14px;
     @include typography(76, 90, 900);
   }
 
   @include media-query($min, $xlarge) {
-    top: -75px;
+    top: -76px;
     left: -28px;
     @include typography(96, 115, 900);
   }
@@ -122,8 +142,8 @@
 
 .featured-product__badge {
   position: absolute;
-  top: 6%;
-  left: -50px;
+  top: 3%;
+  left: -54px;
   transform: scale(0.6);
 
   @include media-query($min, $medium) {
@@ -133,17 +153,17 @@
   }
 
   @include media-query($min, $xlarge) {
-    top: 6%;
-    left: -14%;
+    top: 90px;
+    left: -90px;
     transform: scale(1);
   }
 }
 
 .featured-product__content {
-  padding: 20px;
+  padding: 32px 20px;
 
-  @include media-query($min, $medium) {
-    padding: 40px;
+  @include media-query($min, $xlarge) {
+    padding: 40px 0 40px 80px;
   }
 
   .product-rating {
@@ -154,43 +174,28 @@
 .featured-product__title {
   margin-bottom: 10px;
   font-family: $font-museo-900;
-  @include typography(24, 30, 900);
+  @include typography(22, 28, 700);
 
-  @include media-query($min, $medium) {
+  @include media-query($min, $xlarge) {
     margin-bottom: 20px;
     @include typography(36, 43, 900);
   }
 }
 
 .featured-product__price {
-  @include typography(18, 20, 700);
+  @include typography(20, 22, 700);
 
-  @include media-query($min, $medium) {
-    @include typography(24, 28, 700);
+  @include media-query($min, $xlarge) {
+    @include typography(26, 28, 700);
   }
 }
 
 .featured-product__description {
-  margin: 20px 0 10px;
+  margin: 20px 0 30px;
 
-  @include media-query($max, $medium) {
-    margin: 15px 0;
-  }
-}
-
-.featured-product__cta .btn {
-  border-color: var(--cta-border-color);
-  background-color: var(--cta-bg-color);
-  color: var(--cta-text-color);
-
-  @include media-query($max, $medium) {
-    width: 100%;
-  }
-
-  &:hover {
-    border-color: var(--cta-border-color-hover);
-    background-color: var(--cta-bg-color-hover);
-    color: var(--cta-text-color-hover);
+  @include media-query($max, $xlarge) {
+    margin: 20px 0;
+    @include typography(18, 24);
   }
 }
 
@@ -200,32 +205,62 @@
   margin: 0 0 13px;
   overflow: inherit;
 
-  @include media-query($min, $medium) {
+  @include media-query($min, $xlarge) {
     margin: 0 0 30px;
   }
 }
 
 .featured-product__care-instructions-container {
   overflow: hidden;
+
+  @include media-query($max, $xlarge) {
+    p {
+      @include typography(18, 24);
+    }
+  }
 }
 
 .featured-product__care-instructions-wrapper {
-  gap: 8px;
+  gap: 12px;
 }
 
 .featured-product__care-instruction {
   display: flex;
   flex-direction: column;
-  width: 65px;
+  width: 80px;
   gap: 8px;
+
+  small {
+    @include typography(12, 15);
+  }
+
+  @include media-query($min, $medium) {
+    width: 70px;
+  }
+
+  @include media-query($min, $xlarge) {
+    width: 80px;
+
+    small {
+      @include typography(15, 18);
+    }
+  }
 }
 
 .featured-product__care-instruction-image {
   position: relative;
-  width: 65px;
-  height: 50px;
+  width: 80px;
+  height: 55px;
   border: 1px solid $color-black;
   border-radius: $border-radius-media;
+
+  @include media-query($min, $medium) {
+    width: 70px;
+  }
+
+  @include media-query($min, $xlarge) {
+    width: 80px;
+  }
 
   img {
     position: absolute;
@@ -245,6 +280,10 @@
   left: 0;
   width: 100%;
 
+  @include media-query($max, $medium) {
+    top: 55%;
+  }
+
   .swiper-button-prev,
   .swiper-button-next {
     position: absolute;
@@ -263,7 +302,7 @@
   .swiper-button-prev {
     left: -26px;
 
-    @include media-query($min, $medium) {
+    @include media-query($min, $xlarge) {
       left: -60px;
     }
   }
@@ -271,7 +310,7 @@
   .swiper-button-next {
     right: -26px;
 
-    @include media-query($min, $medium) {
+    @include media-query($min, $xlarge) {
       right: -60px;
     }
   }
@@ -281,7 +320,12 @@
   }
 
   .icon {
+    transform: scale(1.2);
     fill: $color-peach;
+
+    @include media-query($min, $medium) {
+      transform: scale(1.3);
+    }
 
     path:first-child {
       stroke: $color-peach;

@@ -60,9 +60,14 @@ import AccessibleSwiper from '@scripts/components/accessible-swiper'
       if (this.enabled === 'true') {
         this.options = {
           ...this.options,
-          spaceBetween: 12,
+          spaceBetween: 14,
           slidesPerView: 'auto',
           threshold: 10,
+          breakpoints: {
+            1025: {
+              spaceBetween: 12
+            }
+          },
           navigation: {
             nextEl: this.next,
             prevEl: this.prev

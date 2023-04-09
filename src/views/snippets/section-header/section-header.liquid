@@ -16,12 +16,12 @@
 
 <div class="{{ section_name }}__header section-header {{ classes | default: 'text-center' }}">
   {% if preheader != blank %}
-    <span class="{{ section_name }}__preheader heading-5 d-block">
+    <span class="{{ section_name }}__preheader d-block">
       {{ preheader }}
     </span>
   {% endif %}
   {% if title != blank %}
-    <h2 class="{{ section_name }}__title heading-3">
+    <h2 class="{{ section_name }}__title">
       {{ title }}
     </h2>
   {% endif %}

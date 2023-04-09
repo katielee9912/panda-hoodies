@@ -7,10 +7,61 @@
 ============================================================================== */
 
 .store-locator {
-  margin-top: 60px;
+  display: block;
+  margin-top: 110px;
 
   @include media-query($min, $medium) {
-    margin-top: 80px;
+    margin-top: 110px;
+  }
+
+  .container {
+    position: relative;
+  }
+
+  .icon-shaded-box {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    top: -82px;
+    right: 10px;
+    transform: scale(0.8);
+
+    @include media-query($min, $medium) {
+      top: -5%;
+      transform: scale(1);
+    }
+
+    @include media-query($min, $xlarge) {
+      top: -32px;
+      right: -20px;
+      transform: scale(1.2);
+    }
+
+    path {
+      fill: $color-rouge;
+    }
+  }
+
+  .icon-squigly-short {
+    position: absolute;
+    z-index: 10;
+    top: 92%;
+    left: -5%;
+    transform: scale(0.6);
+
+    @include media-query($min, $medium) {
+      left: -2.5%;
+      transform: scale(0.75);
+    }
+
+    @include media-query($min, $xlarge) {
+      left: -4%;
+      transform: scale(0.9);
+    }
+
+    path {
+      stroke: $color-purple;
+    }
   }
 
   h3 {
@@ -19,7 +70,8 @@
     @include typography(36, 36, 900);
 
     @include media-query($min, $medium) {
-      @include typography(48, 58, 900);
+      margin-bottom: 30px;
+      @include typography(44, 44, 900);
     }
   }
 
@@ -29,6 +81,11 @@
 
     @include media-query($min, $medium) {
       max-width: 80%;
+      margin-bottom: 40px;
+    }
+
+    @include media-query($max, $xlarge) {
+      @include typography(18, 24);
     }
   }
 
