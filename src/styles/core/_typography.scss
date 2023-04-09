@@ -102,7 +102,7 @@ sub {
 
 /* H3 */
 @mixin h3 {
-  @include typography(36, 36, $weight-bold);
+  @include typography(35, 35, $weight-bold);
 }
 
 @mixin h3-lg {
@@ -115,7 +115,7 @@ sub {
 }
 
 @mixin h4-lg {
-  @include typography(36, 36, $weight-bold);
+  @include typography(35, 35, $weight-bold);
 }
 
 /* H5 */
@@ -260,7 +260,8 @@ h5 {
   Body
 ============================================================================== */
 @mixin body {
-  @include typography(16, 24);
+  font-family: $font-body;
+  @include typography(22, 30);
 }
 
 .p,
@@ -272,7 +273,8 @@ p {
   Body
 ============================================================================== */
 @mixin body-small {
-  @include typography(11, 14);
+  font-family: $font-body;
+  @include typography(15, 18);
 }
 
 .p--small,
@@ -284,6 +286,7 @@ small {
   Body Large
 ============================================================================== */
 @mixin body-large {
+  font-family: $font-body;
   @include typography(20, 30);
 }
 

@@ -1,7 +1,7 @@
 <script src="{{ 'store-locator.js' | asset_url }}" defer="defer"></script>
 {{ 'store-locator.css' | asset_url | stylesheet_tag }}
 
-<div id="store-locator" class="store-locator" role="region" aria-label="Store Locator">
+<store-locator id="store-locator" class="store-locator" role="region" aria-label="Store Locator">
   <div class="container">
 
     <h3 class="text-center">
@@ -11,8 +11,12 @@
     {{ section.settings.copy }}
 
     <iframe src="https://my.atlistmaps.com/map/a8bd4bc0-5d44-45fe-a06b-e8372518a640?share=true" allow="geolocation 'self' https://my.atlistmaps.com" width="100%" height="400px" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
+    {% comment %} Decorations {% endcomment %}
+    {% render 'icon-shaded-box' %}
+    {% render 'icon-squigly-short' %}
   </div>
-</div>
+</store-locator>
 
 {% render 'section-spacing', section_name: 'store-locator' %}
 

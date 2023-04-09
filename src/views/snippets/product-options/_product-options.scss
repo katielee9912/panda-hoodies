@@ -11,6 +11,11 @@
 
   legend {
     margin: 0 0 5px;
+    @include typography(18, 24);
+
+    @include media-query($min, $xlarge) {
+      @include typography(24, 29);
+    }
   }
 
   .product-options--unavailable-option-style-hide
@@ -43,10 +48,11 @@
   display: flex;
   flex-wrap: wrap;
   margin: 10px 0;
-  gap: 11px;
+  gap: 16px;
 
-  @include media-query($min, $medium) {
+  @include media-query($min, $xlarge) {
     margin: 20px 0;
+    gap: 18px;
   }
 }
 
@@ -87,10 +93,15 @@
     position: relative;
 
     label {
-      width: 28px;
-      height: 28px;
+      width: 34px;
+      height: 34px;
       overflow: hidden;
       border-radius: 50%;
+
+      @include media-query($min, $xlarge) {
+        width: 48px;
+        height: 48px;
+      }
     }
 
     &.soldout .product-option-item__swatch::before {
@@ -114,14 +125,19 @@
 }
 
 .product-option-item__swatch {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   overflow: hidden;
   border: 1px solid $color-white;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+
+  @include media-query($min, $xlarge) {
+    width: 48px;
+    height: 48px;
+  }
 
   &.product-option-item__swatch--white {
     border: 1px solid $color-grey;

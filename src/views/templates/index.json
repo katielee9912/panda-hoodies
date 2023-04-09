@@ -110,11 +110,43 @@
         "padding_bottom": "default",
         "padding_bottom_mobile": "default"
       }
+    },
+    "be759bbc-1592-445f-bbd0-024637bccc6d": {
+      "type": "store-locator",
+      "settings": {
+        "header": "Store Locator",
+        "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<\/p>",
+        "margin_top": "0",
+        "margin_top_mobile": "default",
+        "margin_bottom": "default",
+        "margin_bottom_mobile": "default",
+        "padding_top": "default",
+        "padding_top_mobile": "default",
+        "padding_bottom": "default",
+        "padding_bottom_mobile": "default"
+      }
+    },
+    "3a32200f-980c-466b-94d9-bc6b84144bfb": {
+      "type": "contact-us",
+      "settings": {
+        "header": "Contact Us",
+        "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<\/p>",
+        "margin_top": "0",
+        "margin_top_mobile": "default",
+        "margin_bottom": "default",
+        "margin_bottom_mobile": "default",
+        "padding_top": "default",
+        "padding_top_mobile": "default",
+        "padding_bottom": "default",
+        "padding_bottom_mobile": "default"
+      }
     }
   },
   "order": [
     "4bf41579-6d4d-4536-a51d-0e3cda3de779",
     "eb41f6de-8dbc-4468-84fd-12cf2646f541",
-    "58cf8a65-8894-452e-aeaa-66a757f4b1bc"
+    "58cf8a65-8894-452e-aeaa-66a757f4b1bc",
+    "be759bbc-1592-445f-bbd0-024637bccc6d",
+    "3a32200f-980c-466b-94d9-bc6b84144bfb"
   ]
 }

@@ -27,11 +27,9 @@
 
           {% comment %} Content Block - CTA (button) {% endcomment %}
           {% if block.settings.cta_text != blank and block.settings.cta_link != blank %}
-            <div class="hero-slider__cta">
-              <a class="btn" href="{{ block.settings.cta_link }}" title="{{ block.settings.cta_text }}">
-                {{ block.settings.cta_text }} {% render 'icon-arrow-down' %}
-              </a>
-            </div>
+            <a class="btn" href="{{ block.settings.cta_link }}" title="{{ block.settings.cta_text }}">
+              {{ block.settings.cta_text }} {% render 'icon-arrow-down' %}
+            </a>
           {% endif %}
 
           {% comment %} Content Block - Background Image {% endcomment %}
@@ -128,19 +126,15 @@
             "label": "Preheader Size",
             "options": [
               {
+                "value": "preheader--medium",
+                "label": "Medium"
+              },
+              {
                 "value": "preheader--large",
                 "label": "Large"
-              },
-              {
-                "value": "preheader--xlarge",
-                "label": "X-Large"
-              },
-              {
-                "value": "preheader--xxlarge",
-                "label": "XX-Large"
               }
             ],
-            "default": "preheader--large"
+            "default": "preheader--medium"
           },
           {
             "type": "text",
@@ -153,19 +147,15 @@
             "label": "Title Size",
             "options": [
               {
+                "value": "title--medium",
+                "label": "Medium"
+              },
+              {
                 "value": "title--large",
                 "label": "Large"
-              },
-              {
-                "value": "title--xlarge",
-                "label": "X-Large"
-              },
-              {
-                "value": "title--xxlarge",
-                "label": "XX-Large"
               }
             ],
-            "default": "title--large"
+            "default": "title--medium"
           },
           {
             "type": "textarea",
@@ -178,15 +168,15 @@
             "label": "Text Size",
             "options": [
               {
-                "value": "copy--large",
-                "label": "Large"
+                "value": "copy--medium",
+                "label": "Medium"
               },
               {
-                "value": "copy--xlarge",
-                "label": "X-Large"
+                "value": "copy--large",
+                "label": "Large"
               }
             ],
-            "default": "copy--large"
+            "default": "copy--medium"
           },
           {
             "type": "color",
