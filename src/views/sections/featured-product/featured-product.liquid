@@ -68,6 +68,7 @@
               {% assign sale_price = product.compare_at_price | money %}
 
               {% if sale_price != blank or sale_price == original_price %}
+                {% assign final_price = product.price | money_without_currency %}
                 <span class="sale-price" data-featured-sale-price="{{ sale_price }}">
                   {{- product.price | money -}}
                 </span>
@@ -81,16 +82,16 @@
                   </s>
                 </span>
               {% else %}
+                {% assign final_price = product.selected_or_first_available_variant.price | money_without_currency %}
                 {{- product.selected_or_first_available_variant.price | money -}}
               {% endif %}
             </div>
 
             {% comment %} Product Star Rating {% endcomment %}
             {% unless section.settings.show_ratings == false %}
-              {% render 'star-rating',
-                rating: product.metafields.key.reviews_rating,
-                reviews_count: product.metafields.key.reviews_count,
-              %}
+              <div class="yotpo bottomLine yotpo-inline-star-rating-ph"
+                data-product-id="{{ product.id }}">
+              </div>
             {% endunless %}
           </div>
 
@@ -170,6 +171,20 @@
       {% endunless %}
     </div>
   </featured-product>
+
+  {% comment %} Yotpo Reviews Widget {% endcomment %}
+  {% unless section.settings.show_ratings == false %}
+    <div class="yotpo-main-widget yotpo-widget-instance"
+      data-yotpo-instance-id="378251"
+      data-yotpo-product-id="{{product.id}}"
+      data-yotpo-name="{{ product.title | escape }}"
+      data-yotpo-url="{{ shop.url }}{{ product.url }}"
+      data-yotpo-image-url="{{ product.featured_image | product_img_url: "large" | prepend: "https:" | replace: '?', '%3F' | replace: '&','%26'}}"
+      data-yotpo-price="{{ final_price }}"
+      data-yotpo-currency="{{ shop.currency }}"
+      data-yotpo-description="{{ product.description | escape }}">
+    </div>
+  {% endunless %}
 {% endif %}
 
 {% render 'section-spacing', section_name: 'featured-product' %}
