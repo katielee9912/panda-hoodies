@@ -11,11 +11,6 @@
 
   legend {
     margin: 0 0 5px;
-    @include typography(18, 24);
-
-    @include media-query($min, $xlarge) {
-      @include typography(24, 29);
-    }
   }
 
   .product-options--unavailable-option-style-hide
@@ -51,7 +46,6 @@
   gap: 16px;
 
   @include media-query($min, $xlarge) {
-    margin: 20px 0;
     gap: 18px;
   }
 }

@@ -8,7 +8,7 @@
   <ajax-cart class="ajaxcart drawer__inner" role="region" aria-label="{{ section.settings.cart_title | default: 'Your Bag' }}">
     <div class="ajaxcart__header">
       <div class="ajaxcart__header-main">
-        <h2 id="ajaxcart__header-title" class="heading-4 ajaxcart__header-title">{{ section.settings.cart_title | default: 'Your Bag' }}</h2>
+        <h2 id="ajaxcart__header-title" class="heading-4 ajaxcart__header-title">{{ section.settings.cart_title | default: 'YOUR BAG' }}</h2>
 
         <hide-if-cart-empty>
           <span class="ajaxcart__header-item-count"><cart-count>{{ cart.item_count }}</cart-count> {{ 'templates.cart.general.items' | t }}</span>

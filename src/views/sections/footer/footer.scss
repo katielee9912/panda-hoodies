@@ -43,6 +43,10 @@
   }
 
   .main-col {
+    @include media-query($min, $medium) {
+      padding-right: 30px;
+    }
+
     h2 {
       margin-bottom: 14px;
     }
@@ -61,17 +65,11 @@
     margin-bottom: 18px;
 
     @include media-query($max, $medium) {
-      @include typography(15, 20, 500);
+      @include typography(24, 24, 500);
     }
   }
 
   .no-bullets a {
-    @include typography(18, 24, 500);
-
-    @include media-query($max, $medium) {
-      @include typography(15, 20, 500);
-    }
-
     &:hover {
       opacity: 0.5;
       text-decoration: underline;
@@ -79,7 +77,6 @@
   }
 
   p {
-    @include typography(18, 24, 500);
     margin-bottom: 40px;
   }
 

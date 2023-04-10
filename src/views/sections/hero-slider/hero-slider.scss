@@ -111,7 +111,7 @@
 
   .preheader--medium .hero-slider__preheader {
     margin-bottom: 10px;
-    @include typography(24, 28, 500);
+    @include typography(22, 28, 500);
 
     @include media-query($min, $medium) {
       @include typography(24, 30, 700);
@@ -124,7 +124,7 @@
     letter-spacing: 0.02rem;
 
     @include media-query($min, $site-width) {
-      @include typography(40, 40);
+      @include typography(30, 36);
       letter-spacing: 0.02rem;
     }
   }
@@ -147,7 +147,7 @@
 
     @include media-query($min, $site-width) {
       letter-spacing: 0.02rem;
-      @include typography(170, 180);
+      @include typography(130, 140);
     }
   }
 
@@ -156,7 +156,7 @@
       margin-bottom: 24px;
 
       @include media-query($max, $medium) {
-        @include typography(18, 24, 500);
+        @include typography(16, 24, 500);
       }
     }
 
@@ -164,7 +164,7 @@
       font-family: $font-museo-500;
 
       @include media-query($max, $medium) {
-        @include typography(18, 24, 500);
+        @include typography(16, 24, 500);
       }
 
       svg {
@@ -177,22 +177,22 @@
     .hero-slider__copy {
       margin-bottom: 24px;
       font-family: $font-museo-500;
-      @include typography(18, 24);
+      @include typography(16, 24, 500);
 
       @include media-query($min, $medium) {
         margin-bottom: 34px;
       }
 
       @include media-query($min, $site-width) {
-        @include typography(24, 32);
+        @include typography(18, 24, 500);
       }
     }
 
     ~ .btn {
-      @include typography(18, 24, 700);
+      @include typography(16, 24, 500);
 
       @include media-query($min, $site-width) {
-        @include typography(22, 30, 700);
+        @include typography(18, 24, 500);
       }
     }
   }
@@ -258,6 +258,8 @@
 
   svg {
     transform: scale(1);
+    border: 1px solid $color-black;
+    border-radius: 50%;
 
     @include media-query($min, $site-width) {
       transform: scale(1.5);

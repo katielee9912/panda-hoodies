@@ -34,20 +34,11 @@
 
   h3 {
     margin-bottom: 30px;
-    font-family: $font-museo-900;
-    @include typography(36, 36, 900);
-
-    @include media-query($min, $medium) {
-      @include typography(44, 44, 900);
-    }
+    @include typography(35, 35, 700);
   }
 
   p {
     margin: 0 0 30px;
-
-    @include media-query($max, $xlarge) {
-      @include typography(18, 24);
-    }
 
     @include media-query($min, $medium) {
       max-width: 80%;
@@ -56,7 +47,6 @@
 
     @include media-query($min, $xlarge) {
       max-width: 84%;
-      margin: 0 0 40px;
     }
   }
 
@@ -89,11 +79,10 @@
   }
 
   label {
-    @include typography(18, 24, 700);
+    @include typography(16, 24, 700);
 
     @include media-query($min, $xlarge) {
       padding: 12px 20px;
-      @include typography(22, 30, 700);
     }
   }
 
@@ -103,11 +92,10 @@
     padding: 12px 16px;
     border: 1px solid $color-black;
     border-radius: 0;
-    @include typography(18, 24);
+    @include typography(16, 24);
 
     @include media-query($min, $xlarge) {
       padding: 12px 20px;
-      @include typography(22, 30);
     }
   }
 
@@ -123,10 +111,6 @@
 
   .btn {
     margin-top: 20px;
-
-    @include media-query($max, $xlarge) {
-      @include typography(18, 24, 700);
-    }
   }
 
   .form-success {
@@ -159,24 +143,25 @@
 .contact-us__background-block {
   position: absolute;
   z-index: -2;
-  top: 24px;
-  left: 0;
-  width: 100%;
-  height: 86%;
+  top: 23px;
+  left: 50%;
+  width: 96%;
+  height: 96%;
+  transform: translateX(-50%);
   background-color: rgba(242, 193, 174, 0.5);
 
   @include media-query($min, $medium) {
-    top: 30px;
-    left: 50%;
-    width: 115%;
+    width: 110%;
     height: 100%;
-    transform: translateX(-50%);
+  }
+
+  @include media-query($min, $large) {
+    left: 50%;
   }
 
   @include media-query($min, $xxlarge) {
     left: -10%;
     width: 100vw;
-    height: 100%;
     transform: translateX(0);
   }
 }
