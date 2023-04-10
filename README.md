@@ -1,8 +1,8 @@
 # Panda Hoodies
 
-This is a demo store for a developer proficiency test.
-@author: Katie Lee
-@date: 04/04/2023
+This is a demo store for a developer proficiency test.<br /><br />
+@author: Katie Lee<br />
+@date: 04/04/2023<br />
 
 ## Requirements
 The request is to build a single-page store/landing page home page.
