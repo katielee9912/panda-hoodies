@@ -34,7 +34,7 @@
         <div class="site-header__logo">
           <a href="{{ routes.root_url }}" title="{{ section.settings.logo.alt | default: shop.name }} Logo">
             {% if section.settings.logo != blank %}
-              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ section.settings.logo.alt | shop.name }} Logo" width="176" height="59">
+              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ section.settings.logo.alt | default: shop.name }} Logo" width="176" height="59">
             {% else %}
               <h2 class="heading-4">{{ shop.name }}</h2>
             {% endif %}
