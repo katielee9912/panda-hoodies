@@ -77,6 +77,14 @@
     path {
       stroke: $color-rouge;
     }
+
+    .yotpo-bottomline {
+      cursor: default !important;
+
+      a {
+        pointer-events: none !important;
+      }
+    }
   }
 
   .icon-squigly-short {

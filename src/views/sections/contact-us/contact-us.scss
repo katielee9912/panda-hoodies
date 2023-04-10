@@ -148,7 +148,21 @@
   width: 96%;
   height: 96%;
   transform: translateX(-50%);
-  background-color: rgba(242, 193, 174, 0.5);
+  background: linear-gradient(
+    to right top,
+    #ffceda,
+    #ffd2d8,
+    #ffd6d7,
+    #ffdad7,
+    #ffded8,
+    #ffdeda,
+    #ffdfdc,
+    #ffdfde,
+    #ffdce3,
+    #ffdaeb,
+    #fdd9f4,
+    #f4daff
+  );
 
   @include media-query($min, $medium) {
     width: 110%;
