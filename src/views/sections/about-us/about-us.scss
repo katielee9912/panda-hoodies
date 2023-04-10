@@ -82,21 +82,14 @@
   }
 
   @include media-query($min, $large) {
-    padding: 95px 80px 60px 12px;
-  }
-
-  p {
-    font-weight: 400;
-
-    @include media-query($max, $xlarge) {
-      @include typography(18, 24);
-    }
+    padding: 95px 80px 60px 22px;
   }
 }
 
 .about-us__title {
   margin-bottom: 20px;
-  font-family: $font-museo-900;
+  font-family: $font-museo-700;
+  @include typography(35, 35);
 
   @include media-query($min, $medium) {
     margin-bottom: 30px;

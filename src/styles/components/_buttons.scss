@@ -47,7 +47,7 @@ button {
   color: $color-btn-primary-text;
   line-height: 1;
   font-family: $font-museo-700;
-  @include typography(22, 30);
+  @include typography(16, 24);
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;

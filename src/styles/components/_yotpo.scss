@@ -12,18 +12,25 @@
   .yotpo-bottomline {
     gap: 10px !important;
     align-items: center !important;
+
+    a {
+      color: $color-rouge !important;
+
+      &:active,
+      &:hover,
+      &:focus {
+        color: $color-purple !important;
+        text-decoration: underline !important;
+      }
+    }
   }
 
   .write-review-btn-hidden {
     color: $color-rouge !important;
-    font-size: 1.8rem !important;
+    font-size: 1.6rem !important;
     font-weight: 500 !important;
     line-height: 2rem !important;
     text-decoration: underline !important;
-
-    @include media-query($min, $large) {
-      font-size: 2rem !important;
-    }
 
     &:active,
     &:hover,
@@ -58,10 +65,6 @@
 .yotpo-main-widget {
   max-width: $site-width !important;
   margin: 60px auto 0 !important;
-
-  @include media-query($max, $large) {
-    margin: 40px auto 0 !important;
-  }
 }
 
 .yotpo-head {
@@ -70,15 +73,16 @@
 }
 
 .yotpo-headline {
-  font-family: $font-museo-900 !important;
-  font-size: 2.2rem !important;
-  line-height: 2.8rem !important;
+  font-family: $font-museo-700 !important;
+  font-size: 3rem !important;
+  line-height: 3rem !important;
   text-transform: uppercase !important;
 
   @include media-query($max, $large) {
     flex-basis: 100% !important;
     margin-top: 0 !important;
     margin-left: 0 !important;
+    font-size: 3.5rem !important;
   }
 }
 
@@ -170,16 +174,12 @@
   background-color: $color-btn-primary !important;
   color: $color-btn-primary-text !important;
   font-family: $font-museo-700 !important;
-  font-size: 1.8rem !important;
+  font-size: 1.6rem !important;
   line-height: 1 !important;
   text-transform: uppercase !important;
 
   @include media-query($min, $large) {
     width: 190px !important;
-  }
-
-  @include media-query($min, $xlarge) {
-    font-size: 2.2rem !important;
   }
 
   &:hover,
@@ -313,10 +313,6 @@
 
 .yotpo-review-date {
   font-size: 1.4rem !important;
-
-  @include media-query($max, $large) {
-    margin: -9px 0 10px 20px;
-  }
 }
 
 .yotpo-reviews-pagination-container {

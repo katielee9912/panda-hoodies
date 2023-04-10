@@ -21,7 +21,7 @@
 
   .swiper-wrapper {
     height: auto;
-    margin-top: 22px;
+    margin-top: 14px;
   }
 
   .container {
@@ -32,7 +32,6 @@
     width: 100%;
 
     @include media-query($max, $xlarge) {
-      @include typography(18, 24, 700);
       margin-top: 10px;
     }
   }
@@ -77,6 +76,14 @@
 
     path {
       stroke: $color-rouge;
+    }
+
+    .yotpo-bottomline {
+      cursor: default !important;
+
+      a {
+        pointer-events: none !important;
+      }
     }
   }
 
@@ -177,30 +184,29 @@
 
 .featured-product__title {
   margin-bottom: 10px;
-  font-family: $font-museo-900;
-  @include typography(22, 28, 700);
+  font-family: $font-museo-700;
+  @include typography(30, 30, 700);
 
   @include media-query($min, $xlarge) {
     margin-bottom: 20px;
-    @include typography(36, 43, 900);
+    @include typography(35, 43, 700);
   }
 }
 
 .featured-product__price {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   @include typography(20, 22, 700);
 
   @include media-query($min, $xlarge) {
-    @include typography(26, 28, 700);
+    @include typography(22, 26, 700);
   }
 }
 
 .featured-product__description {
-  margin: 0 0 30px;
+  margin: 0 0 24px;
 
   @include media-query($max, $xlarge) {
     margin: 0 0 20px;
-    @include typography(18, 24);
   }
 }
 
@@ -211,7 +217,7 @@
   overflow: inherit;
 
   @include media-query($min, $xlarge) {
-    margin: 0 0 30px;
+    margin: 0 0 20px;
   }
 }
 
@@ -234,22 +240,6 @@
   flex-direction: column;
   width: 80px;
   gap: 8px;
-
-  small {
-    @include typography(12, 15);
-  }
-
-  @include media-query($min, $medium) {
-    width: 70px;
-  }
-
-  @include media-query($min, $xlarge) {
-    width: 80px;
-
-    small {
-      @include typography(15, 18);
-    }
-  }
 }
 
 .featured-product__care-instruction-image {
@@ -258,14 +248,6 @@
   height: 55px;
   border: 1px solid $color-black;
   border-radius: $border-radius-media;
-
-  @include media-query($min, $medium) {
-    width: 70px;
-  }
-
-  @include media-query($min, $xlarge) {
-    width: 80px;
-  }
 
   img {
     position: absolute;
@@ -305,7 +287,13 @@
   }
 
   .swiper-button-prev {
+    top: -20px;
     left: -26px;
+
+    @include media-query($min, $medium) {
+      top: 0;
+      left: -50px;
+    }
 
     @include media-query($min, $xlarge) {
       left: -60px;
@@ -313,7 +301,13 @@
   }
 
   .swiper-button-next {
+    top: -20px;
     right: -26px;
+
+    @include media-query($min, $medium) {
+      top: 0;
+      right: -50px;
+    }
 
     @include media-query($min, $xlarge) {
       right: -60px;
@@ -338,6 +332,9 @@
   }
 
   svg {
+    border: 1px solid $color-black;
+    border-radius: 50%;
+
     path:first-child {
       transition: all 0.3s ease;
       stroke: $color-peach;

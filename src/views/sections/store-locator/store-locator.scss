@@ -71,12 +71,11 @@
 
   h3 {
     margin-bottom: 20px;
-    font-family: $font-museo-900;
-    @include typography(36, 36, 900);
+    @include typography(35, 35, 700);
 
     @include media-query($min, $medium) {
       margin-bottom: 30px;
-      @include typography(44, 44, 900);
+      @include typography(35, 35, 700);
     }
   }
 
@@ -91,7 +90,7 @@
     }
 
     @include media-query($max, $xlarge) {
-      @include typography(18, 24);
+      @include typography(16, 24);
     }
   }
 

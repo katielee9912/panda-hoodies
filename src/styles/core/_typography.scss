@@ -261,7 +261,7 @@ h5 {
 ============================================================================== */
 @mixin body {
   font-family: $font-body;
-  @include typography(22, 30);
+  @include typography(16, 24);
 }
 
 .p,
@@ -274,7 +274,7 @@ p {
 ============================================================================== */
 @mixin body-small {
   font-family: $font-body;
-  @include typography(15, 18);
+  @include typography(14, 18);
 }
 
 .p--small,
