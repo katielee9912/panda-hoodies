@@ -61,8 +61,8 @@ button {
   &:hover,
   &:active,
   &:focus {
-    background-color: rgba(242, 193, 174, 0.5);
-    color: $color-btn-primary-text-hover;
+    background-color: $color-white;
+    color: $color-black;
   }
 
   &[disabled],

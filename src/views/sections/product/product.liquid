@@ -76,7 +76,9 @@
                   {{ title }}
                 </h1>
 
-                {% render 'star-rating', rating: product.metafields.custom.rating %}
+                <div class="yotpo bottomLine"
+                  data-product-id="{{ product.id }}">
+                </div>
 
                 <div class="product__meta">
                   <div class="product__price p--large">
