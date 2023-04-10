@@ -18,7 +18,7 @@
           {% endfor %}
         </ul>
       {% else %}
-        <label class="d-none d-md-inline" for="collection-sort">{{ 'collections.sorting.title' | t }}</label>
+        <label class="d-none d-md-inline" for="collection-sort">{{ 'templates.collections.general.sorting' | t }}</label>
         <dropdown-select>
           <select id="collection-sort" name="sort_by" aria-label="Collection Sorting" data-current-sorting="{{ collection.sort_by | default: collection.default_sort_by }}">
             {% for sort_option in collection.sort_options %}

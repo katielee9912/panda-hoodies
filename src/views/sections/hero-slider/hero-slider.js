@@ -1,5 +1,4 @@
 import './hero-slider.scss'
-
 import AccessibleSwiper from '@scripts/components/accessible-swiper'
 
 (() => {
@@ -11,7 +10,6 @@ import AccessibleSwiper from '@scripts/components/accessible-swiper'
       this.slider = this
       this.next = this.querySelector('[data-swiper-next]')
       this.prev = this.querySelector('[data-swiper-prev]')
-      this.pagination = this.querySelector('[data-swiper-pagination]')
 
       this.options = {
         ...this.options,
@@ -19,10 +17,6 @@ import AccessibleSwiper from '@scripts/components/accessible-swiper'
         slidesPerView: 'auto',
         threshold: 10,
         loop: true,
-        pagination: {
-          el: this.pagination,
-          clickable: true
-        },
         navigation: {
           nextEl: this.next,
           prevEl: this.prev

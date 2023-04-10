@@ -5,18 +5,38 @@
     - menu: {String} Menu handle
 {% endcomment %}
 
-<nav class="nav" role="navigation" aria-label="Navigation">
-  <ul>
+<site-nav
+  class="nav"
+  role="navigation"
+  aria-label="Navigation"
+>
+  <ul
+    role="menubar"
+    aria-label="Navigation"
+  >
     {% for link in linklists[menu].links %}
       {% assign child_list_handle = link.title | handleize %}
       {% if linklists[child_list_handle].links != blank %}
-        <li class="nav__link-wrapper nav__link-wrapper--has-dropdown {% if link.active %}nav__link-wrapper--active{% endif %}" tabindex="0">
-          <a class="nav__link {% if forloop.first %}nav__link--first{% endif %}" href="{{ link.url }}" title="{{ link.title }}">
+        <li
+          class="nav__link-wrapper nav__link-wrapper--has-dropdown {% if link.active %}nav__link-wrapper--active{% endif %}"
+          role="presentation"
+          data-dropdown-wrapper
+        >
+          <a
+            class="nav__link {% if forloop.first %}nav__link--first{% endif %}"
+            href="/"
+            title="{{ link.title }}"
+            role="menuitem"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            data-nav-item
+            data-nav-link="{{ link.url }}"
+          >
             <span>{{ link.title }}</span>
             {% render 'icon-chevron-down' %}
           </a>
 
-          <ul class="nav__dropdown">
+          <ul class="nav__dropdown" aria-hidden="true" data-dropdown>
             {% for childlink in linklists[child_list_handle].links %}
               <li>
                 <a class="nav__link {% if childlink.active %}nav__link--active{% endif %}" href="{{ childlink.url }}" title="{{ childlink.title }}">{{ childlink.title }}</a>
@@ -25,10 +45,22 @@
           </ul>
         </li>
       {% else %}
-        <li class="nav__link-wrapper">
-          <a class="nav__link {% if forloop.first %}nav__link--first{% endif %} {% if link.active %}nav__link--active{% endif %}" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+        <li
+          class="nav__link-wrapper"
+          role="presentation"
+        >
+          <a
+            class="nav__link {% if forloop.first %}nav__link--first{% endif %} {% if link.active %}nav__link--active{% endif %}"
+            href="/"
+            title="{{ link.title }}"
+            role="menuitem"
+            data-nav-item
+            data-nav-link="{{ link.url }}"
+          >
+            {{ link.title }}
+          </a>
         </li>
       {% endif %}
     {% endfor %}
   </ul>
-</nav>
+</site-nav>

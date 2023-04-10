@@ -6,6 +6,16 @@
   About Us
 ============================================================================== */
 
+.about-us-section {
+  margin-bottom: -70px;
+  padding: 80px 0 40px;
+
+  @include media-query($min, $medium) {
+    margin-bottom: -30px;
+    padding-top: 140px;
+  }
+}
+
 .about-us {
   background-color: $color-purple;
   color: $color-white;

@@ -17,7 +17,7 @@
   }
 
   .icon path {
-    fill: $color-white;
+    fill: var(--text-color);
   }
 
   @include media-query($min, $medium) {
@@ -66,6 +66,8 @@
   }
 
   .no-bullets a {
+    @include typography(18, 24, 500);
+
     @include media-query($max, $medium) {
       @include typography(15, 20, 500);
     }
@@ -76,9 +78,18 @@
     }
   }
 
+  p {
+    @include typography(18, 24, 500);
+    margin-bottom: 40px;
+  }
+
   .menu-col {
     @include media-query($max, $medium) {
       text-align: center;
     }
   }
+}
+
+.site-footer__copyright {
+  margin-top: 10px;
 }

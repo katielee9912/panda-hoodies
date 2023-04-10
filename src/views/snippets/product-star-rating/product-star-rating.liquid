@@ -20,7 +20,7 @@
 
 <div class="product-rating {% if product_reviews_count == blank %}product-rating--no-reviews{% endif %} {{ class }}">
   <span class="visually-hidden">
-    {{- 'general.accessibility.rating_label' | t: rating: product_reviews_rating -}}
+    {{- 'accessibility.star_reviews_info' | t: rating: product_reviews_rating -}}
   </span>
 
   {% if product_section_id != blank %}
@@ -28,7 +28,7 @@
       title="{{ 'products.reviews.read_reviews' | t: count: product_reviews_count }}"
     >
   {% endif %}
-    <div class="product-rating__stars" role="region" aria-label="{{- 'general.accessibility.rating_label' | t: rating: product_reviews_rating -}}">
+    <div class="product-rating__stars" role="region" aria-label="{{- 'accessibility.star_reviews_info' | t: rating: product_reviews_rating -}}">
       {%- liquid
         assign reviews_rating = product_reviews_rating | plus: 0 | round: 1
         capture full_star

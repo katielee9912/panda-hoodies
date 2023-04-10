@@ -6,17 +6,24 @@
   Contact Us
 ============================================================================== */
 
-.contact-us {
-  display: block;
-  padding: 60px 0;
+.contact-us-section {
+  padding-top: 100px;
 
   @include media-query($min, $medium) {
-    margin-top: 40px;
-    padding: 10px 80px 80px;
+    margin-bottom: 30px;
+    padding-top: 50px;
+  }
+}
+
+.contact-us {
+  display: block;
+  padding: 60px 0 30px;
+
+  @include media-query($min, $medium) {
+    padding: 80px;
   }
 
   @include media-query($min, $xlarge) {
-    padding: 80px;
     overflow: hidden;
   }
 
@@ -120,6 +127,13 @@
     @include media-query($max, $xlarge) {
       @include typography(18, 24, 700);
     }
+  }
+
+  .form-success {
+    max-width: 100% !important;
+    margin: 0 !important;
+    color: $color-black !important;
+    text-align: left !important;
   }
 }
 

@@ -131,6 +131,14 @@
   @include media-query($min, $medium) {
     padding: $gutter;
   }
+
+  .btn {
+    @include typography(18, 24, 700);
+
+    @include media-query($min, $medium) {
+      @include typography(22, 30, 700);
+    }
+  }
 }
 
 .ajaxcart__empty {
