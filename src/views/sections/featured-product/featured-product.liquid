@@ -4,162 +4,172 @@
 {% assign product = section.settings.product %}
 
 {% if product != blank %}
-<featured-product id="featured-product" class="featured-product" role="region" aria-label="Featured Product">
-  <div class="container">
-    <div class="row flex-column flex-md-row">
+  <featured-product id="featured-product" class="featured-product" role="region" aria-label="Featured Product">
+    <div class="container">
+      <div class="row flex-column flex-md-row">
 
-      {% comment %} Product Image Half {% endcomment %}
-      <div class="featured-product__images col-md-6">
+        {% comment %} Product Image Half {% endcomment %}
+        <div class="featured-product__images col-md-6">
 
-        {% comment %} Section Header {% endcomment %}
-        <h2 class="featured-product__header">
-          {{ section.settings.header | upcase }}
-        </h2>
+          {% comment %} Section Header {% endcomment %}
+          <h2 class="featured-product__header">
+            {{ section.settings.header | upcase }}
+          </h2>
 
-        {% comment %} Product Image {% endcomment %}
-        <div class="featured-product__image">
-          {%- liquid
-            assign new_value = product.variants[0].title | split: ' /' | first
-            for variant in product.variants
-              assign color_value = variant.title | split: ' /' | first
-              assign next_color_value = product.variants[forloop.index].title | split: ' /' | first
+          {% comment %} Product Image {% endcomment %}
+          <div class="featured-product__image">
+            {%- liquid
+              assign new_value = product.variants[0].title | split: ' /' | first
+              for variant in product.variants
+                assign color_value = variant.title | split: ' /' | first
+                assign next_color_value = product.variants[forloop.index].title | split: ' /' | first
 
-              if forloop.last or next_color_value != color_value
-                assign variant_prices = variant_prices | append: variant.price | append: '||'
-                assign new_value = color_value
-              endif
-              assign variant_names = variant_names | append: color_value | append: '||'
-            endfor
-            assign variant_names = variant_names | split: '||' | uniq
-            assign variant_prices = variant_prices | split: '||'
+                if forloop.last or next_color_value != color_value
+                  assign variant_prices = variant_prices | append: variant.price | append: '||'
+                  assign new_value = color_value
+                endif
+                assign variant_names = variant_names | append: color_value | append: '||'
+              endfor
+              assign variant_names = variant_names | split: '||' | uniq
+              assign variant_prices = variant_prices | split: '||'
 
-            for image in product.media limit: variant_names.size
-              assign attributes = 'data-featured-product-image="' | append: variant_names[forloop.index0] | append: '"'
-              assign attributes = attributes | append: 'data-featured-product-price="' | append: variant_prices[forloop.index0] | append: '"'
-              assign classes = 'hide'
-              if forloop.first
-                assign classes = ''
-              endif
+              for image in product.media limit: variant_names.size
+                assign attributes = 'data-featured-product-image="' | append: variant_names[forloop.index0] | append: '"'
+                assign attributes = attributes | append: 'data-featured-product-price="' | append: variant_prices[forloop.index0] | append: '"'
+                assign classes = 'hide'
+                if forloop.first
+                  assign classes = ''
+                endif
 
-              render 'image', image: image, background: true, classes: classes, attributes: attributes
-            endfor
-          -%}
+                render 'image', image: image, background: true, classes: classes, attributes: attributes
+              endfor
+            -%}
+          </div>
+
+          {% comment %} Featured Badge {% endcomment %}
+          {% unless section.settings.show_badge == false %}
+            <div class="featured-product__badge">
+              {% render 'icon-featured-badge' %}
+            </div>
+          {% endunless %}
         </div>
 
-        {% comment %} Featured Badge {% endcomment %}
-        <div class="featured-product__badge">
-          {% render 'icon-featured-badge' %}
-        </div>
-      </div>
+        {% comment %} Product Content Half {% endcomment %}
+        <div class="featured-product__content col-md-6">
+          {%- assign form_id = 'product-form-' | append: section.id -%}
 
-      {% comment %} Product Content Half {% endcomment %}
-      <div class="featured-product__content col-md-6">
-        {%- assign form_id = 'product-form-' | append: section.id -%}
+          <h3 class="featured-product__title">
+            {{ product.title | upcase }}
+          </h3>
 
-        <h3 class="featured-product__title">
-          {{ product.title | upcase }}
-        </h3>
+          <div class="d-flex align-items-center">
+            <div class="featured-product__price" data-featured-price>
+              {% assign original_price = product.price | money %}
+              {% assign sale_price = product.compare_at_price | money %}
 
-        <div class="d-flex align-items-center">
-          <div class="featured-product__price" data-featured-price>
-            {% assign original_price = product.price | money %}
-            {% assign sale_price = product.compare_at_price | money %}
-
-            {% if sale_price != blank or sale_price == original_price %}
-              <span class="sale-price" data-featured-sale-price="{{ sale_price }}">
-                {{- product.price | money -}}
-              </span>
-
-              <span class="compare-price" data-featured-compare-price="{{ original_price }}">
-                <span class="visually-hidden">
-                  {{- 'general.accessibility.original_price' | t -}}
+              {% if sale_price != blank or sale_price == original_price %}
+                <span class="sale-price" data-featured-sale-price="{{ sale_price }}">
+                  {{- product.price | money -}}
                 </span>
-                <s aria-hidden="true">
-                  {{- sale_price -}}
-                </s>
-              </span>
-            {% else %}
-              {{- product.selected_or_first_available_variant.price | money -}}
-            {% endif %}
+
+                <span class="compare-price" data-featured-compare-price="{{ original_price }}">
+                  <span class="visually-hidden">
+                    {{- 'general.accessibility.original_price' | t -}}
+                  </span>
+                  <s aria-hidden="true">
+                    {{- sale_price -}}
+                  </s>
+                </span>
+              {% else %}
+                {{- product.selected_or_first_available_variant.price | money -}}
+              {% endif %}
+            </div>
+
+            {% comment %} Product Star Rating {% endcomment %}
+            {% unless section.settings.show_ratings == false %}
+              {% render 'star-rating',
+                rating: product.metafields.key.reviews_rating,
+                reviews_count: product.metafields.key.reviews_count,
+              %}
+            {% endunless %}
           </div>
 
-          {% comment %} Product Star Rating {% endcomment %}
-          {% render 'star-rating',
-            rating: product.metafields.key.reviews_rating,
-            reviews_count: product.metafields.key.reviews_count,
-          %}
-        </div>
+          {% comment %} Product Description {% endcomment %}
+          {% unless section.settings.show_description == false %}
+            <p class="featured-product__description">
+              {{ product.description }}
+            </p>
+          {% endunless %}
 
-        <p class="featured-product__description">
-          {{ product.description }}
-        </p>
+          {% comment %} Product Variants Color Picker {% endcomment %}
+          {% render 'product-options', product: product, options: 'color', form_id: form_id %}
 
-        {% comment %} Product Variants Color Picker {% endcomment %}
-        {% render 'product-options', product: product, options: 'color', form_id: form_id %}
+          {% comment %} Care Instructions Slider {% endcomment %}
+          {%- liquid
+            assign swiper_enabled = false
+            assign instructions_length = 0
 
-        {% comment %} Care Instructions Slider {% endcomment %}
-        {%- liquid
-          assign swiper_enabled = false
-          assign instructions_length = 0
+            for instruction in product.metafields.custom.care_instructions.value
+              assign instructions_length = instructions_length | plus: 1
+            endfor
 
-          for instruction in product.metafields.custom.care_instructions.value
-            assign instructions_length = instructions_length | plus: 1
-          endfor
+            if instructions_length > 6
+              assign swiper_enabled = true
+            endif
+          -%}
+          {% unless section.settings.show_care_instructions == false %}
+            <care-instructions class="featured-product__care-instructions swiper">
+              <div class="featured-product__care-instructions-container"
+                data-swiper-enabled="{{ swiper_enabled }}"
+                data-swiper-slider
+              >
+                <p><strong>{{ 'products.product.care_instructions' | t }}</strong></p>
+                <div class="swiper-wrapper{% if swiper_enabled == false %} featured-product__care-instructions-wrapper{% endif %}" role="group">
 
-          if instructions_length > 6
-            assign swiper_enabled = true
-          endif
-        -%}
+                  {% for instruction in product.metafields.custom.care_instructions.value %}
+                    {% assign image_url = instruction.image.value | json | prepend: 'https:' | remove: '\' | remove: '"'%}
 
-        <care-instructions class="featured-product__care-instructions swiper">
-          <div class="featured-product__care-instructions-container"
-            data-swiper-enabled="{{ swiper_enabled }}"
-            data-swiper-slider
-          >
-            <p><strong>{{ 'products.product.care_instructions' | t }}</strong></p>
-            <div class="swiper-wrapper{% if swiper_enabled == false %} featured-product__care-instructions-wrapper{% endif %}">
+                    <div class="featured-product__care-instruction swiper-slide">
+                      <div class="featured-product__care-instruction-image">
+                        <img src="{{ image_url }}" alt="" width="30" height="30"/>
+                      </div>
 
-              {% for instruction in product.metafields.custom.care_instructions.value %}
-                {% assign image_url = instruction.image.value | json | prepend: 'https:' | remove: '\' | remove: '"'%}
-
-                <div class="featured-product__care-instruction swiper-slide">
-                  <div class="featured-product__care-instruction-image">
-                    <img src="{{ image_url }}" alt="{{ instruction.instruction }}" width="30" height="30"/>
-                  </div>
-
-                  <small class="text-center">
-                    {{ instruction.instruction }}
-                  </small>
+                      <small class="text-center">
+                        {{ instruction.instruction }}
+                      </small>
+                    </div>
+                  {% endfor %}
                 </div>
-              {% endfor %}
-            </div>
-          </div>
+              </div>
 
-          {% if swiper_enabled %}
-            {% comment %} Slider Navigation {% endcomment %}
-            <div class="featured-product_navigation">
-              <button class="swiper-button-prev d-inline" aria-label="Previous slide" data-swiper-prev>
-                {% render 'icon-button-prev' %}
-              </button>
-              <button class="swiper-button-next d-inline" aria-label="Next slide" data-swiper-next>
-                {% render 'icon-button-next' %}
-              </button>
-            </div>
-          {% endif %}
-        </care-instructions>
+              {% if swiper_enabled %}
+                {% comment %} Slider Navigation {% endcomment %}
+                <div class="featured-product_navigation">
+                  <button class="swiper-button-prev d-inline" aria-label="Previous slide" data-swiper-prev>
+                    {% render 'icon-button-prev' %}
+                  </button>
+                  <button class="swiper-button-next d-inline" aria-label="Next slide" data-swiper-next>
+                    {% render 'icon-button-next' %}
+                  </button>
+                </div>
+              {% endif %}
+            </care-instructions>
+          {% endunless %}
 
-        <a class="btn" href="{{ product.url }}" title="{{ product.title }}">
-          {{ 'products.product.see_product' | t }}
-        </a>
+          <a class="btn" href="{{ product.url }}" title="{{ product.title }}">
+            {{ 'products.product.see_product' | t }}
+          </a>
+        </div>
       </div>
-    </div>
 
-    {% comment %} Decorations {% endcomment %}
-    {% render 'icon-squigly-short' %}
-    {% render 'icon-squigly-long' %}
-    {% render 'icon-shaded-box' %}
-  </div>
-</featured-product>
+      {% comment %} Decorations {% endcomment %}
+      {% unless section.settings.show_decorations == false %}
+        {% render 'icon-squigly-short' %}
+        {% render 'icon-squigly-long' %}
+        {% render 'icon-shaded-box' %}
+      {% endunless %}
+    </div>
+  </featured-product>
 {% endif %}
 
 {% render 'section-spacing', section_name: 'featured-product' %}
@@ -209,6 +219,12 @@
         "type": "checkbox",
         "id": "show_badge",
         "label": "Show Badge",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_decorations",
+        "label": "Show Decorations",
         "default": true
       },
       FRAGMENT.section-spacing

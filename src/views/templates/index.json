@@ -7,38 +7,37 @@
           "type": "slide",
           "settings": {
             "preheader": "FOR A LIMITED TIME",
-            "preheader_size": "preheader--xxlarge",
+            "preheader_size": "preheader--large",
             "title": "TIE DYE IS BACK",
-            "title_size": "title--xxlarge",
+            "title_size": "title--large",
             "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-            "copy_size": "copy--xlarge",
-            "text_color": "#57568c",
+            "copy_size": "copy--large",
+            "text_color": "#233a59",
             "cta_text": "SHOP NOW",
             "cta_link": "#featured-product",
-            "cta_text_color": "#57568c",
+            "cta_text_color": "#233a59",
             "cta_bg_color": "#ffffff",
-            "cta_border_color": "#ffffff",
+            "cta_border_color": "#233a59",
             "cta_text_color_hover": "#ffffff",
-            "cta_bg_color_hover": "#57568c",
-            "cta_border_color_hover": "#57568c",
+            "cta_bg_color_hover": "#233a59",
+            "cta_border_color_hover": "#233a59",
             "content_bg_image": "shopify:\/\/shop_images\/tie-dye-content.png",
             "content_bg_opacity": 0.7,
             "bg_image": "shopify:\/\/shop_images\/DALL_E_2023-04-05_02.06.16_-_a_panda_bear_wearing_a_tie-dye_hoodie_3_4_angle_background_of_a_skate_park_digital_art.png",
             "full_width": true,
-            "layout_desktop": "flex-md-row-reverse",
-            "layout_mobile": "flex-column"
+            "layout_desktop": "flex-md-row-reverse"
           }
         },
         "8073d3b9-4e48-4499-abd2-3eb177ae366a": {
           "type": "slide",
           "settings": {
-            "preheader": "preheader",
-            "preheader_size": "preheader--large",
-            "title": "title",
-            "title_size": "title--large",
-            "copy": "",
-            "copy_size": "copy--large",
-            "text_color": "#000000",
+            "preheader": "EXAMPLE PREHEADER",
+            "preheader_size": "preheader--medium",
+            "title": "EXAMPLE TITLE",
+            "title_size": "title--medium",
+            "copy": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+            "copy_size": "copy--medium",
+            "text_color": "#ffffff",
             "cta_text": "",
             "cta_link": "",
             "cta_text_color": "#ffffff",
@@ -47,11 +46,11 @@
             "cta_text_color_hover": "#000000",
             "cta_bg_color_hover": "#ffffff",
             "cta_border_color_hover": "#000000",
-            "content_bg_opacity": 0.5,
-            "bg_image": "shopify:\/\/shop_images\/ph_inspiration-timeline.jpg",
-            "full_width": false,
-            "layout_desktop": "flex-md-row",
-            "layout_mobile": "flex-column"
+            "content_bg_image": "shopify:\/\/shop_images\/ph_design-timeline.jpg",
+            "content_bg_opacity": 0.3,
+            "bg_image": "shopify:\/\/shop_images\/art-trend-of-2022-ai-art-02.jpg",
+            "full_width": true,
+            "layout_desktop": "flex-md-row"
           }
         }
       },
@@ -63,11 +62,7 @@
         "margin_top": "0",
         "margin_top_mobile": "default",
         "margin_bottom": "default",
-        "margin_bottom_mobile": "default",
-        "padding_top": "default",
-        "padding_top_mobile": "default",
-        "padding_bottom": "default",
-        "padding_bottom_mobile": "default"
+        "margin_bottom_mobile": "default"
       }
     },
     "eb41f6de-8dbc-4468-84fd-12cf2646f541": {
@@ -75,24 +70,15 @@
       "settings": {
         "product": "tie-dye-hoodie",
         "header": "Featured",
-        "cta_text_color": "#000000",
-        "cta_bg_color": "#d99191",
-        "cta_border_color": "#d99191",
-        "cta_text_color_hover": "#000000",
-        "cta_bg_color_hover": "#ffffff",
-        "cta_border_color_hover": "#000000",
         "show_ratings": true,
         "show_description": true,
         "show_care_instructions": true,
         "show_badge": true,
+        "show_decorations": true,
         "margin_top": "0",
         "margin_top_mobile": "default",
         "margin_bottom": "default",
-        "margin_bottom_mobile": "default",
-        "padding_top": "default",
-        "padding_top_mobile": "default",
-        "padding_bottom": "default",
-        "padding_bottom_mobile": "default"
+        "margin_bottom_mobile": "default"
       }
     },
     "58cf8a65-8894-452e-aeaa-66a757f4b1bc": {
@@ -100,30 +86,21 @@
       "settings": {
         "header": "About Us",
         "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<br\/><br\/>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate.<\/p>",
+        "show_decorations": true,
         "image": "shopify:\/\/shop_images\/DALL_E_2023-04-05_03.35.13_-_pandas_working_together_as_a_team_designing_clothes_in_an_office_peachy_colours_digital_art.png",
         "margin_top": "0",
         "margin_top_mobile": "default",
         "margin_bottom": "default",
-        "margin_bottom_mobile": "default",
-        "padding_top": "default",
-        "padding_top_mobile": "default",
-        "padding_bottom": "default",
-        "padding_bottom_mobile": "default"
+        "margin_bottom_mobile": "default"
       }
     },
     "be759bbc-1592-445f-bbd0-024637bccc6d": {
       "type": "store-locator",
       "settings": {
+        "map_embed": "<iframe src=\"https:\/\/my.atlistmaps.com\/map\/a8bd4bc0-5d44-45fe-a06b-e8372518a640?share=true\" allow=\"geolocation 'self' https:\/\/my.atlistmaps.com\" width=\"100%\" height=\"400px\" frameborder=\"0\" scrolling=\"no\" allowfullscreen><\/iframe>",
         "header": "Store Locator",
         "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<\/p>",
-        "margin_top": "0",
-        "margin_top_mobile": "default",
-        "margin_bottom": "default",
-        "margin_bottom_mobile": "default",
-        "padding_top": "default",
-        "padding_top_mobile": "default",
-        "padding_bottom": "default",
-        "padding_bottom_mobile": "default"
+        "show_decorations": true
       }
     },
     "3a32200f-980c-466b-94d9-bc6b84144bfb": {
@@ -131,14 +108,11 @@
       "settings": {
         "header": "Contact Us",
         "copy": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.<\/p>",
+        "show_badge": true,
         "margin_top": "0",
         "margin_top_mobile": "default",
         "margin_bottom": "default",
-        "margin_bottom_mobile": "default",
-        "padding_top": "default",
-        "padding_top_mobile": "default",
-        "padding_bottom": "default",
-        "padding_bottom_mobile": "default"
+        "margin_bottom_mobile": "default"
       }
     }
   },

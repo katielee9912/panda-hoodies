@@ -4,23 +4,13 @@
 <contact-us id="contact-us" class="contact-us" role="region" aria-label="Contact Us">
   <div class="container">
 
+    {% comment %} Content {% endcomment %}
     <h3>{{ section.settings.header | upcase }}</h3>
-
     {{ section.settings.copy }}
 
     <div class="form-vertical">
       {% form 'contact', data-validation-required: '' %}
         <div class="form-half col-md-6">
-          {% if form.posted_successfully? %}
-            <p class="form-success">
-              {{ 'templates.contact.form.post_success' | t }}
-            </p>
-          {% elsif form.errors %}
-            <div class="form-errors">
-              {{ form.errors | default_errors }}
-            </div>
-          {% endif %}
-
           <label for="contactFormName">{{ 'templates.contact.form.name' | t }}</label>
 
           <input type="text"
@@ -70,16 +60,31 @@
             </textarea>
             <span class="error"></span>
           </div>
-
         </div>
+
         <button type="submit" class="btn btn--full">{{ 'templates.contact.form.send' | t }}</button>
+
+        {% comment %} Success/Error Submit Messages {% endcomment %}
+        {% if form.posted_successfully? %}
+            <p class="form-success">
+              {{ 'templates.contact.form.post_success' | t }}
+            </p>
+          {% elsif form.errors %}
+            <div class="form-errors">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
       {% endform %}
     </div>
 
-    <div class="contact-up__lets-chat-badge">
-      {% render 'icon-lets-chat-badge' %}
-    </div>
+    {% comment %} Let's Chat Badge {% endcomment %}
+    {% unless section.settings.show_badge == false %}
+      <div class="contact-up__lets-chat-badge">
+        {% render 'icon-lets-chat-badge' %}
+      </div>
+    {% endunless %}
 
+    {% comment %} Background color block decoration {% endcomment %}
     <div class="contact-us__background-block"> </div>
   </div>
 </contact-us>
@@ -88,6 +93,7 @@
 
 {% schema %}
   {
+    "class": "contact-us-section",
     "settings" : [
       {
         "type": "header",
@@ -103,6 +109,16 @@
         "type": "richtext",
         "id": "copy",
         "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Visibility"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_badge",
+        "label": "Show Let's Chat Badge",
+        "default": true
       },
       FRAGMENT.section-spacing
     ],

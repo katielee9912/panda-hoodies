@@ -30,8 +30,10 @@
     </div>
 
     {% comment %} Decorations {% endcomment %}
-    {% render 'icon-shaded-box' %}
-    {% render 'icon-squigly-short' %}
+    {% unless section.settings.show_decorations == false %}
+      {% render 'icon-shaded-box' %}
+      {% render 'icon-squigly-short' %}
+    {% endunless %}
   </div>
 </div>
 
@@ -39,6 +41,7 @@
 
 {% schema %}
   {
+    "class": "about-us-section",
     "settings" : [
       {
         "type": "header",
@@ -54,6 +57,16 @@
         "type": "richtext",
         "id": "copy",
         "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Visibility"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_decorations",
+        "label": "Show Decorations",
+        "default": true
       },
       FRAGMENT.image("Image Size: 600x600" || "Image Size: 600x600"),
       FRAGMENT.section-spacing

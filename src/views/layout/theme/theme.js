@@ -1,9 +1,6 @@
 // Import CSS
 import './theme.scss'
 
-// Polyfills
-import 'focus-within-polyfill'
-
 // Core
 import '@scripts/core/a11y'
 import '@scripts/core/shopify'
@@ -15,6 +12,7 @@ import '@scripts/components/required-validation'
 import '@scripts/components/dropdown-select'
 import '@scripts/components/accessible-swiper'
 import '@scripts/components/swiper-slides-in-view'
+import '@scripts/components/navigation'
 
 // Cart
 import '@scripts/cart/cart-api'

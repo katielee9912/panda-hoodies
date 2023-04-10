@@ -63,7 +63,7 @@
     "button_label": "Subscribe"
   },
   "accessibility": {
-    "skip_to_text": "Skip to content",
+    "skip_to_content": "Skip to content",
     "skip_to_product_info": "Skip to product information",
     "close": "Close",
     "unit_price_separator": "per",
@@ -76,7 +76,7 @@
     },
     "loading": "Loading...",
     "total_reviews": "total reviews",
-    "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
+    "star_reviews_info": "{{ rating }} out of 5 stars",
     "collapsible_content_title": "Collapsible content",
     "complementary_products": "Complementary products"
   },
@@ -235,7 +235,21 @@
       "pages": "Pages"
     },
     "cart": {
-      "cart": "Cart"
+      "cart": "Cart",
+      "general": {
+        "items": "items",
+        "subtotal": "Subtotal",
+        "discounts": "Discounts",
+        "shipping": "Shipping",
+        "note_placeholder": "Note"
+      }
+    },
+    "collections": {
+      "general": {
+        "no_matches": "Sorry, there are no products in this collection",
+        "sorting": "Sort by",
+        "product_count": "{{ count }} product"
+      }
     },
     "contact": {
       "form": {
@@ -246,7 +260,7 @@
         "message": "Message",
         "comment": "Comment",
         "send": "Send",
-        "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
+        "post_success": "Thanks for reaching out. We'll get back to you as soon as possible!",
         "error_heading": "Please adjust the following:"
       }
     },

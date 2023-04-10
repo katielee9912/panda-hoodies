@@ -9,7 +9,6 @@
     {% comment %} Google Fonts {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
 
     {% if settings.favicon != blank %}
       <link rel="shortcut icon" href="{{ settings.favicon | img_url: '64x64' }}" type="image/png"/>
@@ -59,7 +58,7 @@
   </head>
 
   <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }} {% if template.suffix %}template-{{ template.suffix }}{% endif %}" data-site-body>
-    <a class="visually-hidden skip-link" href="#siteContent" title="{{ 'general.accessibility.skip_to_content' | t }}">{{ 'general.accessibility.skip_to_content' | t }}</a>
+    <a class="visually-hidden skip-link" href="#siteContent" title="{{ 'accessibility.skip_to_content' | t }}">{{ 'accessibility.skip_to_content' | t }}</a>
 
     {% section 'mobile-nav' %}
     {% section 'ajaxcart' %}

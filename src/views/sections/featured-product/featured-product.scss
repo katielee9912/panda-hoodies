@@ -7,14 +7,16 @@
 ============================================================================== */
 
 .featured-product-section {
-  padding: 110px 0 60px;
+  margin-bottom: -30px;
+  padding: 120px 0 0;
 
   @include media-query($min, $medium) {
-    padding: 160px 0;
+    margin-bottom: 0;
+    padding: 160px 0 20px;
   }
 
   @include media-query($min, $xlarge) {
-    padding: 180px 0 155px;
+    padding: 180px 0 20px;
   }
 
   .swiper-wrapper {
@@ -116,6 +118,7 @@
 
 .featured-product__header {
   position: absolute;
+  z-index: 10;
   top: -44px;
   left: 16px;
   font-family: $font-museo-900;
@@ -142,6 +145,7 @@
 
 .featured-product__badge {
   position: absolute;
+  z-index: 10;
   top: 3%;
   left: -54px;
   transform: scale(0.6);
@@ -183,6 +187,7 @@
 }
 
 .featured-product__price {
+  margin-bottom: 20px;
   @include typography(20, 22, 700);
 
   @include media-query($min, $xlarge) {
@@ -191,10 +196,10 @@
 }
 
 .featured-product__description {
-  margin: 20px 0 30px;
+  margin: 0 0 30px;
 
   @include media-query($max, $xlarge) {
-    margin: 20px 0;
+    margin: 0 0 20px;
     @include typography(18, 24);
   }
 }

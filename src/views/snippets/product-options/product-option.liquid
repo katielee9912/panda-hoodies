@@ -56,6 +56,7 @@
         <div class="product-option-item
           product-option-item--{{ option.name | handleize }}
           {% if type == 'swatch' and swatch_option != blank %}product-option-item--swatch{% else %}product-option-item--radio{% endif %}"
+          tabindex="0"
           data-product-option-item
         >
           <input type="radio"
@@ -63,6 +64,7 @@
             value="{{ value | escape }}"
             name="Color"
             {% if option.selected_value == value %}checked{% endif %}
+            aria-label="{{ value }}"
             data-product-option
             data-option-index="{{ option.position }}"
             data-type="radio"
@@ -74,9 +76,6 @@
               <div class="product-option-item__swatch product-option-item__swatch--{{ value | handleize }}"
                 style="{%- if swatch_file_url != blank %}background-image:url({{ swatch_file_url }});{%- endif -%}"
               ></div>
-              <span class="visually-hidden">
-                {{ value }}
-              </span>
             {% else %}
               <span>{{ value }}</span>
             {% endif %}

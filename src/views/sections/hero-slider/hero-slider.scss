@@ -17,6 +17,7 @@
 
   .btn {
     width: 90%;
+    max-width: 600px;
     border-color: var(--cta-border-color);
     background-color: var(--cta-bg-color);
     color: var(--cta-text-color);
@@ -67,13 +68,10 @@
 
   &.flex-md-row {
     .hero-slider__content {
-      text-align: right;
-    }
-  }
-
-  &.flex-md-row-reverse {
-    .hero-slider__content {
-      text-align: left;
+      align-items: end;
+      @include media-query($min, $medium) {
+        text-align: right;
+      }
     }
   }
 
@@ -90,6 +88,7 @@
   width: 100%;
   padding: 60px 0;
   color: var(--text-color);
+  cursor: default;
 
   @include media-query($min, $medium) {
     max-width: 50%;
@@ -101,7 +100,8 @@
   }
 
   .hero-slider__header {
-    max-width: 90%;
+    width: 90%;
+    max-width: 600px;
 
     @include media-query($max, $medium) {
       max-width: 80%;
@@ -111,10 +111,10 @@
 
   .preheader--medium .hero-slider__preheader {
     margin-bottom: 10px;
-    @include typography(14, 18, 500);
+    @include typography(24, 28, 500);
 
     @include media-query($min, $medium) {
-      @include typography(20, 20, 500);
+      @include typography(24, 30, 700);
     }
   }
 
@@ -132,10 +132,10 @@
   .title--medium .hero-slider__title {
     margin-bottom: 10px;
     font-family: $font-museo-900;
-    @include typography(40, 45, 700);
+    @include typography(64, 64);
 
     @include media-query($min, $medium) {
-      @include typography(50, 50, 700);
+      @include typography(80, 80);
     }
   }
 
@@ -154,22 +154,19 @@
   .copy--medium {
     .hero-slider__copy {
       margin-bottom: 24px;
-      font-family: $font-museo-500;
-      @include typography(20, 24);
 
-      @include media-query($min, $medium) {
-        @include typography(22, 30);
+      @include media-query($max, $medium) {
+        @include typography(18, 24, 500);
       }
     }
 
     ~ .btn {
       font-family: $font-museo-500;
-      @include typography(20, 24);
 
-      @include media-query($min, $medium) {
-        font-family: $font-museo-500;
-        @include typography(22, 30);
+      @include media-query($max, $medium) {
+        @include typography(18, 24, 500);
       }
+
       svg {
         transform: scale(0.8);
       }
@@ -245,14 +242,14 @@
   }
 
   .swiper-button-prev {
-    left: 5px;
+    left: -6px;
 
     @include media-query($min, $site-width) {
       left: 20px;
     }
   }
   .swiper-button-next {
-    right: 5px;
+    right: -6px;
 
     @include media-query($min, $site-width) {
       right: 20px;

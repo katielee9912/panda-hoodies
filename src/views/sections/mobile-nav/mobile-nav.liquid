@@ -63,12 +63,6 @@
           </li>
         {% endif %}
       {% endif %}
-
-      {% for link in linklists[section.settings.sublinks].links %}
-        <li class="mobile-nav__menu-sublink">
-          <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
-        </li>
-      {% endfor %}
     </ul>
   </div>
 </popup-element>
@@ -82,11 +76,6 @@
         "id": "menu",
         "label": "Menu",
         "default": "main-menu"
-      },
-      {
-        "type": "link_list",
-        "id": "sublinks",
-        "label": "Sublinks"
       }
     ]
   }

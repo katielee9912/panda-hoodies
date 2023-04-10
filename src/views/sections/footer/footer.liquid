@@ -2,10 +2,13 @@
   <div class="container">
     <div class="row">
       <div class="main-col col-12 col-md-5 text-center text-md-left">
+
+        {% comment %} Content {% endcomment %}
         <h2 class="heading-3">{{ section.settings.title }}</h2>
-        <p class="p--small">{{ section.settings.copy }}</p>
+        <p>{{ section.settings.copy }}</p>
       </div>
 
+      {% comment %} Menu Columns - just for display purposes {% endcomment %}
       {% for i in (1..3) %}
         <div class="menu-col col">
           <h3 class="heading-5">{{ linklists[section.settings.menu].title }}</h3>
@@ -21,6 +24,7 @@
 
     <div class="row">
       <div class="col">
+        {% comment %} Socials - just for display purposes {% endcomment %}
         <ul class="inline-list footer-socials text-center text-md-left">
           {% if section.settings.facebook_link != blank %}
             <li>
@@ -47,6 +51,7 @@
           {% endif %}
         </ul>
 
+        {% comment %} Copyright - just for display purposes {% endcomment %}
         <div class="site-footer__copyright text-center text-md-left">
           <small>&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}</small>
         </div>
@@ -57,8 +62,8 @@
 
 {% style %}
   .site-footer {
-    --background-color: {{ section.settings.bg_color }};
-    --text-color: {{ section.settings.text_color }};
+    --background-color: {{ section.settings.bg_color | default: '#000' }};
+    --text-color: {{ section.settings.text_color | default: 'FFF' }};
   }
 {% endstyle %}
 

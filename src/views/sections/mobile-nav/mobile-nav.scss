@@ -57,13 +57,3 @@
   align-items: center;
   justify-content: space-between;
 }
-
-.mobile-nav__submenu {
-  margin: 20px 0 0 20px;
-  list-style-type: none;
-
-  li:not(:last-child) {
-    margin-bottom: 20px;
-    border-bottom: none;
-  }
-}

@@ -6,13 +6,18 @@
   Store Locator
 ============================================================================== */
 
-.store-locator {
-  display: block;
-  margin-top: 110px;
+.store-locator-section {
+  margin-bottom: -100px;
+  padding-top: 125px;
 
   @include media-query($min, $medium) {
-    margin-top: 110px;
+    margin-bottom: -40px;
+    padding-top: 110px;
   }
+}
+
+.store-locator {
+  display: block;
 
   .container {
     position: relative;
@@ -45,7 +50,7 @@
   .icon-squigly-short {
     position: absolute;
     z-index: 10;
-    top: 92%;
+    top: 93%;
     left: -5%;
     transform: scale(0.6);
 
@@ -77,11 +82,12 @@
 
   p {
     margin: 0 auto 30px;
-    text-align: center;
+    text-align: left;
 
     @include media-query($min, $medium) {
       max-width: 80%;
       margin-bottom: 40px;
+      text-align: center;
     }
 
     @include media-query($max, $xlarge) {

@@ -4,9 +4,7 @@
 <hero-slider class="hero-slider swiper" role="region" aria-label="Hero Slideshow" data-swiper-slider>
   <div class="hero-slider__container swiper-wrapper">
     {% for block in section.blocks %}
-      <div class="hero-slider__slide hero-slider__slide--{{ block.id }} d-flex swiper-slide
-        {{ block.settings.layout_mobile }}
-        {{ block.settings.layout_desktop }}"
+      <div class="hero-slider__slide hero-slider__slide--{{ block.id }} d-flex swiper-slide {{ block.settings.layout_desktop }}"
       >
         {% comment %} Content Block {% endcomment %}
         <div class="hero-slider__content d-flex flex-column justify-content-md-center">
@@ -26,7 +24,7 @@
           %}
 
           {% comment %} Content Block - CTA (button) {% endcomment %}
-          {% if block.settings.cta_text != blank and block.settings.cta_link != blank %}
+          {% if block.settings.cta_link != blank %}
             <a class="btn" href="{{ block.settings.cta_link }}" title="{{ block.settings.cta_text }}">
               {{ block.settings.cta_text }} {% render 'icon-arrow-down' %}
             </a>
@@ -34,24 +32,29 @@
 
           {% comment %} Content Block - Background Image {% endcomment %}
           {%- liquid
+            assign loading_lazy = true
+            if forloop.first
+              assign loading_lazy = false
+            endif
+
             if block.settings.content_bg_image_mobile != blank
-              render 'image', image: block.settings.content_bg_image, background: true, classes: 'd-none d-md-block'
-              render 'image', image: block.settings.content_bg_image_mobile, background: true, classes: 'd-md-none'
+              render 'image', image: block.settings.content_bg_image, background: true, classes: 'd-none d-md-block', lazy: loading_lazy
+              render 'image', image: block.settings.content_bg_image_mobile, background: true, classes: 'd-md-none', lazy: loading_lazy
             elsif block.settings.content_bg_image != blank
-              render 'image', image: block.settings.content_bg_image, background: true
+              render 'image', image: block.settings.content_bg_image, background: true, lazy: loading_lazy
             endif
           -%}
 
           {% style %}
             .hero-slider__slide--{{ block.id }} {
               --bg-opacity: {{ block.settings.content_bg_opacity | default: 1 }};
-              --text-color: {{ block.settings.text_color }};
-              --cta-text-color: {{ block.settings.cta_text_color }};
-              --cta-bg-color: {{ block.settings.cta_bg_color }};
-              --cta-border-color: {{ block.settings.cta_border_color }};
-              --cta-text-color-hover: {{ block.settings.cta_text_color_hover }};
-              --cta-bg-color-hover: {{ block.settings.cta_bg_color_hover }};
-              --cta-border-color-hover: {{ block.settings.cta_border_color_hover }};
+              --text-color: {{ block.settings.text_color | default: '#000' }};
+              --cta-text-color: {{ block.settings.cta_text_color | default: '#000' }};
+              --cta-bg-color: {{ block.settings.cta_bg_color | default: '#fff' }};
+              --cta-border-color: {{ block.settings.cta_border_color | default: '#000' }};
+              --cta-text-color-hover: {{ block.settings.cta_text_color_hover | default: '#fff' }};
+              --cta-bg-color-hover: {{ block.settings.cta_bg_color_hover | default: '#000' }};
+              --cta-border-color-hover: {{ block.settings.cta_border_color_hover | default: '#000' }};
             }
           {% endstyle %}
         </div>
@@ -61,10 +64,10 @@
           {%- liquid
             if block.settings.full_width == false
               if block.settings.bg_image_mobile != blank
-                render 'image', image: block.settings.bg_image, background: true, classes: 'd-none d-md-block'
-                render 'image', image: block.settings.bg_image_mobile, background: true, classes: 'd-md-none'
+                render 'image', image: block.settings.bg_image, background: true, classes: 'd-none d-md-block', lazy: loading_lazy
+                render 'image', image: block.settings.bg_image_mobile, background: true, classes: 'd-md-none', lazy: loading_lazy
               elsif block.settings.bg_image != blank
-                render 'image', image: block.settings.bg_image, background: true
+                render 'image', image: block.settings.bg_image, background: true, lazy: loading_lazy
               endif
             endif
           -%}
@@ -74,10 +77,10 @@
         {%- liquid
           if block.settings.full_width == true
             if block.settings.bg_image_mobile != blank
-              render 'image', image: block.settings.bg_image, background: true, classes: 'd-none d-md-block'
-              render 'image', image: block.settings.bg_image_mobile, background: true, classes: 'd-md-none'
+              render 'image', image: block.settings.bg_image, background: true, classes: 'd-none d-md-block', lazy: loading_lazy
+              render 'image', image: block.settings.bg_image_mobile, background: true, classes: 'd-md-none', lazy: loading_lazy
             elsif block.settings.bg_image != blank
-              render 'image', image: block.settings.bg_image, background: true
+              render 'image', image: block.settings.bg_image, background: true, lazy: loading_lazy
             endif
           endif
         -%}
@@ -94,8 +97,6 @@
       {% render 'icon-button-next' %}
     </button>
   </div>
-
-  <div class="swiper-pagination" data-swiper-pagination></div>
 </hero-slider>
 
 {% render 'section-spacing', section_name: 'hero-slider' %}
@@ -237,22 +238,6 @@
               }
             ],
             "default": "flex-md-row"
-          },
-          {
-            "type": "select",
-            "id": "layout_mobile",
-            "label": "Layout | Mobile",
-            "options": [
-              {
-                "value": "flex-column",
-                "label": "Content-Top"
-              },
-              {
-                "value": "flex-column-reverse",
-                "label": "Content-Bottom"
-              }
-            ],
-            "default": "flex-column"
           }
         ]
       }

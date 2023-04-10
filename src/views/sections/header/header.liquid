@@ -2,17 +2,20 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-2 d-none d-lg-block align-self-center text-center">
+
+        {% comment %} Logo (desktop view): links to the top of the page {% endcomment %}
         <div class="site-header__logo">
           <a href="{{ routes.root_url }}" title="{{ shop.name }} Logo">
             {% if section.settings.logo != blank %}
-              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ shop.name }} Logo">
+              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ shop.name }} Logo" width="180" height="60">
             {% else %}
-              <h2 class="heading-4">{{ shop.name }}</h2>
+              <h2 class="heading-5">{{ shop.name }}</h2>
             {% endif %}
           </a>
         </div>
       </div>
 
+      {% comment %} Mobile nav popout {% endcomment %}
       <div class="col-2 col-lg-8 align-self-center">
         <popup-toggle data-target="mobile-nav" data-action="open">
           <button class="d-lg-none" type="button" aria-label="Menu" data-drawer-toggle="menu">
@@ -20,16 +23,18 @@
           </button>
         </popup-toggle>
 
+        {% comment %} Desktop navbar {% endcomment %}
         <div class="d-none d-lg-flex justify-content-center">
           {% render 'nav', menu: section.settings.menu %}
         </div>
       </div>
 
+      {% comment %} Logo (mobile view): links to the top of the page {% endcomment %}
       <div class="col-8 d-lg-none align-self-center text-center">
         <div class="site-header__logo">
-          <a href="{{ routes.root_url }}" title="{{ shop.name }} Logo">
+          <a href="{{ routes.root_url }}" title="{{ section.settings.logo.alt | default: shop.name }} Logo">
             {% if section.settings.logo != blank %}
-              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ shop.name }} Logo">
+              <img src="{{ section.settings.logo | img_url: '1024x1024' }}" alt="{{ section.settings.logo.alt | default: shop.name }} Logo" width="176" height="59">
             {% else %}
               <h2 class="heading-4">{{ shop.name }}</h2>
             {% endif %}
@@ -37,6 +42,7 @@
         </div>
       </div>
 
+      {% comment %} Cart icon: toggles cart popout {% endcomment %}
       <div class="site-header__controls col-2 col-lg-2 align-self-center text-right">
         <div class="row">
           <div class="col col-lg-auto d-lg-block align-self-center">
@@ -47,7 +53,7 @@
                 </button>
               </popup-toggle>
             {% else %}
-              <a href="{{ routes.cart_url }}" title="{{ 'cart.general.title' | t }}">
+              <a href="{{ routes.cart_url }}" title="{{ 'sections.cart.title' | t }}">
                 {% render 'icon-cart' %}
               </a>
             {% endif %}

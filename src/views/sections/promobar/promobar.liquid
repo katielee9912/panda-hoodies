@@ -1,3 +1,4 @@
+<script src="{{ 'promobar.js' | asset_url }}" defer="defer"></script>
 {{ 'promobar.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.text != blank %}
@@ -12,8 +13,8 @@
 
 {% style %}
   .promobar {
-    --background-color: {{ section.settings.background_color }};
-    --text-color: {{ section.settings.text_color }};
+    --background-color: {{ section.settings.background_color | default: '#fff' }};
+    --text-color: {{ section.settings.text_color | default: '#000' }};
   }
 {% endstyle %}
 
@@ -29,8 +30,7 @@
       {
         "type": "color_background",
         "id": "background_color",
-        "label": "Background Color",
-        "default": "linear-gradient(#ffffff, #000000)"
+        "label": "Background Color"
       },
       {
         "type": "color",

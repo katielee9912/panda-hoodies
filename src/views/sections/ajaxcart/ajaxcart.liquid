@@ -11,7 +11,7 @@
         <h2 id="ajaxcart__header-title" class="heading-4 ajaxcart__header-title">{{ section.settings.cart_title | default: 'Your Bag' }}</h2>
 
         <hide-if-cart-empty>
-          <span class="ajaxcart__header-item-count"><cart-count>{{ cart.item_count }}</cart-count> {{ 'cart.general.items' | t }}</span>
+          <span class="ajaxcart__header-item-count"><cart-count>{{ cart.item_count }}</cart-count> {{ 'templates.cart.general.items' | t }}</span>
         </hide-if-cart-empty>
 
         <popup-toggle class="ajaxcart__header-close" data-target="ajaxcart" data-action="close">
@@ -49,18 +49,18 @@
 
       <div class="ajaxcart__summary">
         <p class="ajaxcart__summary-item">
-          <strong>{{ 'cart.general.subtotal' | t }}</strong>
+          <strong>{{ 'templates.cart.general.subtotal' | t }}</strong>
           <strong><cart-total>{{ cart.total_price | money }}</cart-total></strong>
         </p>
 
         <show-if-cart-discounts class="ajaxcart__summary-item">
-          <strong>{{ 'cart.general.discounts' | t }}</strong>
+          <strong>{{ 'templates.cart.general.discounts' | t }}</strong>
           <strong>-<cart-discounts>{{ cart.total_discount | money }}</cart-discounts></strong>
         </show-if-cart-discounts>
 
         {% if section.settings.free_shipping_enable == true %}
           <show-if-cart-over data-threshold="{{ section.settings.free_shipping_threshold }}" class="ajaxcart__summary-item">
-            <strong>{{ 'cart.general.shipping' | t }}</strong>
+            <strong>{{ 'templates.cart.general.shipping' | t }}</strong>
             <strong>{{ section.settings.free_shipping_text | default: 'Free' }}</strong>
           </show-if-cart-over>
         {% endif %}
@@ -79,7 +79,7 @@
           </summary>
 
           <cart-note>
-            <textarea data-note-input placeholder="{{ 'cart.general.note_placeholder' | t  }}"></textarea>
+            <textarea data-note-input placeholder="{{ 'templates.cart.general.note_placeholder' | t  }}"></textarea>
           </cart-note>
         </details>
       {% endif %}

@@ -33,6 +33,7 @@ newCustomElement('popup-element', class extends HTMLElement {
   }
 
   handleOpen () {
+    this.setAttribute('aria-hidden', 'false')
     this.siteOverlay.classList.add('active')
     this.classList.add('active')
     this.removeAttribute('inert')
@@ -45,6 +46,7 @@ newCustomElement('popup-element', class extends HTMLElement {
   }
 
   handleClose () {
+    this.setAttribute('aria-hidden', 'true')
     this.classList.remove('active')
     this.setAttribute('inert', '')
 

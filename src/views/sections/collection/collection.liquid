@@ -68,12 +68,12 @@
           data-section-id="{{ section.id }}"
         >
           <div class="collection-header">
-            <span data-collection-product-count>{{ 'collections.general.product_count' | t: count: collection.products_count }}</span>
+            <span data-collection-product-count>{{ 'templates.collections.general.product_count' | t: count: collection.products_count }}</span>
             {% render 'collection-sorting' %}
           </div>
 
           {% if collection.products.size == 0 %}
-            <p class="collection__no-products">{{ 'collections.general.no_matches' | t }}</p>
+            <p class="collection__no-products">{{ 'templates.collections.general.no_matches' | t }}</p>
           {% else %}
             <div class="collection__grid grid" style="--bs-gap: 34px 24px;">
               {% for product in collection.products %}
